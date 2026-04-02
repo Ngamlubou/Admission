@@ -32,8 +32,7 @@ label {
   margin: 15px 0 5px;  
 }  
 
-select, input[type="radio"] {  
-  margin-right: 10px;  
+select {  margin-right: 10px;  
 }  
 
 button {  
@@ -60,12 +59,8 @@ button {
   </style>  
 </head>  
 <body>    <div id="app">  
-    <h1>Admission Ticket</h1>  <!-- Form Section -->  
+    <h1>Admission Form</h1>  <!-- Form Section -->  
 <form id="admissionForm">  
-  <label>Status:</label>  
-  <label><input type="radio" name="status" value="newcomer" required> Newcomer</label>  
-  <label><input type="radio" name="status" value="old-timer" required> Old-timer</label>  
-
   <label for="classSelect">Select Class:</label>  
   <select id="classSelect" name="class" required>  
     <option value="">--Choose Class--</option>  
@@ -87,11 +82,8 @@ button {
 <option value="R">Class 12</option>
   </select>  
 
-  <button type="submit">Get Ticket</button>  
+  <button type="submit">Get Admission Form</button>  
 </form>  
-
-<!-- Ticket Info Section -->  
 <div id="ticketInfo"></div>
-
-  </div>    <!-- App logic -->    <script src="app.js"></script>  </body>  
+ </div>    <!-- App logic -->    <script src="app.js"></script>  </body>  
 </html>  
