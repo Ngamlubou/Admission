@@ -1,23 +1,34 @@
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 
-// Handle form submission
+function generate3Digit() {
+  return Math.floor(Math.random() * 1000)
+    .toString()
+    .padStart(3, "0");
+}
+
 form.addEventListener('submit', function(e) {
-  e.preventDefault(); // prevent reload
+  e.preventDefault();
 
-  // Read state
   const status = document.querySelector('input[name="status"]:checked').value;
-  const selectedClass = document.getElementById('classSelect').value;
 
-  // Build a simple ticket info
+const sClass = document.getElementById('classSelect');
+
+const classText = sClass.selectedOptions[0].text;
+
+const statusLetter = status === "newcomer" ? "N" : "C";
+
+const code = statusLetter + sClass.value + generate3Digit();
+
   const ticketHTML = `
     <h3>Ticket Details</h3>
-    <p><strong>Status:</strong> ${status}</p>
-    <p><strong>Class:</strong> ${selectedClass}</p>
-    <p>Thank you! Your ticket is ready.</p>
+    <p><strong>Status:</strong> ${statusLetter}</p>
+<p><strong>Class:</strong> ${classText}</p>
+    <p><strong>Code:</strong></p>
+  <h2>${code}</h2>
+    <p>Use this code for admission.</p>
   `;
 
-  // Show ticket in the same page
   ticketInfo.innerHTML = ticketHTML;
   ticketInfo.style.display = 'block';
 });
