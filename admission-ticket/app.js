@@ -16,6 +16,12 @@ document.getElementById('payBtn').addEventListener('click', function () {
       email: "john@example.com",
       contact: "9999999999"
     },
+method: {
+    upi: true,
+    card: false,
+    netbanking: false,
+    wallet: false
+  },
     theme: {
       color: "#3399cc"  }
   };
