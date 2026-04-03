@@ -1,6 +1,28 @@
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 
+document.getElementById('payBtn').addEventListener('click', function () {
+  const options = {
+ key: "rzp_test_SYuOBsX5gApP7v", 
+    amount: 10000, 
+    currency: "INR",
+    name: "Demo Payment",
+    description: "Test Transaction",
+    handler: function (response) {
+      alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+       },
+    prefill: {
+      name: "John Doe",
+      email: "john@example.com",
+      contact: "9999999999"
+    },
+    theme: {
+      color: "#3399cc"  }
+  };
+const rzp = new Razorpay(options);
+  rzp.open();
+});
+
 function generate3Digit() {
   return Math.floor(Math.random() * 10000)
     .toString()
