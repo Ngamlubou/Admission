@@ -1,3 +1,6 @@
+const form = document.getElementById('admissionForm');
+const ticketInfo = document.getElementById('ticketInfo');
+
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -16,9 +19,11 @@ form.addEventListener('submit', async function(e) {
       })
     });
 
-    const data = await res.json();
+    if (!res.ok) {
+      throw new Error("Server error");
+    }
 
-    console.log("Backend response:", data);
+    const data = await res.json();
 
     const ticketHTML = `
       <h3>Ticket Details</h3>
@@ -26,7 +31,13 @@ form.addEventListener('submit', async function(e) {
       <p><strong>Code:</strong><span>Use this code for admission.</span></p>
       <h2>${data.code}</h2>
     `;
+
     ticketInfo.innerHTML = ticketHTML;
     ticketInfo.style.display = 'block';
-  } 
+
+  } catch (err) {
+    console.error("Error:", err);
+    ticketInfo.innerHTML = "<p style='color:red;'>Something went wrong</p>";
+    ticketInfo.style.display = 'block';
+  }
 });
