@@ -63,6 +63,5 @@ ticketInfo.innerHTML = ticketHTML;
 
  rzp.open();
 } catch (err) {
-  alert("Can't connect to server");
-}
+  alert(err.message || "Something went wrong"); }
 });
