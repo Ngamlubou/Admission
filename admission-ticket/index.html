@@ -1,89 +1,48 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Admission Form Ticket</title>  
-  <style>  
-    body {  
-      font-family: Arial, sans-serif;  
-      display: flex;  
-      justify-content: center;  
-      align-items: flex-start;  
-      min-height: 100vh;  
-      margin: 0;  
-      background-color: #f0f0f0;  
-      padding: 20px;  
-    }  
-#app {  
-  background-color: #fff;  
-  padding: 30px;  
-  border-radius: 10px;  
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);  
-  width: 100%;  
-  max-width: 400px;  
-}  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Razorpay Test</title>
+</head>
+<body>
 
-h1 {  
-  text-align: center;  
-}  
+<button id="payBtn">Pay ₹500</button>
 
-label {  
-  display: block;  
-  margin: 15px 0 5px;  
-}  
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-select {  margin-right: 10px;  
-}  
+<script>
 
-button {  
-  margin-top: 20px;  
-  width: 100%;  
-  padding: 10px;  
-  font-size: 16px;  
-  cursor: pointer;  
-  border: none;  
-  background-color: #007bff;  
-  color: white;  
-  border-radius: 5px;  
-}  
+document.getElementById("payBtn").onclick = 
 
-#ticketInfo {  
-  margin-top: 20px;  
-  padding: 15px;  
-  background-color: #e9ffe9;  
-  border: 1px solid #b2ffb2;  
-  border-radius: 5px;  
-  display: none;  
-}
-
-  </style>  
-</head>  
-<body>    <div id="app">  
-    <h1>Admission Form</h1>  <!-- Form Section -->  
-<form id="admissionForm">  
-  <label for="classSelect">Select Class:</label>  
-  <select id="classSelect" name="class" required>  
-    <option value="">--Choose Class--</option>  
-  <option value="A">Play Group</option>
-<option value="B">Nursery</option>
-<option value="C">KG-1</option>
-<option value="D">KG-2</option>
-<option value="E">Class 1</option>
-<option value="F">Class 2</option>
-<option value="G">Class 3</option>
-<option value="H">Class 4</option>
-<option value="J">Class 5</option>
-<option value="K">Class 6</option>
-<option value="L">Class 7</option>
-<option value="M">Class 8</option>
-<option value="N">Class 9</option>
-<option value="P">Class 10</option>
-<option value="Q">Class 11</option>
-<option value="R">Class 12</option>
-  </select>  
-  <button type="submit">Get Admission Form</button>  
-</form>  
-<div id="ticketInfo"></div>
- </div>    <!-- App logic -->    <script src="app.js"></script> </body>  
-</html>  
+function payment (data) {
+const setting = {
+    key: "rzp_test_SYuOBsX5gApP7v", 
+    amount: 10000, 
+    currency: "INR",
+  name: "Test Payment",
+    description: "Admission Form",
   
+    handler: function (response) {
+      alert("Payment Successful!");
+  console.log("Payment ID:", response.razorpay_payment_id);
+      console.log("Order ID:", response.razorpay_order_id);
+      console.log("Signature:", response.razorpay_signature);
+    },
+    theme: { color: "#3399cc"    }
+  };
+
+  const rzp = new Razorpay(setting);
+
+  rzp.on("payment.failed", function (response) {
+    alert("Payment Failed!");
+ console.log("Error:", response.error);
+    console.log("Error Code:", response.error.code);
+    console.log("Description:", response.error.description);
+  });
+
+ rzp.open();
+};
+
+</script>
+
+</body>
+</html>
