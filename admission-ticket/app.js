@@ -1,43 +1,68 @@
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 
-form.addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const sClass = document.getElementById('classSelect');
+form.addEventListener('submit', async function(e) {  
+e.preventDefault();
+const sClass = e.target.elements['classSelect'];
   const classText = sClass.selectedOptions[0].text;
   const classValue = sClass.value;
 
+  try {  const res = await fetch("https://smartpea-backend.onrender.com/create-order", {
+      method: "POST", 
+headers: {  "Content-Type": "application/json" }
+});
+  if (!res.ok) {
+      throw new Error("Server not responding");  }
+  const data = await res.json();
+
+const setting = {
+    key: "rzp_test_SYuOBsX5gApP7v", 
+    amount: data.amount, 
+    currency: "INR",
+order_id: data.order_id,
+  name: "Test Payment",
+    description: "Admission Form",
+ 
+handler: async function (response) {
   try {
-    const res = await fetch("https://smartpea-backend.onrender.com/submit", {
+    const verifyRes = await fetch("https://smartpea-backend.onrender.com/verify-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        classValue: classValue
+        classValue: classValue,  
+       razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_signature: response.razorpay_signature
       })
     });
 
-    if (!res.ok) {
-      throw new Error("Server error");
-    }
-
-    const data = await res.json();
-
-    const ticketHTML = `
+    const result = await verifyRes.json();
+if (!verifyRes.ok) {
+  throw new Error(result.error || "Verification failed");
+}
+  alert("Payment Verified! Your admission form code is created.");
+const ticketHTML = `
       <h3>Ticket Details</h3>
       <p><strong>Class:</strong> ${classText}</p>
-      <p><strong>Code:</strong><span>Use this code for admission.</span></p>
-      <h2>${data.code}</h2>
+      <p><strong>Code:</strong><span>Use this below code for admission.</span></p>
+      <h1>${result.code}</h1>
     `;
-
-    ticketInfo.innerHTML = ticketHTML;
+ticketInfo.innerHTML = ticketHTML;
     ticketInfo.style.display = 'block';
-
   } catch (err) {
-    console.error("Error:", err);
-    ticketInfo.innerHTML = "<p style='color:red;'>Something went wrong</p>";
-    ticketInfo.style.display = 'block';
-  }
+    alert("Can't connect to verify payment status");  }
+},
+    theme: { color: "#3399cc"    }
+  };
+  const rzp = new Razorpay(setting);
+  rzp.on("payment.failed", function (response) {
+    alert("Payment Failed!");
+  });
+
+ rzp.open();
+} catch (err) {
+  alert("Can't connect to server");
+}
 });
