@@ -8,7 +8,7 @@ const sClass = e.target.elements['classSelect'];
   const classText = sClass.selectedOptions[0].text;
   const classValue = sClass.value;
 
-  try {  const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/create-order", {
+  try {  const res = await fetch("https://8080-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/create-order", {
 
       method: "POST", 
 headers: {  "Content-Type": "application/json" }
@@ -27,7 +27,7 @@ order_id: data.order_id,
  
 handler: async function (response) {
   try {
-    const verifyRes = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/verify-payment", {
+    const verifyRes = await fetch("https://8080-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/verify-payment", {
 
       method: "POST",
       headers: {
