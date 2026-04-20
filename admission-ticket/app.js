@@ -1,5 +1,6 @@
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
+const submitBtn = document.getElementById("submitBtn");
 
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
