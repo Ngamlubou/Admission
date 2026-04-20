@@ -9,9 +9,11 @@ const sClass = e.target.elements['classSelect'];
   const classValue = sClass.value;
 
   try {  const res = await fetch("https://smartpea-backend.onrender.com/create-order", {
-
-      method: "POST", 
-headers: {  "Content-Type": "application/json" }
+ method: "POST", 
+headers: {  "Content-Type": "application/json" }, 
+body: JSON.stringify({
+  classValue: classValue
+}) 
 });
   if (!res.ok) {
       throw new Error("Server not responding");  }
