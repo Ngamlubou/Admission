@@ -46,6 +46,10 @@ button {
   color: white;  
   border-radius: 5px;  
 }  
+button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
 
 #ticketInfo {  
   margin-top: 20px;  
@@ -82,7 +86,7 @@ button {
 <option value="Q">Class 11</option>
 <option value="R">Class 12</option>
   </select>  
-  <button type="submit">Get Admission Form</button>  
+  <button type="submit" id="submitBtn">Get Admission Form</button>
 </form>  
 <div id="ticketInfo"></div>
  </div>  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
