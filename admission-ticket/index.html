@@ -4,8 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <title>Admission Form Ticket</title>  
   <style>  
-    body {  
-      font-family: Arial, sans-serif;  
+    body {     font-family: Arial, sans-serif;  
       display: flex;  
       justify-content: center;  
       align-items: flex-start;  
@@ -14,29 +13,21 @@
       background-color: #f0f0f0;  
       padding: 20px;  
     }  
-#app {  
-  background-color: #fff;  
+#app {    background-color: #fff;  
   padding: 30px;  
   border-radius: 10px;  
   box-shadow: 0 0 10px rgba(0,0,0,0.1);  
   width: 100%;  
   max-width: 400px;  
 }  
-
-h1 {  
-  text-align: center;  
+h1 {    text-align: center;  
 }  
-
-label {  
-  display: block;  
+label {    display: block;  
   margin: 15px 0 5px;  
 }  
-
 select {  margin-right: 10px;  
 }  
-
-button {  
-  margin-top: 20px;  
+button {    margin-top: 20px;  
   width: 100%;  
   padding: 10px;  
   font-size: 16px;  
@@ -46,18 +37,75 @@ button {
   color: white;  
   border-radius: 5px;  
 }  
-button:disabled {
-  background-color: #999;
+button:disabled {  background-color: #999;
   cursor: not-allowed;
 }
 
-#ticketInfo {  
-  margin-top: 20px;  
+#ticketInfo {    margin-top: 20px;  
   padding: 15px;  
   background-color: #e9ffe9;  
   border: 1px solid #b2ffb2;  
   border-radius: 5px;  
   display: none;  
+}
+
+/* Common card style */
+.card {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ✅ Success card */
+.card.success {
+  background: #e9ffe9;
+  border: 1px solid #b2ffb2;
+}
+
+.card.success h3 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+
+/* ❌ Failed section */
+#failed_card {
+  margin-top: 10px;
+}
+
+/* Dropdown */
+#failed_card details {
+  background: #fff3f3;
+  border: 1px solid #ffb2b2;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Summary (clickable title) */
+#failed_card summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Table container */
+#failed_card .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Header row */
+#failed_card .header {
+  font-weight: bold;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Last row remove border */
+#failed_card .row:last-child {
+  border-bottom: none;
 }
 
   </style>  
@@ -69,26 +117,31 @@ button:disabled {
   <label for="classSelect">Select Class:</label>  
   <select id="classSelect" name="class" required>  
     <option value="">--Choose Class--</option>  
-  <option value="A">Play Group</option>
-<option value="B">Nursery</option>
-<option value="C">KG-1</option>
-<option value="D">KG-2</option>
-<option value="E">Class 1</option>
-<option value="F">Class 2</option>
-<option value="G">Class 3</option>
-<option value="H">Class 4</option>
-<option value="J">Class 5</option>
-<option value="K">Class 6</option>
+  <option value="C">Play Group</option>
+<option value="F">Nursery</option>
+<option value="J">KG-1</option>
+<option value="M">KG-2</option>
+<option value="Q">Class 1</option>
+<option value="U">Class 2</option>
+<option value="X">Class 3</option>
+<option value="B">Class 4</option>
+<option value="E">Class 5</option>
+<option value="H">Class 6</option>
 <option value="L">Class 7</option>
-<option value="M">Class 8</option>
-<option value="N">Class 9</option>
-<option value="P">Class 10</option>
-<option value="Q">Class 11</option>
-<option value="R">Class 12</option>
+<option value="P">Class 8</option>
+<option value="T">Class 9</option>
+<option value="W">Class 10</option>
+<option value="A">Class 11</option>
+<option value="D">Class 12</option>
   </select>  
   <button type="submit" id="submitBtn">Get Admission Form</button>
 </form>  
 <div id="ticketInfo"></div>
- </div>  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ </div> 
+
+  <div id="success_card"></div>
+   <div id="failed_card"></div>
+
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
  <script src="app.js"></script> </body>  
 </html>  
