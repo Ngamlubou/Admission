@@ -89,7 +89,7 @@ writeStorage(storage);
 //------------
 
 //------------
-async function pendingCheck() { 
+ function pendingCheck() { 
 const data = readStorage();
 const pendingItems = data.filter(item => item.status === "pending");
 
