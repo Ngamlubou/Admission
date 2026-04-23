@@ -3,8 +3,8 @@ const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", () => {
-  pendingCheck();
+document.addEventListener("DOMContentLoaded", async () => {
+  await pendingCheck();
   renderHistory();
 });
 //------------
@@ -89,9 +89,9 @@ function updateStatus(code, status)
 writeStorage(storage);
    }
 //------------
-const supabase = supabase.createClient("https://lrlsgaijuawpiujymind.supabase.co", "sb_publishable_5eDgojN0OX5sFTjcPDHtGA_DdG32z33");
+const supabaseClient = supabase.createClient( "https://lrlsgaijuawpiujymind.supabase.co", "sb_publishable_5eDgojN0OX5sFTjcPDHtGA_DdG32z33" );
 async function checkDBcode(code) {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("payments")    
     .select("code")
     .eq("code", code)
