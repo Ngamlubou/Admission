@@ -2,7 +2,6 @@ const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
- pendingCheck();
  renderHistory();
 //------------
 form.addEventListener('submit', async function(e) {  
@@ -88,13 +87,7 @@ writeStorage(storage);
 //------------
 
 //------------
- function pendingCheck() { 
-const data = readStorage();
-const pendingItems = data.filter(item => item.status === "pending");
 
-if (pendingItems.length > 0) {
-  alert("You have pending payments.");
-}
 //------------
 function renderHistory() {
 const data = readStorage();
