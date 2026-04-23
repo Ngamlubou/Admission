@@ -1,12 +1,8 @@
-let storage = null;
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", async () => {
-  await pendingCheck();
-  renderHistory();
-});
+document.addEventListener("DOMContentLoaded", renderHistory);
 //------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
@@ -26,15 +22,14 @@ const data = await res.json();
   if (!res.ok) {
   throw new Error(data.error || "Server not responding"); }
 
- storage = readStorage();
-
+ const storage = readStorage();
 storage.push({
   order_id: data.order_id,
   code: data.code,
   class: classText,
   status: "pending"
 });
-localStorage.setItem("Payment History", JSON.stringify(storage));
+writeStorage(storage);
   
 const setting = {
     key: "rzp_test_SYuOBsX5gApP7v", 
@@ -82,58 +77,17 @@ function readStorage()
 function writeStorage(storage) { localStorage.setItem("Payment History", JSON.stringify(storage)); }
 //------------
 function updateStatus(code, status) 
-{  storage = storage.map(item => {
+{  const data = readStorage();
+const storage = data.map(item => {
     if (item.code === code) {
       return { ...item, status };  }
     return item;  });
 writeStorage(storage);
    }
 //------------
-const supabaseClient = supabase.createClient( "https://lrlsgaijuawpiujymind.supabase.co", "sb_publishable_5eDgojN0OX5sFTjcPDHtGA_DdG32z33" );
-async function checkDBcode(code) {
-  const { data, error } = await supabaseClient
-    .from("payments")    
-    .select("code")
-    .eq("code", code)
-    .maybeSingle();
-if (error) {   throw new Error();   }
-  return !!data; 
-}
+
 //------------
-async function pendingCheck() { 
-const data = readStorage();
-const pendingItems = data.filter(item => item.status === "pending");
 
-if (pendingItems.length > 0) { 
-try {
-const checks = await Promise.all(
-  pendingItems.map(async item => ({
-    item,
-    exists: await checkDBcode(item.code)
-  }))
-);
-
-const validPending = checks
-  .filter(entry => entry.exists)
-  .map(entry => entry.item);
-
-const validCodes = new Set(validPending.map(item => item.code));
-
-storage = data.map(item => {
-  if (item.status === "pending" && validCodes.has(item.code)) {
-    return { ...item, status: "success" };
-  }
-  return item; });
-writeStorage(storage); 
-} 
-catch (err) {
-  ticketInfo.innerHTML = `
-    <p style="color: red;">
-      Last payment pending verification failed. Try again later.
-    </p>
-  `;
-  ticketInfo.style.display = "block";
-} }
 //------------
 function renderHistory() {
 const data = readStorage();
