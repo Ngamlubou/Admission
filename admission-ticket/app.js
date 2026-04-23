@@ -117,13 +117,8 @@ const storage = data.map(item => {
 writeStorage(storage); 
 } 
 catch (err) {
-  ticketInfo.innerHTML = `
-    <p style="color: red;">
-      Last payment pending verification failed. Try again later.
-    </p>
-  `;
-  ticketInfo.style.display = "block";
-} }
+  alert("Last payment pending verification failed. Try again later.");
+}
 //------------
 function renderHistory() {
 const data = readStorage();
