@@ -2,7 +2,10 @@ const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", renderHistory);
+document.addEventListener("DOMContentLoaded", async () => {
+  await pendingCheck();
+  renderHistory();
+});
 //------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
@@ -87,7 +90,40 @@ writeStorage(storage);
 //------------
 
 //------------
+async function pendingCheck() { 
+const data = readStorage();
+const pendingItems = data.filter(item => item.status === "pending");
 
+if (pendingItems.length > 0) { 
+try {
+const checks = await Promise.all(
+  pendingItems.map(async item => ({
+    item,
+    exists: await checkDBcode(item.code)
+  }))
+);
+
+const validPending = checks
+  .filter(entry => entry.exists)
+  .map(entry => entry.item);
+
+const validCodes = new Set(validPending.map(item => item.code));
+
+const storage = data.map(item => {
+  if (item.status === "pending" && validCodes.has(item.code)) {
+    return { ...item, status: "success" };
+  }
+  return item; });
+writeStorage(storage); 
+} 
+catch (err) {
+  ticketInfo.innerHTML = `
+    <p style="color: red;">
+      Last payment pending verification failed. Try again later.
+    </p>
+  `;
+  ticketInfo.style.display = "block";
+} }
 //------------
 function renderHistory() {
 const data = readStorage();
