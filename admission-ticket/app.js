@@ -97,7 +97,7 @@ function renderHistory() {
 
   if (successItems.length > 0) {
     successCard.innerHTML = successItems.map(item => `
-      <div class="card success">
+      <div>
         <h3>Admission Success</h3>
         <p><strong>Class:</strong> ${item.class}</p>
         <p><strong>Code:</strong> ${item.code}</p>
