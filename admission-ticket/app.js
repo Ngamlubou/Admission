@@ -94,30 +94,8 @@ async function pendingCheck() {
 const data = readStorage();
 const pendingItems = data.filter(item => item.status === "pending");
 
-if (pendingItems.length > 0) { 
-try {
-const checks = await Promise.all(
-  pendingItems.map(async item => ({
-    item,
-    exists: await checkDBcode(item.code)
-  }))
-);
-
-const validPending = checks
-  .filter(entry => entry.exists)
-  .map(entry => entry.item);
-
-const validCodes = new Set(validPending.map(item => item.code));
-
-const storage = data.map(item => {
-  if (item.status === "pending" && validCodes.has(item.code)) {
-    return { ...item, status: "success" };
-  }
-  return item; });
-writeStorage(storage); 
-} 
-catch (err) {
-  alert("Last payment pending verification failed. Try again later.");
+if (pendingItems.length > 0) {
+  alert("You have pending payments.");
 }
 //------------
 function renderHistory() {
