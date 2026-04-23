@@ -2,23 +2,18 @@ let storage = null;
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
-
+//========= Executors ============
+document.addEventListener("DOMContentLoaded", () => {
+  pendingCheck();
+  renderHistory();
+});
+//------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
 submitBtn.disabled = true;
 const sClass = e.target.elements['classSelect'];
   const classText = sClass.selectedOptions[0].text;
   const classValue = sClass.value;
-
-function updateStatus(order_id, status) {
-    storage = storage.map(item => {
-    if (item.order_id === order_id) {
-      return { ...item, status };
-    }
-    return item;  });
-  localStorage.setItem("Payment History", JSON.stringify(storage));
-}
-
   try {  
 const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/create-order", {
  method: "POST", 
@@ -31,7 +26,7 @@ const data = await res.json();
   if (!res.ok) {
   throw new Error(data.error || "Server not responding"); }
 
- storage = JSON.parse(localStorage.getItem("Payment History")) || [];
+ storage = readStorage();
 
 storage.push({
   order_id: data.order_id,
@@ -51,7 +46,7 @@ order_id: data.order_id,
  
 handler: async function (response) {
     alert("Payment Success! Your admission form code is allotted.");
-updateStatus(data.order_id, "success");
+updateStatus(data.code, "success");
 submitBtn.disabled = false;
 renderHistory();
 const ticketHTML = `
@@ -69,7 +64,7 @@ ticketInfo.innerHTML = ticketHTML;
  const rzp = new Razorpay(setting);
   rzp.on("payment.failed", function (response) {
     alert("Payment Failed! Code not allotted for admission.");
-updateStatus(data.order_id, "failed");
+updateStatus(data.code, "failed");
 submitBtn.disabled = false;
 renderHistory();
   });
@@ -80,11 +75,69 @@ renderHistory();
 submitBtn.disabled = false; }
 });
 
+//========= Utilities ============
+function readStorage() 
+{ return JSON.parse(localStorage.getItem("Payment History") || "[]"); }
 //------------
+function writeStorage(storage) { localStorage.setItem("Payment History", JSON.stringify(storage)); }
+//------------
+function updateStatus(code, status) 
+{  storage = storage.map(item => {
+    if (item.code === code) {
+      return { ...item, status };  }
+    return item;  });
+writeStorage(storage);
+   }
+//------------
+async function checkDBcode(code) {
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  const { data, error } = await supabase
+    .from("payments")    
+    .select("code")
+    .eq("code", code)
+    .maybeSingle();
+if (error) {   throw new Error();   }
+  return !!data; 
+}
+//------------
+async function pendingCheck() { 
+const data = readStorage();
+const pendingItems = data.filter(item => item.status === "pending");
+
+if (pendingItems.length > 0) { 
+try {
+const checks = await Promise.all(
+  pendingItems.map(async item => ({
+    item,
+    exists: await checkDBcode(item.code)
+  }))
+);
+
+const validPending = checks
+  .filter(entry => entry.exists)
+  .map(entry => entry.item);
+
+const validCodes = new Set(validPending.map(item => item.code));
+
+storage = data.map(item => {
+  if (item.status === "pending" && validCodes.has(item.code)) {
+    return { ...item, status: "success" };
+  }
+  return item; });
+writeStorage(storage); 
+} 
+catch (err) {
+  ticketInfo.innerHTML = `
+    <p style="color: red;">
+      Last payment pending verification failed. Try again later.
+    </p>
+  `;
+  ticketInfo.style.display = "block";
+} }
+//------------
 function renderHistory() {
-  const data = JSON.parse(localStorage.getItem("Payment History") || "[]");
-
+const data = readStorage();
   const successCard = document.getElementById("success_card");
   const failedCard = document.getElementById("failed_card");
 
@@ -123,8 +176,4 @@ function renderHistory() {
             </div>
           `).join("")}
         </div>
-      </details>`;
-  }
-}
-
-document.addEventListener("DOMContentLoaded", renderHistory);
+      </details>`;   } }
