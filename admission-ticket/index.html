@@ -49,7 +49,6 @@ button:disabled {  background-color: #999;
   display: none;  
 }
 
-/* Common card style */
 .card {
   padding: 15px;
   border-radius: 8px;
@@ -57,38 +56,30 @@ button:disabled {  background-color: #999;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* ✅ Success card */
-.card.success {
+#success_card {
   background: #e9ffe9;
   border: 1px solid #b2ffb2;
 }
-
-.card.success h3 {
+#success_card h3 {
   margin-top: 0;
   color: #2e7d32;
 }
 
-/* ❌ Failed section */
 #failed_card {
   margin-top: 10px;
 }
-
-/* Dropdown */
 #failed_card details {
   background: #fff3f3;
   border: 1px solid #ffb2b2;
   border-radius: 8px;
   padding: 10px;
 }
-
-/* Summary (clickable title) */
 #failed_card summary {
   cursor: pointer;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-/* Table container */
 #failed_card .row {
   display: flex;
   justify-content: space-between;
@@ -97,7 +88,6 @@ button:disabled {  background-color: #999;
   font-size: 14px;
 }
 
-/* Header row */
 #failed_card .header {
   font-weight: bold;
   border-bottom: 2px solid #ccc;
@@ -138,10 +128,10 @@ button:disabled {  background-color: #999;
 </form>  
 <div id="ticketInfo"></div>
  </div> 
-
+<div class="card">
   <div id="success_card"></div>
    <div id="failed_card"></div>
-
+</div>
  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
  <script src="app.js"></script> </body>  
 </html>  
