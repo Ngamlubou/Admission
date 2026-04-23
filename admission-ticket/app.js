@@ -2,9 +2,8 @@ const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", async () => {
-  await pendingCheck();
-  renderHistory();
+ pendingCheck();
+ renderHistory();
 });
 //------------
 form.addEventListener('submit', async function(e) {  
