@@ -4,7 +4,6 @@ const submitBtn = document.getElementById("submitBtn");
 //========= Executors ============
  pendingCheck();
  renderHistory();
-});
 //------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
