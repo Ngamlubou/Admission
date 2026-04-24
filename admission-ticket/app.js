@@ -1,11 +1,10 @@
-let storage = readStorage();
+let sData = readStorage();
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
 const successCard = document.getElementById("success_card");
   const failedCard = document.getElementById("failed_card");
 //========= Executors ============
-//------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
 submitBtn.disabled = true;
@@ -24,14 +23,14 @@ const data = await res.json();
   if (!res.ok) {
   throw new Error(data.error || "Server not responding"); }
 
- storage = readStorage();
-storage.push({
+ sData = readStorage();
+sData.push({
   order_id: data.order_id,
   code: data.code,
   class: classText,
   status: "pending"
 });
-writeStorage(storage);
+writeStorage(sData);
   
 const setting = {
     key: "rzp_test_SYuOBsX5gApP7v", 
@@ -79,7 +78,7 @@ function readStorage()
 function writeStorage(storage) { localStorage.setItem("Payment History", JSON.stringify(storage)); }
 //------------
 function updateStatus(code, status) 
-{  storage = storage.map(item => {
+{  storage = sData.map(item => {
     if (item.code === code) {
       return { ...item, status };  }
     return item;  });
@@ -88,11 +87,10 @@ writeStorage(storage);
 //------------
 //------------
 async function renderHistory() {
-const data = readStorage();  
-  successCard.innerHTML = "";
+   successCard.innerHTML = "";
   failedCard.innerHTML = "";
 
-const pendingItems = data.filter(item => item.status === "pending");
+const pendingItems = sData.filter(item => item.status === "pending");
 if (pendingItems.length > 0) { 
 try {
 const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/verify-status", {
@@ -104,9 +102,8 @@ const verifiedStatus = await res.json();
 } 
 catch (err) {
    alert("Your last pending verification unable to complete. Try again later.");
-}
-}
-  const successItems = [...data]
+} }
+  const successItems = [...sData]
     .filter(item => item.status === "success")
     .reverse();
   if (successItems.length > 0) {
@@ -119,7 +116,7 @@ catch (err) {
     `).join("");
   }
 
-  const failedItems = data.filter(item => item.status === "failed");
+  const failedItems = sData.filter(item => item.status === "failed");
 
   if (failedItems.length > 0) {
     failedCard.innerHTML = `
