@@ -99,9 +99,30 @@ const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluste
         body: JSON.stringify({ code: pendingItems.map(i => i.code) })
       });
 const verifiedStatus = await res.json();
+
+let hasChanges = false;
+const sDataUpdated = sData.reduce((acc, item) => {
+  const dbVerdict = verifiedStatus[item.code];
+
+  if (dbVerdict === true) {  hasChanges = true;
+    acc.push({ ...item, status: "success" });
+  } 
+  else if (dbVerdict === false) {  hasChanges = true;
+  } 
+  else {    acc.push(item);
+  }  
+  return acc;
+}, []);
+
+if (hasChanges) { writeStorage(sDataUpdated);
+sData = readStorage(); }
 } 
 catch (err) {
-   alert("Your last pending verification unable to complete. Try again later.");
+    ticketInfo.innerHTML = `
+    <p style="color: red;">
+      Last payment pending verification failed. Try again later.
+    </p>  `;
+  ticketInfo.style.display = "block";
 } }
   const successItems = [...sData]
     .filter(item => item.status === "success")
