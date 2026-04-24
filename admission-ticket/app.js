@@ -2,15 +2,10 @@ let storage = readStorage();
 const form = document.getElementById('admissionForm');
 const ticketInfo = document.getElementById('ticketInfo');
 const submitBtn = document.getElementById("submitBtn");
+const successCard = document.getElementById("success_card");
+  const failedCard = document.getElementById("failed_card");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", async () => {
-try {
-    await pendingCheck(); 
-  } catch (err) {
-   alert("Pending checking found error. Try again later."); 
-  }
-  renderHistory();
-});
+document.addEventListener("DOMContentLoaded", renderHistory);
 //------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
@@ -92,61 +87,28 @@ function updateStatus(code, status)
 writeStorage(storage);
    }
 //------------
-let supabaseClient;
-if (typeof supabase !== 'undefined') {
-     supabaseClient = supabase.createClient("https://lrlsgaijuawpiujymind.supabase.co", "sb_publishable_5eDgojN0OX5sFTjcPDHtGA_DdG32z33"); }
-async function checkDBcode(code) {
-  const { data, error } = await supabaseClient
-    .from("payments")    
-    .select("code")
-    .eq("code", code)
-    .maybeSingle();
-if (error) {   throw new Error();   }
-  return !!data; 
-}
-//------------
-async function pendingCheck() { 
-const data = readStorage();
-const pendingItems = data.filter(item => item.status === "pending");
-
-if (pendingItems.length > 0) { 
-try {
-const checks = await Promise.all(
-  pendingItems.map(async item => ({
-    item,
-    exists: await checkDBcode(item.code)
-  }))
-);
-
-const validPending = checks
-  .filter(entry => entry.exists)
-  .map(entry => entry.item);
-
-const validCodes = new Set(validPending.map(item => item.code));
-
-storage = data.map(item => {
-  if (item.status === "pending" && validCodes.has(item.code)) {
-    return { ...item, status: "success" };
-  }
-  return item; });
-writeStorage(storage); 
-} 
-catch (err) {
-   alert("Your last pending verification unable to complete. Try again later.");
-} }
 //------------
 function renderHistory() {
-const data = readStorage();
-  const successCard = document.getElementById("success_card");
-  const failedCard = document.getElementById("failed_card");
-
+const data = readStorage();  
   successCard.innerHTML = "";
   failedCard.innerHTML = "";
 
+const pendingItems = data.filter(item => item.status === "pending");
+if (pendingItems.length > 0) { 
+try {
+const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/verify-status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: pendingItems.map(i => i.code) })
+      });
+const verifiedStatus = await res.json();
+} 
+catch (err) {
+   alert("Your last pending verification unable to complete. Try again later.");
+}
   const successItems = [...data]
     .filter(item => item.status === "success")
     .reverse();
-
   if (successItems.length > 0) {
     successCard.innerHTML = successItems.map(item => `
       <div>
