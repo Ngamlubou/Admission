@@ -5,7 +5,6 @@ const submitBtn = document.getElementById("submitBtn");
 const successCard = document.getElementById("success_card");
   const failedCard = document.getElementById("failed_card");
 //========= Executors ============
-document.addEventListener("DOMContentLoaded", renderHistory);
 //------------
 form.addEventListener('submit', async function(e) {  
 e.preventDefault();
@@ -88,7 +87,7 @@ writeStorage(storage);
    }
 //------------
 //------------
-function renderHistory() {
+async function renderHistory() {
 const data = readStorage();  
   successCard.innerHTML = "";
   failedCard.innerHTML = "";
@@ -105,6 +104,7 @@ const verifiedStatus = await res.json();
 } 
 catch (err) {
    alert("Your last pending verification unable to complete. Try again later.");
+}
 }
   const successItems = [...data]
     .filter(item => item.status === "success")
@@ -137,4 +137,8 @@ catch (err) {
             </div>
           `).join("")}
         </div>
-      </details>`;   } }
+      </details>`;   }
+ }
+
+//------------
+await renderHistory();
