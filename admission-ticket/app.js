@@ -12,7 +12,7 @@ const sClass = e.target.elements['classSelect'];
   const classText = sClass.selectedOptions[0].text;
   const classValue = sClass.value;
   try {  
-const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/create-order", {
+const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/create-order", {
  method: "POST", 
 headers: {  "Content-Type": "application/json" }, 
 body: JSON.stringify({
@@ -85,7 +85,6 @@ function updateStatus(code, status)
 writeStorage(storage);
    }
 //------------
-//------------
 async function renderHistory() {
    successCard.innerHTML = "";
   failedCard.innerHTML = "";
@@ -93,7 +92,7 @@ async function renderHistory() {
 const pendingItems = sData.filter(item => item.status === "pending");
 if (pendingItems.length > 0) { 
 try {
-const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/verify-status", {
+const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/verify-status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: pendingItems.map(i => i.code) })
