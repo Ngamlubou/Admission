@@ -78,11 +78,11 @@ function readStorage()
 function writeStorage(storage) { localStorage.setItem("Payment History", JSON.stringify(storage)); }
 //------------
 function updateStatus(code, status) 
-{  storage = sData.map(item => {
+{  sData = sData.map(item => {
     if (item.code === code) {
       return { ...item, status };  }
     return item;  });
-writeStorage(storage);
+writeStorage(sData);
    }
 //------------
 async function renderHistory() {
