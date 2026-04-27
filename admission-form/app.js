@@ -1,7 +1,9 @@
-    const codeInput = document.getElementById("codeInput");
+   const codeForm = document.getElementById("codeForm");
+ const codeInput = document.getElementById("codeInput");
   const codeError = document.getElementById("codeError");
+const personalSection = document.getElementById("personalSection");
 
-  form.addEventListener("submit", function (e) {
+  codeForm.addEventListener("submit", function (e) {
     e.preventDefault();
   const code = codeInput.value.toUpperCase();
 const prefix = code.charAt(0);
@@ -24,5 +26,7 @@ const prefix = code.charAt(0);
     R: "Class 12"
   }; 
 const sClass = classMap[prefix];
-   
+ personalSection.style.display = "block"; 
+ 
+
   });
