@@ -54,26 +54,23 @@
     }
   </style>
 </head>
-
 <body>
-
-  <div class="container">
+<div class="container">
     <h2>Enter Admission Code</h2>
-
     <form id="codeForm">
-      <input 
-        type="text" 
-        id="codeInput" 
-        placeholder="Enter your code" 
-        required 
-      />
-
-      <button type="submit">Next</button>
-      <p class="error" id="errorMsg">Invalid code</p>
+<input 
+  type="text" 
+  id="codeInput" 
+  placeholder="Enter your admission form code"
+  maxlength="5"
+  minlength="5"
+  required 
+/>
+    <button type="submit">Next</button>
+      <p class="error" id="codeError">Invalid code</p>
     </form>
   </div>
 
-  <!-- Link JS -->
   <script src="app.js"></script>
 </body>
-  </html>
+</html>
