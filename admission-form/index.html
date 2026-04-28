@@ -11,8 +11,8 @@
       background: #f5f7fa;
       display: flex;
       justify-content: center;
+flex-direction: column; 
       align-items: center;
-      flex-direction: column; 
       height: 100vh;
       margin: 0;
     }
@@ -71,6 +71,7 @@
       <p class="error" id="codeError">Invalid code</p>
     </form>
   </div>
+
 <div id="personalSection" style="display:none;">
   <div class="container">
     <h2>Personal Details</h2>
@@ -90,11 +91,43 @@
       <input type="text" id="address" placeholder="Current Address" required />
 
       <button type="submit">Next</button>
-     
-    </form>
+     </form>
   </div>
 </div>
 
+<div id="contactSection">
+  <div class="container">
+    <h2>Contact Details</h2>
+   <form id="contactForm">
+    <input 
+        type="tel" 
+        id="contactNumber" 
+        placeholder="Contact Number (WhatsApp preferred)" 
+        maxlength="10"
+minlength="10"
+        required 
+      />
+    <select id="relation" required>
+        <option value="">Select Relation</option>
+        <option>Student</option>
+        <option>Father</option>
+        <option>Mother</option>
+        <option>Sibling</option>
+        <option>Guardian</option>
+      </select>
+
+      <input 
+        type="text" 
+        id="aadharNumber" 
+        placeholder="Aadhaar Number" 
+        maxlength="12"
+minlength="12"
+        required 
+      />
+   <button type="submit">Next</button>
+    </form>
+  </div>
+</div>
   <script src="app.js"></script>
 </body>
-</html>
+  </html>
