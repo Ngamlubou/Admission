@@ -57,12 +57,13 @@ label { margin-top:10px; }
 <body>
 
 <div class="container">
-    <h2>Enter Admission Code</h2>
+    <h2>Admission Code</h2>
     <form id="codeForm">
+<label for="codeInput">Admission Code</label>
 <input 
   type="text" 
   id="codeInput" 
-  placeholder="Enter your admission form code"
+  placeholder="e.g. AB123" 
 maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"
   required 
@@ -80,7 +81,7 @@ maxlength="5"
           <input type="text" id="surname" placeholder="Surname" required />
       <input type="text" id="fatherName" placeholder="Father's First Name" required />
        <input type="text" id="motherName" placeholder="Mother's First Name" required />
-         <input type="date" id="dob" placeholder="Student Date of birth" required />
+         <input type="date" id="dob" min="2004-01-01" required />
           <input type="text" id="address" placeholder="Student Current Address" required />
 
       <button type="submit">Next</button>
