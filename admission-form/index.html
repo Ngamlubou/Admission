@@ -140,7 +140,7 @@ max="2026-01-01"
     required   
   />  
  <small>WhatsApp number recommended for updates</small>
-  <label for="relation">Whose number is this?</label>  
+  <label for="relation">This number belongs to</label>  
   <select id="relation" required>  
     <option value="">Select Relation</option>  
     <option>Student</option>  
@@ -149,14 +149,13 @@ max="2026-01-01"
     <option>Sibling</option>  
     <option>Guardian</option>  
   </select>  
-  <label for="alternativeNumber">Alternative Number</label>  
+  <label for="alternativeNumber">Alternative Number <span>(optional)</span></label>  
   <input   
     type="text"  
     id="alternativeNumber"   
     inputmode="numeric"  
     maxlength="10"  
-    pattern="\d{10}"  
-    required   
+    pattern="\d{10}"   
   />  
   <button type="submit">Next</button>  
 </form>
@@ -167,17 +166,19 @@ max="2026-01-01"
   <div class="container">
     <h2>Academic Details</h2>
     <form id="academicForm">
-     <input 
+  <label for="percentage">Percentage Obtained</label>
+      <input 
         type="number" 
         id="percentage" 
-        placeholder="Enter Percentage (%)"
+        placeholder="e.g. 85.5"
         min="10"
         max="100"
         step="0.01"
         required 
       />
-    <button type="submit">Next</button>
- </form>
+      <small>Enter final exam percentage</small>
+      <button type="submit">Next</button>
+    </form>
   </div>
 </div>
 
@@ -236,4 +237,4 @@ maxlength="12"
 
   <script src="app.js"></script>
 </body>
-</html>
+    </html>
