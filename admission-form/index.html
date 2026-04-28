@@ -12,9 +12,6 @@
       display: flex;
       justify-content: center;
 flex-direction: column; 
-      align-items: center;
-      height: 100vh;
-      margin: 0;
     }
 
     .container {
@@ -63,8 +60,7 @@ flex-direction: column;
   type="text" 
   id="codeInput" 
   placeholder="Enter your admission form code"
-  maxlength="5"
-  minlength="5"
+  pattern="[A-Za-z]{2}\d{3}"
   required 
 />
     <button type="submit">Next</button>
@@ -103,8 +99,7 @@ flex-direction: column;
         type="tel" 
         id="contactNumber" 
         placeholder="Contact Number (WhatsApp preferred)" 
-        maxlength="10"
-minlength="10"
+        pattern="\d{10}"
         required 
       />
     <select id="relation" required>
@@ -120,8 +115,7 @@ minlength="10"
         type="number" 
         id="aadharNumber" 
         placeholder="Aadhaar Number" 
-        maxlength="12"
-minlength="12"
+        pattern="\d{12}"
         required 
       />
    <button type="submit">Next</button>
