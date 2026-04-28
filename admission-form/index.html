@@ -32,7 +32,9 @@ flex-direction: column;
       border: 1px solid #ccc;
     }
 
-label { margin-top:10px; }
+label { margin-top:20px; 
+text-align: left;
+}
 
     button {
       width: 100%;
@@ -77,15 +79,51 @@ maxlength="5"
   <div class="container">
     <h2>Personal Details</h2>
    <form id="personalForm">
-      <input type="text" id="firstName" placeholder="Student First Name" required />
-          <input type="text" id="surname" placeholder="Surname" required />
-      <input type="text" id="fatherName" placeholder="Father's First Name" required />
-       <input type="text" id="motherName" placeholder="Mother's First Name" required />
-         <input type="date" id="dob" min="2004-01-01" required />
-          <input type="text" id="address" placeholder="Student Current Address" required />
-
-      <button type="submit">Next</button>
-     </form>
+      <label for="firstName">Student First Name</label>
+      <input 
+        type="text" 
+        id="firstName" 
+        placeholder="e.g. James" 
+        required 
+      />
+   <label for="surname">Surname</label>
+      <input 
+        type="text" 
+        id="surname" 
+        placeholder="e.g. Bond" 
+        required 
+      />
+      <label for="fatherName">Father's First Name</label>
+      <input 
+        type="text" 
+        id="fatherName" 
+        placeholder="e.g. John" 
+        required 
+      />
+  <label for="motherName">Mother's First Name</label>
+      <input 
+        type="text" 
+        id="motherName" 
+        placeholder="e.g. Mary" 
+        required 
+      />
+  <label for="dob">Date of Birth</label>
+      <input 
+        type="date" 
+        id="dob" 
+        min="2004-01-01"
+max="2026-01-01" 
+        required 
+      />
+   <label for="address">Current Address</label>
+      <input 
+        type="text" 
+        id="address" 
+        placeholder="e.g. Mantriban, Kanglatongbi" 
+        required 
+      />
+     <button type="submit">Next</button>
+    </form>
   </div>
 </div>
 
