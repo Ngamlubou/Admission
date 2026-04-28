@@ -117,7 +117,7 @@ minlength="10"
       </select>
 
       <input 
-        type="text" 
+        type="number" 
         id="aadharNumber" 
         placeholder="Aadhaar Number" 
         maxlength="12"
@@ -128,6 +128,28 @@ minlength="12"
     </form>
   </div>
 </div>
+
+<div id="academicSection" style="display:none;">
+  <div class="container">
+    <h2>Academic Details</h2>
+    <form id="academicForm">
+
+     <input 
+        type="number" 
+        id="percentage" 
+        placeholder="Enter Percentage (%)"
+        min="10"
+        max="100"
+        step="0.01"
+        required 
+      />
+
+      <button type="submit">Next</button>
+
+    </form>
+  </div>
+</div>
+
   <script src="app.js"></script>
 </body>
   </html>
