@@ -55,6 +55,7 @@ label { margin-top:10px; }
   </style>
 </head>
 <body>
+
 <div class="container">
     <h2>Enter Admission Code</h2>
     <form id="codeForm">
@@ -74,20 +75,13 @@ maxlength="5"
 <div id="personalSection">
   <div class="container">
     <h2>Personal Details</h2>
-
-    <form id="personalForm">
-      
-      <input type="text" id="firstName" placeholder="First Name" required />
-      
-      <input type="text" id="surname" placeholder="Surname" required />
-      
+   <form id="personalForm">
+      <input type="text" id="firstName" placeholder="Student First Name" required />
+          <input type="text" id="surname" placeholder="Surname" required />
       <input type="text" id="fatherName" placeholder="Father's First Name" required />
-      
-      <input type="text" id="motherName" placeholder="Mother's First Name" required />
-      
-      <input type="date" id="dob" required />
-      
-      <input type="text" id="address" placeholder="Current Address" required />
+       <input type="text" id="motherName" placeholder="Mother's First Name" required />
+         <input type="date" id="dob" placeholder="Student Date of birth" required />
+          <input type="text" id="address" placeholder="Student Current Address" required />
 
       <button type="submit">Next</button>
      </form>
@@ -114,15 +108,6 @@ maxlength="5"
         <option>Sibling</option>
         <option>Guardian</option>
       </select>
-
-      <input 
-        type="number" 
-        id="aadharNumber" 
-        placeholder="Aadhaar Number" 
-maxlength="12"
-        pattern="\d{12}"
-        required 
-      />
    <button type="submit">Next</button>
     </form>
   </div>
@@ -179,6 +164,22 @@ maxlength="12"
         accept="image/*" 
         required 
       />
+<select id="docType" required>
+  <option value="">Select Document Type</option>
+  <option value="birth">Birth Certificate</option>
+  <option value="student_aadhar">Student Aadhaar</option>
+  <option value="mother_aadhar">Mother Aadhaar</option>
+  <option value="father_aadhar">Father Aadhaar</option>
+</select>
+<input 
+        type="text" 
+        id="aadharNumber" 
+        placeholder="Aadhaar Number" 
+inputmode="numeric" 
+maxlength="12"
+        pattern="\d{12}"
+        required 
+      />
    <button type="submit">Submit</button>
     </form>
   </div>
@@ -186,4 +187,4 @@ maxlength="12"
 
   <script src="app.js"></script>
 </body>
-  </html>
+</html>
