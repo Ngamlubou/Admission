@@ -32,6 +32,8 @@ flex-direction: column;
       border: 1px solid #ccc;
     }
 
+label { margin-top:10px; }
+
     button {
       width: 100%;
       margin-top: 20px;
@@ -60,6 +62,7 @@ flex-direction: column;
   type="text" 
   id="codeInput" 
   placeholder="Enter your admission form code"
+maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"
   required 
 />
@@ -99,7 +102,8 @@ flex-direction: column;
         type="tel" 
         id="contactNumber" 
         placeholder="Contact Number (WhatsApp preferred)" 
-        pattern="\d{10}"
+    maxlength="10"
+    pattern="\d{10}"
         required 
       />
     <select id="relation" required>
@@ -115,6 +119,7 @@ flex-direction: column;
         type="number" 
         id="aadharNumber" 
         placeholder="Aadhaar Number" 
+maxlength="12"
         pattern="\d{12}"
         required 
       />
@@ -127,7 +132,6 @@ flex-direction: column;
   <div class="container">
     <h2>Academic Details</h2>
     <form id="academicForm">
-
      <input 
         type="number" 
         id="percentage" 
@@ -137,9 +141,45 @@ flex-direction: column;
         step="0.01"
         required 
       />
+    <button type="submit">Next</button>
+ </form>
+  </div>
+</div>
 
-      <button type="submit">Next</button>
+<div id="documentSection">
+  <div class="container">
+    <h2>Upload Documents</h2>
+   <form id="documentForm">
+  <label>
+        Marksheet
+      </label>
+      <input 
+        type="file" 
+        id="marksheetFile" 
+        accept="image/*,application/pdf" 
+        required 
+      />
 
+      <label>
+        Student Profile Photo
+      </label>
+      <input 
+        type="file" 
+        id="photoFile" 
+        accept="image/*" 
+        capture="environment"
+        required 
+      />
+  <label>
+        Aadhaar Card (Front)
+      </label>
+      <input 
+        type="file" 
+        id="aadharFile" 
+        accept="image/*" 
+        required 
+      />
+   <button type="submit">Submit</button>
     </form>
   </div>
 </div>
