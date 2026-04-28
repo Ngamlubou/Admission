@@ -139,12 +139,8 @@ max="2026-01-01"
     pattern="\d{10}"  
     required   
   />  
- <label>
-  <input type="checkbox" id="isWhatsapp" />
-  Same number is on WhatsApp
-</label>
-
-  <label for="relation">Relation</label>  
+ <small>WhatsApp number recommended for updates</small>
+  <label for="relation">Whose number is this?</label>  
   <select id="relation" required>  
     <option value="">Select Relation</option>  
     <option>Student</option>  
@@ -153,11 +149,17 @@ max="2026-01-01"
     <option>Sibling</option>  
     <option>Guardian</option>  
   </select>  
-
+  <label for="alternativeNumber">Alternative Number</label>  
+  <input   
+    type="text"  
+    id="alternativeNumber"   
+    inputmode="numeric"  
+    maxlength="10"  
+    pattern="\d{10}"  
+    required   
+  />  
   <button type="submit">Next</button>  
-
 </form>
-
   </div>  
 </div>
 
