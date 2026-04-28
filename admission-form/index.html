@@ -20,7 +20,6 @@ flex-direction: column;
       border-radius: 12px;
       width: 320px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
     }
 
     input {
@@ -32,8 +31,7 @@ flex-direction: column;
       border: 1px solid #ccc;
     }
 
-label { margin-top:20px; 
-text-align: left;
+label { margin-top: 20px;
 }
 
     button {
@@ -127,29 +125,40 @@ max="2026-01-01"
   </div>
 </div>
 
-<div id="contactSection">
-  <div class="container">
-    <h2>Contact Details</h2>
-   <form id="contactForm">
-    <input 
-        type="tel" 
-        id="contactNumber" 
-        placeholder="Contact Number (WhatsApp preferred)" 
-    maxlength="10"
-    pattern="\d{10}"
-        required 
-      />
-    <select id="relation" required>
-        <option value="">Select Relation</option>
-        <option>Student</option>
-        <option>Father</option>
-        <option>Mother</option>
-        <option>Sibling</option>
-        <option>Guardian</option>
-      </select>
-   <button type="submit">Next</button>
-    </form>
-  </div>
+<div id="contactSection">  
+  <div class="container">  
+    <h2>Contact Details</h2>  <form id="contactForm">  
+
+  <label for="contactNumber">Contact Number</label>  
+  <input   
+    type="text"  
+    id="contactNumber"   
+    placeholder="e.g. 9876543210"  
+    inputmode="numeric"  
+    maxlength="10"  
+    pattern="\d{10}"  
+    required   
+  />  
+ <label>
+  <input type="checkbox" id="isWhatsapp" />
+  Same number is on WhatsApp
+</label>
+
+  <label for="relation">Relation</label>  
+  <select id="relation" required>  
+    <option value="">Select Relation</option>  
+    <option>Student</option>  
+    <option>Father</option>  
+    <option>Mother</option>  
+    <option>Sibling</option>  
+    <option>Guardian</option>  
+  </select>  
+
+  <button type="submit">Next</button>  
+
+</form>
+
+  </div>  
 </div>
 
 <div id="academicSection">
@@ -183,7 +192,6 @@ max="2026-01-01"
         accept="image/*,application/pdf" 
         required 
       />
-
       <label>
         Student Profile Photo
       </label>
