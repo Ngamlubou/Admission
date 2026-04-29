@@ -4,7 +4,8 @@ const preview = document.getElementById("preview");
 aadharFile.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (file) {
-    preview.src = URL.createObjectURL(file);
- preview.style.display = "block"; 
-}
+const url = URL.createObjectURL(file);
+preview.src = url;
+preview.onload = () => {
+URL.revokeObjectURL(url); };  }
 });
