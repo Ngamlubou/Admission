@@ -203,7 +203,7 @@ max="2026-01-01"
     id="input-grad" 
     placeholder="e.g. A+"
     maxlength="2"
-    pattern="^[A-Sa-s][+-]?$"
+    pattern="[A-Za-z][+-]?"
     style="text-transform: uppercase;"  
   />
   <small>Enter grade (A+, B, etc.)</small>
@@ -225,7 +225,7 @@ max="2026-01-01"
         type="file" 
         id="marksheetFile" 
         accept="image/*,application/pdf" 
-        required 
+        
       />
       <label>
         Student Profile Photo
@@ -235,7 +235,7 @@ max="2026-01-01"
         id="photoFile" 
         accept="image/*" 
         capture="environment"
-        required 
+        
       />
   <label>
         Aadhaar Card (Front)
@@ -244,7 +244,7 @@ max="2026-01-01"
         type="file" 
         id="aadharFile" 
         accept="image/*" 
-        required 
+        
       />
 <select id="docType" required>
   <option value="">Select Document Type</option>
@@ -269,4 +269,4 @@ maxlength="12"
 
   <script src="app.js"></script>
 </body>
-                                </html>
+  </html>
