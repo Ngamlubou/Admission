@@ -9,4 +9,4 @@ aadharFile.addEventListener("change", (e) => {
   if (file) {
     preview.src = URL.createObjectURL(file);
   }
-};
+});
