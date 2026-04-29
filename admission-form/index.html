@@ -176,6 +176,18 @@ max="2026-01-01"
         step="0.01"
         required 
       />
+<label for="scoreType">Assessment Type</label>
+      <select id="scoreType" required>
+        <option value="percentage">Percentage (%)</option>
+        <option value="cgpa">CGPA (10 pt scale)</option>
+        <option value="grade">Letter Grade (A-E)</option>
+      </select>
+<input 
+        type="text" 
+        id="percentage" 
+        placeholder=""
+        required 
+      />
       <small>Enter final exam percentage</small>
       <button type="submit">Next</button>
     </form>
@@ -237,4 +249,4 @@ maxlength="12"
 
   <script src="app.js"></script>
 </body>
-    </html>
+</html>
