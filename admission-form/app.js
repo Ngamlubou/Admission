@@ -6,7 +6,10 @@ const personalSection = document.getElementById("personalSection");
 const img = document.createElement("img");
 img.src = URL.createObjectURL(file);
 
-document.getElementById("aadharFile").onchange = (e) => {
+const aadharFile = document.getElementById("aadharFile");
+const preview = document.getElementById("preview");
+
+aadharFile.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (file) {
     document.getElementById("preview").src = URL.createObjectURL(file);
