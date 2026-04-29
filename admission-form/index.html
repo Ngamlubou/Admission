@@ -55,7 +55,7 @@ label { margin-top: 20px;
   </style>
 </head>
 <body>
-
+//========= Section ============
 <div class="container">
     <h2>Admission Code</h2>
     <form id="codeForm">
@@ -72,7 +72,7 @@ maxlength="5"
       <p class="error" id="codeError">Invalid code</p>
     </form>
   </div>
-
+//------------
 <div id="personalSection">
   <div class="container">
     <h2>Personal Details</h2>
@@ -124,7 +124,7 @@ max="2026-01-01"
     </form>
   </div>
 </div>
-
+//------------
 <div id="contactSection">  
   <div class="container">  
     <h2>Contact Details</h2>  <form id="contactForm">  
@@ -161,7 +161,7 @@ max="2026-01-01"
 </form>
   </div>  
 </div>
-
+//------------
 <div id="academicSection">
   <div class="container">
     <h2>Academic Details</h2>
@@ -203,17 +203,16 @@ max="2026-01-01"
     id="input-grad" 
     placeholder="e.g. A+"
     maxlength="2"
-    pattern="[A-Za-z].?"
+    pattern="[A-Za-z]."
     style="text-transform: uppercase;"  
   />
   <small>Enter grade (A+, B, etc.)</small>
 </div>
-
       <button type="submit">Next</button>
     </form>
   </div>
 </div>
-
+//------------
 <div id="documentSection">
   <div class="container">
     <h2>Upload Documents</h2>
@@ -224,8 +223,7 @@ max="2026-01-01"
       <input 
         type="file" 
         id="marksheetFile" 
-        accept="image/*,application/pdf" 
-        
+        accept="image/*,application/pdf"       
       />
       <label>
         Student Profile Photo
@@ -233,9 +231,7 @@ max="2026-01-01"
       <input 
         type="file" 
         id="photoFile" 
-        accept="image/*" 
-        capture="environment"
-        
+        accept="image/*"       
       />
   <label>
         Aadhaar Card (Front)
@@ -243,9 +239,10 @@ max="2026-01-01"
       <input 
         type="file" 
         id="aadharFile" 
-        accept="image/*" 
-        
+        accept="image/*"    
       />
+<img id="preview">
+
 <select id="docType" required>
   <option value="">Select Document Type</option>
   <option value="birth">Birth Certificate</option>
@@ -253,20 +250,11 @@ max="2026-01-01"
   <option value="mother_aadhar">Mother Aadhaar</option>
   <option value="father_aadhar">Father Aadhaar</option>
 </select>
-<input 
-        type="text" 
-        id="aadharNumber" 
-        placeholder="Aadhaar Number" 
-inputmode="numeric" 
-maxlength="12"
-        pattern="\d{12}"
-        required 
-      />
-   <button type="submit">Submit</button>
+  <button type="submit">Submit</button>
     </form>
   </div>
 </div>
-
+//------------
   <script src="app.js"></script>
 </body>
   </html>
