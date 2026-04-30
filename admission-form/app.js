@@ -32,7 +32,12 @@ const compressedFile = await compressImg(file);
 }
 //========= Utility Function  =========
 async function compressImg(file, maxWidth = 720, quality = 0.6) {
-  if (file.size < 300 * 1024) return file; 
+  if ( file.size < 250 * 1024 ||
+  file.type === "application/pdf"
+) {  return new File([file], "studentfile.jpeg", {
+    type: file.type
+  });
+}
 const img = new Image();
   const reader = new FileReader();
   return new Promise((resolve) => {
@@ -56,4 +61,4 @@ const img = new Image();
     };
     reader.readAsDataURL(file);
   });
- }
+                         }
