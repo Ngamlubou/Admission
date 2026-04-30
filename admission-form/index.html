@@ -32,6 +32,7 @@ flex-direction: column;
     }
 
 label { margin-top: 20px;
+display: block;
 }
 small { display: block;
   margin-top: 5px;
@@ -48,16 +49,10 @@ small { display: block;
       cursor: pointer;
     }
 
-    .error {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-      display: none;
-    }
   </style>
 </head>
 <body>
-<div class="container">
+<div id="codeSection" class="container">
     <h2>Admission Code</h2>
     <form id="codeForm">
 <label for="codeInput">Admission Code</label>
@@ -71,12 +66,11 @@ style="text-transform: uppercase;"
   required
 />
     <button type="submit">Next</button>
-      <p class="codeError" id="codeError">Invalid code</p>
+      <p id="codeError"></p>
     </form>
   </div>
 
-<div id="personalSection">
-  <div class="container">
+<div id="personalSection" class="container">
     <h2>Personal Details</h2>
    <form id="personalForm">
       <label for="firstName">Student First Name</label>
@@ -136,26 +130,23 @@ max="2026-01-01"
 </datalist>
      <button type="submit">Next</button>
     </form>
-  </div>
 </div>
 
-<div id="contactSection">
-  <div class="container">
+<div id="contactSection" class="container">
     <h2>Contact Details</h2>  <form id="contactForm">
-
-  <label for="contactNumber">Contact Number</label>
+  <label for="contactNo">WhatsApp Number</label>
   <input
     type="text"
-    id="contactNumber"
+    id="contactNo"
     placeholder="e.g. 9876543210"
     inputmode="numeric"
     maxlength="10"
     pattern="\d{10}"
     required
   />
- <small>WhatsApp number recommended for updates</small>
-  <label for="relation">This number belongs to</label>
-  <select id="relation" required>
+ <small>Used for admission updates and communication</small>
+  <label for="contactRelate">Who uses this number?</label>
+  <select id="contactRelate" required>
     <option value="">Select Relation</option>
     <option>Student</option>
     <option>Father</option>
@@ -163,29 +154,29 @@ max="2026-01-01"
     <option>Sibling</option>
     <option>Guardian</option>
   </select>
-  <label for="alternativeNumber">Alternative Number <span>(optional)</span></label>
+  <label for="alternateNo">Alternative Number <span>(optional)</span></label>
   <input
     type="text"
-    id="alternativeNumber"
+    id="alternateNo"
     inputmode="numeric"
     maxlength="10"
     pattern="\d{10}"
   />
   <button type="submit">Next</button>
 </form>
-  </div>
 </div>
 
-<div id="academicSection">
-  <div class="container">
+<div id="academicSection"  class="container">
     <h2>Academic Details</h2>
     <form id="academicForm">
+<div id="scoreArea" hidden>
 <label for="scoreType">Assessment Type</label>
       <select id="scoreType" required>
         <option value="percentage">Percentage (%)</option>
         <option value="cgpa">CGPA (10 pt scale)</option>
         <option value="grade">Letter Grade (A-E)</option>
       </select>
+</div>
 <div id="percArea">
   <label for="percInput">Percentage Obtained</label>
   <input
@@ -221,40 +212,41 @@ max="2026-01-01"
   />
   <small>Enter grade (A+, B, etc.)</small>
 </div>
-      <button type="submit">Next</button>
+  <button type="submit">Next</button>
     </form>
-  </div>
 </div>
 
-<div id="documentSection">
-  <div class="container">
+<div id="docSection" class="container">
     <h2>Upload Documents</h2>
-   <form id="documentForm">
+   <form id="docForm">
   <div id="msheetArea">
-  <label>
-        Marksheet
-      </label>
+  <label>Marksheet </label>
       <input
         type="file"
         id="msheetFile"
         accept="image/*,application/pdf"
       />
 <img id="msheetView" style="width:100%; margin-top:10px;" />
-<div id="msheetPdf"
-     style="display:none; margin-top:10px;">
+<div id="msheetPdf" hidden>
   ✔️ PDF Selected
-</div> </div>
-      <label>
-        Student Profile Photo
-      </label>
+</div>
+</div>
+      <label>Student Profile Photo</label>
       <input
         type="file"
         id="profileFile"
         accept="image/*"
       />
 <img id="profileView" style="width:100%; margin-top:10px;" />
-  <label>
-        Aadhaar Card (Front)
+ <select id="docType" hidden disabled required>
+  <option value="">Select Document Type</option>
+  <option value="birth">Student Birth Certificate</option>
+  <option value="student_aadhaar">Student Aadhaar</option>
+  <option value="mother_aadhaar">Mother Aadhaar</option>
+  <option value="father_aadhaar">Father Aadhaar</option>
+</select>
+ <label id="docLabel">
+        Student Aadhaar  (Front)
       </label>
       <input
         type="file"
@@ -263,13 +255,6 @@ max="2026-01-01"
       />
 <img id="aadhaarView" style="width:100%; margin-top:10px;" />
 
-<select id="docType" required>
-  <option value="">Select Document Type</option>
-  <option value="birth">Student Birth Certificate</option>
-  <option value="student_aadhaar">Student Aadhaar</option>
-  <option value="mother_aadhaar">Mother Aadhaar</option>
-  <option value="father_aadhaar">Father Aadhaar</option>
-</select>
   <button type="submit">Submit</button>
     </form>
   </div>
