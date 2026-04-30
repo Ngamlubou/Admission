@@ -65,10 +65,11 @@ label { margin-top: 20px;
   placeholder="e.g. AB123" 
 maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"
+style="text-transform: uppercase;"
   required 
 />
     <button type="submit">Next</button>
-      <p class="error" id="codeError">Invalid code</p>
+      <p class="codeError" id="codeError">Invalid code</p>
     </form>
   </div>
 
@@ -202,8 +203,7 @@ max="2026-01-01"
     id="input-grad" 
     placeholder="e.g. A+"
     maxlength="2"
-    pattern="[A-Za-z]."
-    style="text-transform: uppercase;"  
+    pattern="[A-Za-z].?"     
   />
   <small>Enter grade (A+, B, etc.)</small>
 </div>
@@ -225,6 +225,10 @@ max="2026-01-01"
         accept="image/*,application/pdf"       
       />
 <img id="msheetView" style="width:100%; margin-top:10px;" />
+<div id="msheetPdf"
+     style="display:none; margin-top:10px;">
+  📄 PDF Selected
+</div>
       <label>
         Student Profile Photo
       </label>
@@ -258,4 +262,4 @@ max="2026-01-01"
 
   <script src="app.js"></script>
 </body>
-     </html>
+  </html>
