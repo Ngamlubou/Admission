@@ -1,20 +1,20 @@
-const sFile = {
+   const sFile = {
   aadhar: null,
   profile: null,
   msheet: null
 };
-const msheetPdf = document.getElementById("msheetPdf");
 const msheetFile = document.getElementById("msheetFile");
 const msheetView = document.getElementById("msheetView");
+const msheetPdf = document.getElementById("msheetPdf");
 
 const profileFile = document.getElementById("profileFile");
 const profileView = document.getElementById("profileView");
 
-const aadharFile = document.getElementById("aadharFile");
-const aadharView = document.getElementById("aadharView");
+const aadhaarFile = document.getElementById("aadhaarFile");
+const aadhaarView = document.getElementById("aadhaarView");
 
 //------------
-bindUpload(aadharFile, aadharView, "aadhar");
+bindUpload(aadhaarFile, aadhaarView, "aadhaar");
 bindUpload(profileFile, profileView, "profile");
 bindUpload(msheetFile, msheetView, "msheet");
 
@@ -64,4 +64,4 @@ const img = new Image();
     };
     reader.readAsDataURL(file);
   });
-    }
+}
