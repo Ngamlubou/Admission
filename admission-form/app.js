@@ -3,6 +3,7 @@ const sFile = {
   profile: null,
   msheet: null
 };
+const msheetPdf = document.getElementById("msheetPdf");
 const msheetFile = document.getElementById("msheetFile");
 const msheetView = document.getElementById("msheetView");
 
@@ -32,11 +33,13 @@ const compressedFile = await compressImg(file);
 }
 //========= Utility Function  =========
 async function compressImg(file, maxWidth = 720, quality = 0.6) {
-  if ( file.size < 250 * 1024 ||
-  file.type === "application/pdf"
-) {  return new File([file], "studentfile.jpeg", {
-    type: file.type
-  });
+if ( file.type === "application/pdf" ) {  
+msheetPdf.style.display = "block";
+return new File([file], "studentfile.pdf", {
+    type: file.type  });
+}
+  if ( file.size < 250 * 1024 ) {  return new File([file], "studentfile.jpeg", {
+    type: file.type  });
 }
 const img = new Image();
   const reader = new FileReader();
@@ -61,4 +64,4 @@ const img = new Image();
     };
     reader.readAsDataURL(file);
   });
-                         }
+    }
