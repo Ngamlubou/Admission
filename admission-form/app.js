@@ -1,17 +1,35 @@
-const aadharFile = document.getElementById("aadharFile");
-const preview = document.getElementById("preview");
+const sFile = {
+  aadhar: null,
+  profile: null,
+  msheet: null
+};
+const msheetFile = document.getElementById("msheetFile");
+const msheetView = document.getElementById("msheetView");
 
-aadharFile.addEventListener("change", async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const compressedFile = await compressImg(file);
+const profileFile = document.getElementById("profileFile");
+const profileView = document.getElementById("profileView");
+
+const aadharFile = document.getElementById("aadharFile");
+const aadharView = document.getElementById("aadharView");
+
+//------------
+bindUpload(aadharFile, aadharView, "aadhar");
+bindUpload(profileFile, profileView, "profile");
+bindUpload(msheetFile, msheetView, "msheet");
+
+function bindUpload(input, view, key) {
+  input.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+const compressedFile = await compressImg(file);
   const url = URL.createObjectURL(compressedFile);
-    preview.src = url;
-  preview.onload = () => {
-    URL.revokeObjectURL(url);
-  };
-  window.finalFile = compressedFile;
-});
+ view.src = url;
+ view.onload = () => {
+      URL.revokeObjectURL(url);
+    };
+   sFile[key] = compressedFile;
+  });
+}
 //========= Utility Function  =========
 async function compressImg(file, maxWidth = 720, quality = 0.6) {
   if (file.size < 300 * 1024) return file; 
@@ -38,4 +56,4 @@ const img = new Image();
     };
     reader.readAsDataURL(file);
   });
-      }
+ }
