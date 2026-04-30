@@ -3,6 +3,11 @@
   profile: null,
   msheet: null
 };
+const scoreType = document.getElementById("scoreType");
+const percArea = document.getElementById("percArea");
+const cgpaArea = document.getElementById("cgpaArea");
+const gradArea = document.getElementById("gradArea");
+
 const msheetFile = document.getElementById("msheetFile");
 const msheetView = document.getElementById("msheetView");
 const msheetPdf = document.getElementById("msheetPdf");
@@ -31,9 +36,21 @@ const compressedFile = await compressImg(file);
    sFile[key] = compressedFile;
   });
 }
+
+scoreType.addEventListener("change", () => {
+  percArea.hidden = true;
+  cgpaArea.hidden = true;
+  gradArea.hidden = true;
+  if (scoreType.value === "percentage") {
+    percArea.hidden = false; }
+if (scoreType.value === "cgpa") {
+    cgpaArea.hidden = false; }
+if (scoreType.value === "grade") {
+    gradArea.hidden = false;  }
+});
 //========= Utility Function  =========
 async function compressImg(file, maxWidth = 720, quality = 0.6) {
-if ( file.type === "application/pdf" ) {  
+if ( file.type === "application/pdf" ) {
 msheetPdf.style.display = "block";
 return new File([file], "studentfile.pdf", {
     type: file.type  });
