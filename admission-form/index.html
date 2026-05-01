@@ -13,7 +13,16 @@
       justify-content: center;
 flex-direction: column;
     }
-
+#sumBtn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+padding: 10px 14px;
+background: white;
+  border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+cursor: pointer;
+}
     .container {
       background: #fff;
       padding: 25px;
@@ -52,6 +61,8 @@ small { display: block;
   </style>
 </head>
 <body>
+<h3 id="sumBtn" onclick="toggleSumContent()" hidden></h3>
+<div id="sumContent" hidden></div>
 <div id="codeSection" class="container">
     <h2>Admission Code</h2>
     <form id="codeForm">
@@ -62,7 +73,7 @@ small { display: block;
   placeholder="e.g. AB123"
 maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"
-style="text-transform: uppercase;"
+oninput="this.value = this.value.toUpperCase()"
   required
 />
     <button type="submit">Next</button>
@@ -166,9 +177,9 @@ max="2026-01-01"
 </form>
 </div>
 
-<div id="academicSection"  class="container">
+<div id="acadeSection"  class="container">
     <h2>Academic Details</h2>
-    <form id="academicForm">
+    <form id="acadeForm">
 <div id="scoreArea" hidden>
 <label for="scoreType">Assessment Type</label>
       <select id="scoreType" required>
