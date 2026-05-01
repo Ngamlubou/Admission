@@ -56,12 +56,13 @@ const msheetView = document.getElementById("msheetView");
 const msheetPdf = document.getElementById("msheetPdf");
 const profileFile = document.getElementById("profileFile");
 const profileView = document.getElementById("profileView");
-const docType = document.getElementById("docType");
-const docLabel = document.getElementById("docLabel");
+const aadhaarType = document.getElementById("docType");
+const aadhaarLabel = document.getElementById("docLabel");
 const aadhaarFile = document.getElementById("aadhaarFile");
 const aadhaarView = document.getElementById("aadhaarView");
 
 //========= Active Workers  =========
+//-------- admission code --------
 codeForm.onsubmit = (e) => {
   e.preventDefault();
   const prefix = codeInput.value[0];
@@ -71,7 +72,6 @@ sumBtn.textContent = `☰ ${studentClass} 2026 • ${codeInput.value}`;
  updateSumContent();
 };
 
-//-------- admission code --------
 //-------- personal detials --------
 //-------- contact detials --------
 
@@ -85,9 +85,9 @@ if (scoreType.value === "cgpa") cgpaArea.hidden = false;
 if (scoreType.value === "grade") gradArea.hidden = false;
 });
 //-------- upload document --------
-bindUpload(aadhaarFile, aadhaarView, "aadhaar");
-bindUpload(profileFile, profileView, "profile");
 bindUpload(msheetFile, msheetView, "msheet");
+bindUpload(profileFile, profileView, "profile");
+bindUpload(aadhaarFile, aadhaarView, "aadhaar");
 
 function bindUpload(input, view, key) {
   input.addEventListener("change", async (e) => {
@@ -100,13 +100,14 @@ const compressedFile = await compressImg(file);
       URL.revokeObjectURL(url); };
    sFile[key] = compressedFile; }); }
 
-docType.addEventListener("change", () => {
-docLabel.textContent =
-    docType.options[docType.selectedIndex].text;
+aadhaarType.addEventListener("change", () => {
+aadhaarLabel.textContent =
+    aadhaarType.options[aadhaarType.selectedIndex].text;
 });
 //========= Utility Function  =========
 function toggleSumContent() {
   sumContent.hidden = !sumContent.hidden; }
+
 function updateSumContent() {
   const personalHTML = firstName.value && `
   <h3>🟢 Personal Details</h3>
@@ -116,8 +117,26 @@ function updateSumContent() {
  <p>• DOB: ${dob.value}</p>
  <p>• Address: ${address.value}</p>
 `;
+const contactHTML = contactNo.value && `
+  <h3>🟢 Contact Details</h3>
+  <p>• Whatsapp: ${contactNo.value}</p>
+  <p>• Alternative: ${alternateNo.value || "—"} </p>
+`;
+const acadeHTML = scoreType.value && `
+  <h3>🟢 Academic Details</h3>
+  <p>• ${scoreType.value || "percentage"}: ${percInput.value || cgpaInput.value ||  gradInput.value}  </p>
+`;
+const docHTML = sFile.profile && `
+   <h3>🟢 Upload Documents</h3>
+  ${sFile.msheet ? "<p>• Marksheet: ✔️</p>" : ""}
+ <p>• Profile Photo: ✔️</p>
+ <p>• ${aadhaarLabel.textContent}: ✔️</p>
+`;
   sumContent.innerHTML = `
   ${personalHTML || "<h3>🟡 Personal Details</h3>"}
+${contactHTML || "<h3>🟡 Contact Details</h3>"}
+${academicHTML || "<h3>🟡 Academic Details</h3>"}
+${docHTML || "<h3>🟡 Upload Documents</h3>"}
   `; }
 
 //-------- admission code --------
