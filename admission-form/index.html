@@ -182,7 +182,7 @@ max="2026-01-01"
     <form id="acadeForm">
 <div id="scoreArea" hidden>
 <label for="scoreType">Assessment Type</label>
-      <select id="scoreType" required>
+      <select id="scoreType">
         <option value="percentage">Percentage (%)</option>
         <option value="cgpa">CGPA (10 pt scale)</option>
         <option value="grade">Letter Grade (A-E)</option>
@@ -249,14 +249,14 @@ max="2026-01-01"
         accept="image/*"
       />
 <img id="profileView" style="width:100%; margin-top:10px;" />
- <select id="docType" hidden disabled required>
+ <select id="aadhaarType" hidden disabled required>
   <option value="">Select Document Type</option>
   <option value="birth">Student Birth Certificate</option>
   <option value="student_aadhaar">Student Aadhaar</option>
   <option value="mother_aadhaar">Mother Aadhaar</option>
   <option value="father_aadhaar">Father Aadhaar</option>
 </select>
- <label id="docLabel">
+ <label id="aadhaarLabel">
         Student Aadhaar  (Front)
       </label>
       <input
@@ -273,4 +273,5 @@ max="2026-01-01"
 
   <script src="app.js"></script>
 </body>
-</html>
+        </html>
+  
