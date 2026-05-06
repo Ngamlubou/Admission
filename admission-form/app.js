@@ -21,12 +21,11 @@ const codeInput = document.getElementById("codeInput");
 //-------- personal detials --------
 const personalSection = document.getElementById("personalSection");
 const personalForm = document.getElementById("personalForm");
-const firstName = document.getElementById("firstName");
-const surname = document.getElementById("surname");
+const studentName = document.getElementById("studentName");
 const fatherName = document.getElementById("fatherName");
 const motherName = document.getElementById("motherName");
 const dob = document.getElementById("dob");
-const address = document.getElementById("address");
+const addressCur = document.getElementById("addressCur");
 
 //-------- contact detials --------
 const contactSection = document.getElementById("contactSection");
@@ -111,11 +110,11 @@ function toggleSumContent() {
 function updateSumContent() {
   const personalHTML = firstName.value && `
   <h3>🟢 Personal Details</h3>
-  <p>• Student: ${firstName.value} ${surname.value}</p>
-  <p>• Father: ${fatherName.value} ${surname.value}</p>
- <p>• Mother: ${motherName.value} ${surname.value}</p>
+  <p>• Student: ${studentName.value}</p>
+  <p>• Father: ${fatherName.value} </p>
+ <p>• Mother: ${motherName.value}</p>
  <p>• DOB: ${dob.value}</p>
- <p>• Address: ${address.value}</p>
+ <p>• Address: ${addressCur.value}</p>
 `;
 const contactHTML = contactNo.value && `
   <h3>🟢 Contact Details</h3>
@@ -124,7 +123,7 @@ const contactHTML = contactNo.value && `
 `;
 const acadeHTML = scoreType.value && `
   <h3>🟢 Academic Details</h3>
-  <p>• ${scoreType.value || "percentage"}: ${percInput.value || cgpaInput.value ||  gradInput.value}  </p>
+  <p>• ${scoreType.value}: ${percInput.value || cgpaInput.value ||  gradInput.value}  </p>
 `;
 const docHTML = sFile.profile && `
    <h3>🟢 Upload Documents</h3>
@@ -135,7 +134,7 @@ const docHTML = sFile.profile && `
   sumContent.innerHTML = `
   ${personalHTML || "<h3>🟡 Personal Details</h3>"}
 ${contactHTML || "<h3>🟡 Contact Details</h3>"}
-${academicHTML || "<h3>🟡 Academic Details</h3>"}
+${acadeHTML || "<h3>🟡 Academic Details</h3>"}
 ${docHTML || "<h3>🟡 Upload Documents</h3>"}
   `; }
 
