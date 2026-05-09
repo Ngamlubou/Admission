@@ -265,13 +265,14 @@ small { display: block;
  <option value="aadhaar">Student Aadhaar</option>
   <option value="birth">Student Birth Certificate</option>
 </select>
- <label id="aadhaarLabel" title="Upload front and back side clearly. All text must be visible.">
-        Student Aadhaar  (both front & back) <details>
-  <summary>Help❔</summary>
-  Upload clear front and back images.
-  Make sure all text is visible.
-</details>
-      </label>
+ <label id="aadhaarLabel">
+        Student Aadhaar  (both front & back)
+     <details> <summary>❔</summary>
+  <ul>  <li>Upload images only</li>
+    <li>First upload the front side</li>
+    <li>Then upload the back side using the same input again</li>
+    <li>Make sure all text is clearly visible</li> </ul>
+</details> </label>
       <input  type="file"  id="aadhaarFile"   accept="image/*" />
 <img id="aadhaarView" style="width:100%; margin-top:10px;" />
 <img id="aadhaarView1" style="width:100%; margin-top:10px;" />
