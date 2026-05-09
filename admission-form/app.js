@@ -1,7 +1,8 @@
 //========= DOM Store =========
   const sFile = {
-  aadhar: null,
+  aadhaar: null,
   profile: null,
+  tc: null,
   msheet: null };
 const classMap = {
     C: "Playgroup", F: "Nursery",    J: "KG-I", M: "KG-II",
@@ -55,11 +56,14 @@ const msheetView = document.getElementById("msheetView");
 const msheetPdf = document.getElementById("msheetPdf");
 const profileFile = document.getElementById("profileFile");
 const profileView = document.getElementById("profileView");
+const tcArea = document.getElementById("tcArea");
+const tcFile = document.getElementById("tcFile");
+const tcView = document.getElementById("tcView");
 const aadhaarType = document.getElementById("docType");
 const aadhaarLabel = document.getElementById("docLabel");
 const aadhaarFile = document.getElementById("aadhaarFile");
 const aadhaarView = document.getElementById("aadhaarView");
-
+const aadhaarView1 = document.getElementById("aadhaarView1");
 //========= Active Workers  =========
 //-------- admission code --------
 codeForm.onsubmit = (e) => {
@@ -85,19 +89,28 @@ if (scoreType.value === "grade") gradArea.hidden = false;
 });
 //-------- upload document --------
 bindUpload(msheetFile, msheetView, "msheet");
+bindUpload(tcFile, tcView, "tc");
 bindUpload(profileFile, profileView, "profile");
-bindUpload(aadhaarFile, aadhaarView, "aadhaar");
+bindUpload(aadhaarFile, [aadhaarView, aadhaarView1], "aadhaar");
 
 function bindUpload(input, view, key) {
+  let index = 0;
   input.addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-const compressedFile = await compressImg(file);
-  const url = URL.createObjectURL(compressedFile);
- view.src = url;
- view.onload = () => {
-      URL.revokeObjectURL(url); };
-   sFile[key] = compressedFile; }); }
+    const compressedFile = await compressImg(file);
+    const url = URL.createObjectURL(compressedFile);
+    if (Array.isArray(view)) {
+      if (!sFile[key]) {  sFile[key] = [];  }
+      view[index].src = url;
+ view[index].onload = () => {     URL.revokeObjectURL(url);  };
+      sFile[key][index] = compressedFile;
+      index = (index + 1) % 2;
+    } else {
+      view.src = url;
+      view.onload = () => {  URL.revokeObjectURL(url); };
+      sFile[key] = compressedFile;  } });
+}
 
 aadhaarType.addEventListener("change", () => {
 aadhaarLabel.textContent =
@@ -108,7 +121,7 @@ function toggleSumContent() {
   sumContent.hidden = !sumContent.hidden; }
 
 function updateSumContent() {
-  const personalHTML = firstName.value && `
+  const personalHTML = studentName.value && `
   <h3>🟢 Personal Details</h3>
   <p>• Student: ${studentName.value}</p>
   <p>• Father: ${fatherName.value} </p>
