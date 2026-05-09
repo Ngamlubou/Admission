@@ -84,15 +84,15 @@ oninput="this.value = this.value.toUpperCase()"
 <div id="personalSection" class="container">
     <h2>Personal Details</h2>
    <form id="personalForm">
-      <label for="firstName">Student Full Name</label>
+      <label for="firstName">Student Full Name *</label>
       <input  type="text"  id="studentName" placeholder="e.g. James Bond"  />
-      <label for="fatherName">Father's Full Name</label>
+      <label for="fatherName">Father's Full Name *</label>
       <input  type="text"      id="fatherName"  placeholder="e.g. John Bond"   />
-  <label for="motherName">Mother's Full Name</label>
+  <label for="motherName">Mother's Full Name *</label>
       <input  type="text" id="motherName"   placeholder="e.g. Mary Bond" />
       <label for="motherName">Guardian's Full Name</label>
       <input  type="text" id="guadianName"   placeholder="e.g. Albert King" />
-  <label for="dob">Date of Birth</label>
+  <label for="dob">Date of Birth *</label>
       <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
       <label>Gender</label>
 <label>Male</label>
@@ -182,6 +182,54 @@ oninput="this.value = this.value.toUpperCase()"
     </form>
 </div>
 
+<select id="disabilityType">
+  <option value="">Select Disability Type</option>
+  <optgroup label="Physical Disability">
+    <option value="1">Blindness</option>
+    <option value="2">Low-vision</option>
+    <option value="3">Leprosy Cured persons</option>
+    <option value="4">Hearing Impairment</option>
+    <option value="5">Locomotor Disability</option>
+    <option value="6">Dwarfism</option>
+    <option value="10">Cerebral Palsy</option>
+    <option value="11">Muscular Dystrophy</option>
+    <option value="15">Speech and Language disability</option>
+    <option value="20">Acid Attack victims</option>
+  </optgroup>
+  <optgroup label="Intellectual Disability">
+    <option value="7">Intellectual Disability</option>
+    <option value="9">Autism Spectrum Disorder</option>
+    <option value="13">Specific Learning Disabilities</option>
+  </optgroup>
+  <optgroup label="Mental Behavior">
+    <option value="8">Mental Illness</option>
+  </optgroup>
+  <optgroup label="Chronic Neurological & Blood Disorders">
+    <option value="12">Chronic Neurological conditions</option>
+    <option value="14">Multiple Sclerosis</option>
+    <option value="16">Thalassemia</option>
+    <option value="17">Hemophilia</option>
+    <option value="18">Sickle Cell disease</option>
+    <option value="21">Parkinson's disease</option>
+  </optgroup>
+  <optgroup label="Multiple Disabilities">
+    <option value="19">Multiple Disabilities (including Deaf-Blindness)</option>
+  </optgroup>
+</select>
+<select id="bloodGroup">
+  <option value="">Select Blood Group</option>
+  <option value="1">Under Investigation / Unknown</option>
+  <option value="2">A+</option>
+  <option value="3">A-</option>
+  <option value="4">B+</option>
+  <option value="5">B-</option>
+  <option value="6">O+</option>
+  <option value="7">O-</option>
+  <option value="8">AB+</option>
+  <option value="9">AB-</option>
+</select>
+
+
 <div id="docSection" class="container">
     <h2>Upload Documents</h2>
    <form id="docForm">
@@ -213,4 +261,5 @@ oninput="this.value = this.value.toUpperCase()"
 
   <script src="app.js"></script>
 </body>
-</html>
+        </html>
+        
