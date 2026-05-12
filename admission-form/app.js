@@ -18,6 +18,7 @@ const sumContent = document.getElementById("sumContent");
 const codeSection = document.getElementById("codeSection");
 const codeForm = document.getElementById("codeForm");
 const codeInput = document.getElementById("codeInput");
+const codeError = document.getElementById("codeError");
 
 //-------- personal detials --------
 const personalSection = document.getElementById("personalSection");
@@ -26,7 +27,10 @@ const studentName = document.getElementById("studentName");
 const fatherName = document.getElementById("fatherName");
 const motherName = document.getElementById("motherName");
 const dob = document.getElementById("dob");
+const gender = document.getElementById("gender");
 const addressCur = document.getElementById("addressCur");
+const pincode = document.getElementById("pincode");
+const addressPer = document.getElementById("addressPer");
 
 //-------- contact detials --------
 const contactSection = document.getElementById("contactSection");
@@ -47,6 +51,11 @@ const cgpaInput = document.getElementById("cgpaInput");
 const gradArea = document.getElementById("gradArea");
 const gradInput = document.getElementById("gradInput");
 
+const socialCategory = document.getElementById("socialCategory");
+const minorityStatus = document.getElementById("minorityStatus");
+const disabilityType = document.getElementById("disabilityType");
+const bloodGroup = document.getElementById("bloodGroup");
+
 //-------- upload document --------
 const docSection = document.getElementById("docSection");
 const docForm = document.getElementById("docForm");
@@ -64,16 +73,30 @@ const aadhaarLabel = document.getElementById("docLabel");
 const aadhaarFile = document.getElementById("aadhaarFile");
 const aadhaarView = document.getElementById("aadhaarView");
 const aadhaarView1 = document.getElementById("aadhaarView1");
+
 //========= Active Workers  =========
 //-------- admission code --------
-codeForm.onsubmit = (e) => {
+codeForm.onsubmit = async (e) => {
   e.preventDefault();
-  const prefix = codeInput.value[0];
+const code = codeInput.value;
+  const prefix = code[0];
+try {  
+const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code", {
+ method: "POST", 
+headers: {  "Content-Type": "application/json" }, 
+body: JSON.stringify({ code }) 
+ });
+const result = await res.json();
+
+if (result.status === 0) {  codeError.hidden = false;  return; }
 const studentClass = classMap[prefix];
-sumBtn.textContent = `☰ ${studentClass} 2026 • ${codeInput.value}`;
+sumBtn.textContent = `☰ ${studentClass} 2026 • ${code}`;
  sumBtn.hidden = false;
  updateSumContent();
-};
+
+} catch (err) {
+  alert(err.message || "Something went wrong"); }
+});
 
 //-------- personal detials --------
 //-------- contact detials --------
