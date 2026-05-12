@@ -77,25 +77,25 @@ const aadhaarView1 = document.getElementById("aadhaarView1");
 //-------- admission code --------
 codeForm.onsubmit = async (e) => {
   e.preventDefault();
-const code = codeInput.value;
+  const code = codeInput.value.trim();
   const prefix = code[0];
-try {  
-const res = await fetch("https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code", {
- method: "POST", 
-headers: {  "Content-Type": "application/json" }, 
-body: JSON.stringify({ code }) 
- });
-const result = await res.json();
+  try {
+    const res = await fetch(
+      "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code",
+      {   method: "POST",
+        headers: {   "Content-Type": "application/json"  },
+        body: JSON.stringify({ code })  }
+    );
+    const result = await res.json();
 
-if (result.status === 0) {  codeError.hidden = false;  return; }
-const studentClass = classMap[prefix];
-sumBtn.textContent = `☰ ${studentClass} 2026 • ${code}`;
- sumBtn.hidden = false;
- updateSumContent();
+    if (result.status === 0) { codeError.hidden = false;     return;  }
 
-} catch (err) {
-  alert(err.message || "Something went wrong"); }
-});
+    const studentClass = classMap[prefix];
+    sumBtn.textContent = `☰ ${studentClass} 2026 • ${code}`;
+    sumBtn.hidden = false;
+    updateSumContent();
+  } catch (err) { alert(err.message || "Something went wrong"); }
+};
 
 //-------- personal detials --------
 //-------- contact detials --------
