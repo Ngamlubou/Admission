@@ -46,7 +46,7 @@ label span {  color: red; }
 
 small { display: block;
   margin-top: 5px; }
-  
+
   button {  width: 100%;
       margin-top: 20px;
       padding: 10px;
@@ -70,7 +70,7 @@ small { display: block;
 <input type="text"  id="codeInput" placeholder="e.g. AB123" maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"  oninput="this.value = this.value.toUpperCase()" required />
     <button type="submit">Next</button>
-      <p id="codeError" hidden><span>Invalid admission code.</span></p>
+      <label id="codeError" hidden><span>Invalid admission code.</span></label>
     </form>
   </div>
 
@@ -79,24 +79,23 @@ small { display: block;
    <form id="personalForm">
    <label for="studentName">Student Full Name <span>*</span></label>
       <input  type="text"  id="studentName" placeholder="e.g. James Bond"  />
-     
+
  <label for="fatherName">Father's Full Name <span>*</span></label>
       <input  type="text"      id="fatherName"  placeholder="e.g. John Bond"   />
   <label for="motherName">Mother's Full Name <span>*</span></label>
       <input  type="text" id="motherName"   placeholder="e.g. Mary Bond" />
       <label for="motherName">Guardian's Full Name</label>
-      <input  type="text" id="guadianName"   placeholder="e.g. Albert King" />
+      <input  type="text" id="guardianName"   placeholder="e.g. Albert King" />
       <label for="dob">Date of Birth <span>*</span></label>
       <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
       <label for="penNo">Permanent Education Number (PEN) <span>*</span></label>
 <input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric" />
  <small>Enter the number from your transfer certificate</small>
       <label>Gender <span>*</span></label>
-<label>Male</label>
-<input type="radio" name="gender" value="male">
-<label>Female</label>
+<input type="radio" name="gender" value="male" required>
+<span>   Male</span>
 <input type="radio" name="gender" value="female">
-
+<span>   Female</span>
       <label for="addressPer">Permanent Address <span>*</span></label>
       <input  type="text"   id="addressPer"  placeholder="e.g. "   />
       <label for="pincode">Pincode <span>*</span></label>
