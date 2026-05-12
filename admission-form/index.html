@@ -32,7 +32,6 @@ cursor: pointer;
     }
 
     input {
-      width: 100%;
       padding: 10px;
       font-size: 16px;
       margin-top: 10px;
@@ -71,7 +70,7 @@ small { display: block;
 <input type="text"  id="codeInput" placeholder="e.g. AB123" maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"  oninput="this.value = this.value.toUpperCase()" required />
     <button type="submit">Next</button>
-      <p id="codeError"></p>
+      <p id="codeError" hidden><span>Invalid admission code.</span></p>
     </form>
   </div>
 
@@ -141,7 +140,7 @@ small { display: block;
     <option>Sibling</option>
     <option>Guardian</option>
   </select>
-  <label for="alternateNo">Alternative Number <span>(optional)</span></label>
+  <label for="alternateNo">Alternative Number (optional)</label>
   <input type="text" id="alternateNo"  inputmode="numeric" maxlength="10"  pattern="\d{10}" />
   <button type="submit">Next</button>
 </form>
@@ -174,41 +173,33 @@ small { display: block;
   <small>Enter grade (A+, B, etc.)</small>
 </div>
 <label for="disabilityType">Disability (CWSN) <span>*</span></label>
-<span><input type="radio" name="cwsn" value="yes">  Yes     </span><span>  <input type="radio" name="cwsn" value="no">   No</span>
- <select id="disabilityType">
+<span><input type="radio" name="cwsn" value="1">  Yes     </span><span>  <input type="radio" name="cwsn" value="2">   No</span>
+
+<select id="disabilityType">
   <option value="">Select Disability Type</option>
-  <optgroup label="Physical Disability">
-    <option value="1">Blindness</option>
-    <option value="2">Low-vision</option>
-    <option value="3">Leprosy Cured persons</option>
-    <option value="4">Hearing Impairment</option>
-    <option value="5">Locomotor Disability</option>
-    <option value="6">Dwarfism</option>
-    <option value="10">Cerebral Palsy</option>
-    <option value="11">Muscular Dystrophy</option>
-    <option value="15">Speech and Language disability</option>
-    <option value="20">Acid Attack victims</option>
-  </optgroup>
-  <optgroup label="Intellectual Disability">
-    <option value="7">Intellectual Disability</option>
-    <option value="9">Autism Spectrum Disorder</option>
-    <option value="13">Specific Learning Disabilities</option>
-  </optgroup>
-  <optgroup label="Mental Behavior">
-    <option value="8">Mental Illness</option>
-  </optgroup>
-  <optgroup label="Chronic Neurological & Blood Disorders">
-    <option value="12">Chronic Neurological conditions</option>
-    <option value="14">Multiple Sclerosis</option>
-    <option value="16">Thalassemia</option>
-    <option value="17">Hemophilia</option>
-    <option value="18">Sickle Cell disease</option>
-    <option value="21">Parkinson's disease</option>
-  </optgroup>
-  <optgroup label="Multiple Disabilities">
-    <option value="19">Multiple Disabilities (including Deaf-Blindness)</option>
-  </optgroup>
+  <option value="1">Blindness</option>
+  <option value="2">Low-vision</option>
+  <option value="3">Leprosy Cured persons</option>
+  <option value="4">Hearing Impairment</option>
+  <option value="5">Locomotor Disability</option>
+  <option value="6">Dwarfism</option>
+  <option value="7">Intellectual Disability</option>
+  <option value="8">Mental Illness</option>
+  <option value="9">Autism Spectrum Disorder</option>
+  <option value="10">Cerebral Palsy</option>
+  <option value="11">Muscular Dystrophy</option>
+  <option value="12">Chronic Neurological conditions</option>
+  <option value="13">Specific Learning Disabilities</option>
+  <option value="14">Multiple Sclerosis</option>
+  <option value="15">Speech and Language disability</option>
+  <option value="16">Thalassemia</option>
+  <option value="17">Hemophilia</option>
+  <option value="18">Sickle Cell disease</option>
+  <option value="19">Multiple Disabilities (including Deaf-Blindness)</option>
+  <option value="20">Acid Attack victims</option>
+  <option value="21">Parkinson's disease</option>
 </select>
+
 <label for="bloodGroup">Blood Group <span>*</span></label>
 <select id="bloodGroup">
   <option value="">Select Blood Group</option>
