@@ -27,9 +27,6 @@ const studentName = document.getElementById("studentName");
 const fatherName = document.getElementById("fatherName");
 const motherName = document.getElementById("motherName");
 const dob = document.getElementById("dob");
-const gender =
-document.querySelector('input[name="gender"]:checked')?.value;
-
 const addressCur = document.getElementById("addressCur");
 const pincode = document.getElementById("pincode");
 const addressPer = document.getElementById("addressPer");
