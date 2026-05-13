@@ -75,28 +75,118 @@ small { display: block;
   </div>
 
 <div id="personalSection" class="container">
-    <h2>Personal Details</h2>
+    <h2>1. Personal Details</h2>
    <form id="personalForm">
    <label for="studentName">Student Full Name <span>*</span></label>
       <input  type="text"  id="studentName" placeholder="e.g. James Bond"  />
-
+<label>Gender <span>*</span></label>
+<input type="radio" name="gender" value="male" required>
+<span>   Male</span>
+<input type="radio" name="gender" value="female">
+<span>   Female</span>
+ <label for="dob">Date of Birth <span>*</span></label>
+      <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
+<div id="demographicArea">
+<label for="bloodGroup">Blood Group <span>*</span></label>
+<select id="bloodGroup">
+  <option value="">Select Blood Group</option>
+  <option value="1">Under Investigation / Unknown</option>
+  <option value="2">A+</option>
+  <option value="3">A-</option>
+  <option value="4">B+</option>
+  <option value="5">B-</option>
+  <option value="6">O+</option>
+  <option value="7">O-</option>
+  <option value="8">AB+</option>
+  <option value="9">AB-</option>
+</select>
+<label for="socialCategory">Social Category <span>*</span></label>
+<select id="socialCategory">
+  <option value="">Select Social Category</option>
+  <option value="1">General</option>
+  <option value="2">SC</option>
+  <option value="3">ST</option>
+  <option value="4">OBC</option>
+</select>
+<label for="minorityStatus">Minority Status <span>*</span></label>
+<select id="minorityStatus">
+  <option value="">Select Minority Group</option>
+  <option value="1">Muslim</option>
+  <option value="2">Sikh</option>
+  <option value="3">Jain</option>
+  <option value="4">Christian</option>
+  <option value="5">Parsi</option>
+  <option value="6">Buddhist</option>
+  <option value="7">None / Not Applicable</option>
+</select>
+<label>Disability (CWSN) <span>*</span></label>
+<span><input type="radio" name="cwsn" value="">  Yes     </span><span>  <input type="radio" name="cwsn" value="2">   No</span><br>
+<select id="disabilityType">
+  <option value="">Select Disability Type</option>
+  <option value="1">Blindness</option>
+  <option value="2">Low-vision</option>
+  <option value="3">Leprosy Cured persons</option>
+  <option value="4">Hearing Impairment</option>
+  <option value="5">Locomotor Disability</option>
+  <option value="6">Dwarfism</option>
+  <option value="7">Intellectual Disability</option>
+  <option value="8">Mental Illness</option>
+  <option value="9">Autism Spectrum Disorder</option>
+  <option value="10">Cerebral Palsy</option>
+  <option value="11">Muscular Dystrophy</option>
+  <option value="12">Chronic Neurological conditions</option>
+  <option value="13">Specific Learning Disabilities</option>
+  <option value="14">Multiple Sclerosis</option>
+  <option value="15">Speech and Language disability</option>
+  <option value="16">Thalassemia</option>
+  <option value="17">Hemophilia</option>
+  <option value="18">Sickle Cell disease</option>
+  <option value="19">Multiple Disabilities (including Deaf-Blindness)</option>
+  <option value="20">Acid Attack victims</option>
+  <option value="21">Parkinson's disease</option>
+</select></div>
+<div id="aadhaarNoArea"> <label for="aadhaarNo">Student Aadhaar Number<span>*</span></label>
+<input  type="text"  id="aadhaarNo" placeholder="" maxlength="12"  inputmode="numeric" /></div>
+<div id="penArea"
+<label for="penNo">Permanent Education Number (PEN) <span>*</span></label>
+<input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric" />
+ <small>Enter the number from your transfer certificate</small>
+</div>
+ <button type="submit">Next</button>
+    </form>
+</div>
+     
+<div id="contactSection" class="container">
+    <h2>2. Family & Contact Details</h2>  <form id="contactForm">
  <label for="fatherName">Father's Full Name <span>*</span></label>
       <input  type="text"      id="fatherName"  placeholder="e.g. John Bond"   />
   <label for="motherName">Mother's Full Name <span>*</span></label>
       <input  type="text" id="motherName"   placeholder="e.g. Mary Bond" />
       <label for="motherName">Guardian's Full Name</label>
       <input  type="text" id="guardianName"   placeholder="e.g. Albert King" />
-      <label for="dob">Date of Birth <span>*</span></label>
-      <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
-      <label for="penNo">Permanent Education Number (PEN) <span>*</span></label>
-<input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric" />
- <small>Enter the number from your transfer certificate</small>
-      <label>Gender <span>*</span></label>
-<input type="radio" name="gender" value="male" required>
-<span>   Male</span>
-<input type="radio" name="gender" value="female">
-<span>   Female</span>
-      <label for="addressPer">Permanent Address <span>*</span></label>
+  <label for="contactNo">WhatsApp Number <span>*</span></label>
+  <input  type="text"  id="contactNo" placeholder="e.g. 9876543210"  inputmode="numeric" maxlength="10" pattern="\d{10}" required />
+ <small>Used for admission updates and communication</small>
+  <label for="contactRelate">Who uses this number? <span>*</span></label>
+  <select id="contactRelate" required>
+    <option value="">Select Relation</option>
+    <option>Student</option>
+    <option>Father</option>
+    <option>Mother</option>
+    <option>Sibling</option>
+    <option>Guardian</option>
+  </select>
+  <label for="alternateNo">Alternative Number (optional)</label>
+  <input type="text" id="alternateNo"  inputmode="numeric" maxlength="10"  pattern="\d{10}" />
+  <button type="submit">Next</button>
+</form>
+</div>
+
+
+<div id="acadeSection"  class="container">
+    <h2>3. Address & Academic Details</h2>
+    <form id="acadeForm">
+<label for="addressPer">Permanent Address <span>*</span></label>
       <input  type="text"   id="addressPer"  placeholder="e.g. "   />
       <label for="pincode">Pincode <span>*</span></label>
 <input  type="text"  id="pincode" placeholder="e.g. 795136" maxlength="6"  inputmode="numeric" />
@@ -121,41 +211,12 @@ small { display: block;
 <option value="Awang Sekmai">
 <option value="Sekmai Bazar">
 </datalist>
-     <button type="submit">Next</button>
-    </form>
-</div>
-
-<div id="contactSection" class="container">
-    <h2>Contact Details</h2>  <form id="contactForm">
-  <label for="contactNo">WhatsApp Number <span>*</span></label>
-  <input  type="text"  id="contactNo" placeholder="e.g. 9876543210"  inputmode="numeric" maxlength="10" pattern="\d{10}" required />
- <small>Used for admission updates and communication</small>
-  <label for="contactRelate">Who uses this number? <span>*</span></label>
-  <select id="contactRelate" required>
-    <option value="">Select Relation</option>
-    <option>Student</option>
-    <option>Father</option>
-    <option>Mother</option>
-    <option>Sibling</option>
-    <option>Guardian</option>
-  </select>
-  <label for="alternateNo">Alternative Number (optional)</label>
-  <input type="text" id="alternateNo"  inputmode="numeric" maxlength="10"  pattern="\d{10}" />
-  <button type="submit">Next</button>
-</form>
-</div>
-
-<div id="acadeSection"  class="container">
-    <h2>Academic Details</h2>
-    <form id="acadeForm">
-<div id="scoreArea">
 <label for="scoreType">Assessment Type</label>
       <select id="scoreType">
         <option value="percentage">Percentage (%)</option>
         <option value="cgpa">CGPA (10 pt scale)</option>
         <option value="grade">Letter Grade (A-E)</option>
       </select>
-</div>
 <div id="percArea">
   <label for="percInput">Percentage Obtained <span>*</span></label>
   <input type="number"    id="percInput" placeholder="e.g. 85.5"    min="10"  max="100"  step="0.01"  />
@@ -171,72 +232,12 @@ small { display: block;
   <input    type="text"   id="gradInput" placeholder="e.g. A+"  maxlength="2" pattern="[A-Za-z].?" />
   <small>Enter grade (A+, B, etc.)</small>
 </div>
-<label for="disabilityType">Disability (CWSN) <span>*</span></label>
-<span><input type="radio" name="cwsn" value="1">  Yes     </span><span>  <input type="radio" name="cwsn" value="2">   No</span>
-
-<select id="disabilityType">
-  <option value="">Select Disability Type</option>
-  <option value="1">Blindness</option>
-  <option value="2">Low-vision</option>
-  <option value="3">Leprosy Cured persons</option>
-  <option value="4">Hearing Impairment</option>
-  <option value="5">Locomotor Disability</option>
-  <option value="6">Dwarfism</option>
-  <option value="7">Intellectual Disability</option>
-  <option value="8">Mental Illness</option>
-  <option value="9">Autism Spectrum Disorder</option>
-  <option value="10">Cerebral Palsy</option>
-  <option value="11">Muscular Dystrophy</option>
-  <option value="12">Chronic Neurological conditions</option>
-  <option value="13">Specific Learning Disabilities</option>
-  <option value="14">Multiple Sclerosis</option>
-  <option value="15">Speech and Language disability</option>
-  <option value="16">Thalassemia</option>
-  <option value="17">Hemophilia</option>
-  <option value="18">Sickle Cell disease</option>
-  <option value="19">Multiple Disabilities (including Deaf-Blindness)</option>
-  <option value="20">Acid Attack victims</option>
-  <option value="21">Parkinson's disease</option>
-</select>
-
-<label for="bloodGroup">Blood Group <span>*</span></label>
-<select id="bloodGroup">
-  <option value="">Select Blood Group</option>
-  <option value="1">Under Investigation / Unknown</option>
-  <option value="2">A+</option>
-  <option value="3">A-</option>
-  <option value="4">B+</option>
-  <option value="5">B-</option>
-  <option value="6">O+</option>
-  <option value="7">O-</option>
-  <option value="8">AB+</option>
-  <option value="9">AB-</option>
-</select>
-<label for="minorityStatus">Minority Status <span>*</span></label>
-<select id="minorityStatus">
-  <option value="">Select Minority Group</option>
-  <option value="1">Muslim</option>
-  <option value="2">Sikh</option>
-  <option value="3">Jain</option>
-  <option value="4">Christian</option>
-  <option value="5">Parsi</option>
-  <option value="6">Buddhist</option>
-  <option value="7">None / Not Applicable</option>
-</select>
-<label for="socialCategory">Social Category <span>*</span></label>
-<select id="socialCategory">
-  <option value="">Select Social Category</option>
-  <option value="1">General</option>
-  <option value="2">SC</option>
-  <option value="3">ST</option>
-  <option value="4">OBC</option>
-</select>
 <button type="submit">Next</button>
     </form>
 </div>
 
 <div id="docSection" class="container">
-    <h2>Upload Documents</h2>
+    <h2>4. Upload Documents</h2>
    <form id="docForm">
   <div id="msheetArea">
   <label>Marksheet <span>*</span></label>
