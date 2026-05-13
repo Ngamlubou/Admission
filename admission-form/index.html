@@ -23,6 +23,45 @@ background: white;
 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 cursor: pointer;
 }
+ #spinner {
+      position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border: 10px solid #ddd;
+  border-top: 10px solid #000;
+  border-radius: 50%;
+animation: spin 0.7s linear infinite;
+z-index: 999;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg); }
+}
+.field {  position: relative;
+}
+.helpBox {
+  position: absolute;
+
+  bottom: 120%;
+  left: 0;
+
+  max-width: 220px;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  background: white;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  z-index: 999;
+}
     .container {
       background: #fff;
       padding: 25px;
@@ -31,7 +70,8 @@ cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    input {
+   input:not([type="radio"]):not([type="checkbox"]) {
+width: 100%;
       padding: 10px;
       font-size: 16px;
       margin-top: 10px;
@@ -70,7 +110,8 @@ small { display: block;
 <input type="text"  id="codeInput" placeholder="e.g. AB123" maxlength="5"
   pattern="[A-Za-z]{2}\d{3}"  oninput="this.value = this.value.toUpperCase()" required />
     <button type="submit">Next</button>
-      <label id="codeError" hidden><span>Invalid admission code.</span></label>
+    <div id="spinner" hidden></div>
+      <p id="codeError" style="color: #ff0000;" hidden>Invalid admission code.</p>
     </form>
   </div>
 
@@ -147,7 +188,7 @@ small { display: block;
 </select></div>
 <div id="aadhaarNoArea"> <label for="aadhaarNo">Student Aadhaar Number<span>*</span></label>
 <input  type="text"  id="aadhaarNo" placeholder="" maxlength="12"  inputmode="numeric" /></div>
-<div id="penArea"
+<div id="penArea">
 <label for="penNo">Permanent Education Number (PEN) <span>*</span></label>
 <input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric" />
  <small>Enter the number from your transfer certificate</small>
@@ -155,7 +196,7 @@ small { display: block;
  <button type="submit">Next</button>
     </form>
 </div>
-     
+
 <div id="contactSection" class="container">
     <h2>2. Family & Contact Details</h2>  <form id="contactForm">
  <label for="fatherName">Father's Full Name <span>*</span></label>
@@ -259,13 +300,11 @@ small { display: block;
  <option value="aadhaar">Student Aadhaar</option>
   <option value="birth">Student Birth Certificate</option>
 </select>
- <label id="aadhaarLabel">
-        Student Aadhaar (both front & back) <span>*</span><details> <summary>❔</summary>
-  <ul>  <li>Upload images only</li>
-    <li>First upload the front side</li>
-    <li>Then upload the back side using the same input again</li>
-    <li>Make sure all text is clearly visible</li> </ul>
-</details> </label>
+<div class="field">
+ <label id="aadhaarLabel">Student Aadhaar (both front & back) <span>*</span></label>
+ <div class="helpBox">
+  Front side first • Back side second • Images only
+</div></div>
       <input  type="file"  id="aadhaarFile"   accept="image/*" />
 <img id="aadhaarView" style="width:100%; margin-top:10px;" />
 <img id="aadhaarView1" style="width:100%; margin-top:10px;" />
