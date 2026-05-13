@@ -13,7 +13,7 @@ const classMap = {
 //========= DOM Fields =========
 const sumBtn = document.getElementById("sumBtn");
 const sumContent = document.getElementById("sumContent");
-
+const spinner = document.getElementById("spinner");
 //-------- admission code --------
 const codeSection = document.getElementById("codeSection");
 const codeForm = document.getElementById("codeForm");
@@ -72,7 +72,7 @@ const tcArea = document.getElementById("tcArea");
 const tcFile = document.getElementById("tcFile");
 const tcView = document.getElementById("tcView");
 const aadhaarType = document.getElementById("docType");
-const aadhaarLabel = document.getElementById("docLabel");
+const aadhaarLabel = document.getElementById("aadhaarLabel");
 const aadhaarFile = document.getElementById("aadhaarFile");
 const aadhaarView = document.getElementById("aadhaarView");
 const aadhaarView1 = document.getElementById("aadhaarView1");
@@ -81,24 +81,26 @@ const aadhaarView1 = document.getElementById("aadhaarView1");
 //-------- admission code --------
 codeForm.onsubmit = async (e) => {
   e.preventDefault();
+  spinner.hidden = false;
   const code = codeInput.value.trim();
   const prefix = code[0];
-  try {
-    const res = await fetch(
-      "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code",
-      {   method: "POST",
-        headers: {   "Content-Type": "application/json"  },
-        body: JSON.stringify({ code })  }
-    );
-    const result = await res.json();
-
-    if (result.status === 0) { codeError.hidden = false;     return;  }
-
     const studentClass = classMap[prefix];
     sumBtn.textContent = `☰ ${studentClass} 2026 • ${code}`;
     sumBtn.hidden = false;
     updateSumContent();
-  } catch (err) { alert(err.message || "Something went wrong"); }
+try {
+    const res = await fetch(
+     "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code",
+      {   method: "POST",
+        headers: {   "Content-Type": "application/json"  },
+        body: JSON.stringify({ code })  }
+    );
+if (!res.ok) {  throw new Error("Server not responding");  }
+    const result = await res.json();
+spinner.hidden = true;
+    if (result.status === 0) { codeError.hidden = false;     return;  }
+
+} catch (err) { alert(err.message || "Something went wrong"); }
 };
 
 //-------- personal detials --------
@@ -167,7 +169,7 @@ const contactHTML = contactNo.value && `
 `;
 const acadeHTML = pincode.value && `
   <h3>🟢 Address & Academic Details</h3>
-<p>• Permanent Address: ${addressPer.value} ${pincode.value}</p>
+<p>• Permanent Address: ${addressPer.value}, ${pincode.value}</p>
 <p>• Present Address: ${addressCur.value}</p>
   <p>• ${scoreType.value}: ${percInput.value || cgpaInput.value ||  gradInput.value}  </p>
 `;
@@ -175,6 +177,7 @@ const docHTML = sFile.profile && `
    <h3>🟢 Upload Documents</h3>
   ${sFile.msheet ? "<p>• Marksheet: ✔️</p>" : ""}
  <p>• Profile Photo: ✔️</p>
+  ${sFile.tc ? "<p>• Transfer Certificate: ✔️</p>" : ""}
  <p>• ${aadhaarLabel.textContent}: ✔️</p>
 `;
   sumContent.innerHTML = `
