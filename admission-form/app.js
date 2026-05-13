@@ -24,16 +24,23 @@ const codeError = document.getElementById("codeError");
 const personalSection = document.getElementById("personalSection");
 const personalForm = document.getElementById("personalForm");
 const studentName = document.getElementById("studentName");
-const fatherName = document.getElementById("fatherName");
-const motherName = document.getElementById("motherName");
 const dob = document.getElementById("dob");
-const addressCur = document.getElementById("addressCur");
-const pincode = document.getElementById("pincode");
-const addressPer = document.getElementById("addressPer");
+const demographicArea = document.getElementById("demographicArea");
+const bloodGroup = document.getElementById("bloodGroup");
+const socialCategory = document.getElementById("socialCategory");
+const minorityStatus = document.getElementById("minorityStatus");
+const disabilityType = document.getElementById("disabilityType");
+const aadhaarNoArea = document.getElementById("aadhaarNoArea");
+const aadhaarNo = document.getElementById("aadhaarNo");
+const penArea = document.getElementById("penArea");
+const penNo = document.getElementById("penNo");
 
 //-------- contact detials --------
 const contactSection = document.getElementById("contactSection");
 const contactForm = document.getElementById("contactForm");
+const fatherName = document.getElementById("fatherName");
+const motherName = document.getElementById("motherName");
+const guardianName = document.getElementById("guardianName");
 const contactNo = document.getElementById("contactNo");
 const contactRelate = document.getElementById("contactRelate");
 const alternateNo = document.getElementById("alternateNo");
@@ -41,7 +48,9 @@ const alternateNo = document.getElementById("alternateNo");
 //-------- academic detials --------
 const acadeSection = document.getElementById("acadeSection");
 const acadeForm = document.getElementById("acadeForm");
-const scoreArea = document.getElementById("scoreArea");
+const addressPer = document.getElementById("addressPer");
+const pincode = document.getElementById("pincode");
+const addressCur = document.getElementById("addressCur");
 const scoreType = document.getElementById("scoreType");
 const percArea = document.getElementById("percArea");
 const percInput = document.getElementById("percInput");
@@ -49,11 +58,6 @@ const cgpaArea = document.getElementById("cgpaArea");
 const cgpaInput = document.getElementById("cgpaInput");
 const gradArea = document.getElementById("gradArea");
 const gradInput = document.getElementById("gradInput");
-
-const socialCategory = document.getElementById("socialCategory");
-const minorityStatus = document.getElementById("minorityStatus");
-const disabilityType = document.getElementById("disabilityType");
-const bloodGroup = document.getElementById("bloodGroup");
 
 //-------- upload document --------
 const docSection = document.getElementById("docSection");
@@ -145,19 +149,26 @@ function toggleSumContent() {
 function updateSumContent() {
   const personalHTML = studentName.value && `
   <h3>🟢 Personal Details</h3>
-  <p>• Student: ${studentName.value}</p>
-  <p>• Father: ${fatherName.value} </p>
- <p>• Mother: ${motherName.value}</p>
+  <p>• Student Name: ${studentName.value}</p>
  <p>• DOB: ${dob.value}</p>
- <p>• Address: ${addressCur.value}</p>
+ <p>• Blood Group: ${bloodGroup.value}</p>
+<p>• Social Category: ${socialCategory.value}</p>
+<p>• Minority Status: ${minorityStatus.value}</p>
+<p>• Disability (CWSN) status : ${disabilityType.value || "No"}</p>
+<p>• Aadhaar Number: ${aadhaarNo.value || "__"}</p>
+${penNo.value ? `<p>• PEN: ${penNo.value}</p>`  : ""}
 `;
 const contactHTML = contactNo.value && `
-  <h3>🟢 Contact Details</h3>
-  <p>• Whatsapp: ${contactNo.value}</p>
-  <p>• Alternative: ${alternateNo.value || "—"} </p>
+  <h3>🟢 Family & Contact Details</h3>
+ <p>• Father Name: ${fatherName.value} </p>
+ <p>• Mother Name: ${motherName.value}</p>
+  <p>• ${contactRelate.value} Whatsapp: ${contactNo.value}</p>
+  <p>• Alternative: ${alternateNo.value || "__"} </p>
 `;
-const acadeHTML = scoreType.value && `
-  <h3>🟢 Academic Details</h3>
+const acadeHTML = pincode.value && `
+  <h3>🟢 Address & Academic Details</h3>
+<p>• Permanent Address: ${addressPer.value} ${pincode.value}</p>
+<p>• Present Address: ${addressCur.value}</p>
   <p>• ${scoreType.value}: ${percInput.value || cgpaInput.value ||  gradInput.value}  </p>
 `;
 const docHTML = sFile.profile && `
@@ -168,8 +179,8 @@ const docHTML = sFile.profile && `
 `;
   sumContent.innerHTML = `
   ${personalHTML || "<h3>🟡 Personal Details</h3>"}
-${contactHTML || "<h3>🟡 Contact Details</h3>"}
-${acadeHTML || "<h3>🟡 Academic Details</h3>"}
+${contactHTML || "<h3>🟡 Family & Contact Details</h3>"}
+${acadeHTML || "<h3>🟡 Address & Academic Details</h3>"}
 ${docHTML || "<h3>🟡 Upload Documents</h3>"}
   `; }
 
