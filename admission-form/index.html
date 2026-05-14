@@ -43,23 +43,15 @@ z-index: 999;
 }
 .helpBox {
   position: absolute;
-
   bottom: 120%;
   left: 0;
-
   max-width: 220px;
-
   padding: 10px;
-
   border-radius: 10px;
-
   background: white;
-
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
   font-size: 13px;
   line-height: 1.4;
-
   z-index: 999;
 }
     .container {
@@ -70,7 +62,7 @@ z-index: 999;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-   input:not([type="radio"]):not([type="checkbox"]) {
+   input:not([type="radio"]):not([type="checkbox"]), select  {
 width: 100%;
       padding: 10px;
       font-size: 16px;
@@ -121,10 +113,7 @@ small { display: block;
    <label for="studentName">Student Full Name <span>*</span></label>
       <input  type="text"  id="studentName" placeholder="e.g. James Bond"  />
 <label>Gender <span>*</span></label>
-<input type="radio" name="gender" value="male" required>
-<span>   Male</span>
-<input type="radio" name="gender" value="female">
-<span>   Female</span>
+<p><input type="radio" name="gender" value="male" required>   Male     <input type="radio" name="gender" value="female">   Female</p>
  <label for="dob">Date of Birth <span>*</span></label>
       <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
 <div id="demographicArea">
@@ -161,7 +150,7 @@ small { display: block;
   <option value="7">None / Not Applicable</option>
 </select>
 <label>Disability (CWSN) <span>*</span></label>
-<span><input type="radio" name="cwsn" value="">  Yes     </span><span>  <input type="radio" name="cwsn" value="2">   No</span><br>
+<p><input type="radio" name="cwsn" value="">  Yes       <input type="radio" name="cwsn" value="2">   No</p>
 <select id="disabilityType">
   <option value="">Select Disability Type</option>
   <option value="1">Blindness</option>
@@ -256,7 +245,7 @@ small { display: block;
       <select id="scoreType">
         <option value="percentage">Percentage (%)</option>
         <option value="cgpa">CGPA (10 pt scale)</option>
-        <option value="grade">Letter Grade (A-E)</option>
+        <option value="grade" hidden>Letter Grade (A-E)</option>
       </select>
 <div id="percArea">
   <label for="percInput">Percentage Obtained <span>*</span></label>
@@ -316,4 +305,5 @@ small { display: block;
 
   <script src="app.js"></script>
 </body>
-</html>
+  </html>
+                                                
