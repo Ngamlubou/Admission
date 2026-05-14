@@ -54,11 +54,8 @@ const addressCur = document.getElementById("addressCur");
 const scoreType = document.getElementById("scoreType");
 const gradeOption =
 document.querySelector('#scoreType option[value="grade"]');
-const percArea = document.getElementById("percArea");
 const percInput = document.getElementById("percInput");
-const cgpaArea = document.getElementById("cgpaArea");
 const cgpaInput = document.getElementById("cgpaInput");
-const gradArea = document.getElementById("gradArea");
 const gradInput = document.getElementById("gradInput");
 
 //-------- upload document --------
@@ -110,14 +107,6 @@ spinner.hidden = true;
 //-------- contact detials --------
 
 //-------- academic detials --------
-scoreType.addEventListener("change", () => {
-  percArea.hidden = true;
-  cgpaArea.hidden = true;
-  gradArea.hidden = true;
-if (scoreType.value === "percentage") percArea.hidden = false;
-if (scoreType.value === "cgpa") cgpaArea.hidden = false;
-if (scoreType.value === "grade") gradArea.hidden = false;
-});
 //-------- upload document --------
 bindUpload(msheetFile, msheetView, "msheet");
 bindUpload(tcFile, tcView, "tc");
