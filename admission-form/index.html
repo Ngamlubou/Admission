@@ -100,7 +100,7 @@ small { display: block;
     <form id="codeForm">
 <label for="codeInput">Admission  Code <span>*</span></label>
 <input type="text"  id="codeInput" placeholder="e.g. AB123" maxlength="5"
-  pattern="[A-Za-z]{2}\d{3}"  oninput="this.value = this.value.toUpperCase()" required />
+  pattern="[A-Za-z]{2}\d{3}"  oninput="this.value = this.value.toUpperCase()" required>
     <button type="submit">Next</button>
     <div id="spinner" hidden></div>
       <p id="codeError" style="color: #ff0000;" hidden>Invalid admission code.</p>
@@ -115,7 +115,7 @@ small { display: block;
 <label>Gender <span>*</span></label>
 <p><input type="radio" name="gender" value="male" required>   Male     <input type="radio" name="gender" value="female">   Female</p>
  <label for="dob">Date of Birth <span>*</span></label>
-      <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01" />
+      <input      type="date" id="dob"  min="2004-01-01"  max="2026-01-01">
 <div id="demographicArea">
 <label for="bloodGroup">Blood Group <span>*</span></label>
 <select id="bloodGroup">
@@ -150,7 +150,7 @@ small { display: block;
   <option value="7">None / Not Applicable</option>
 </select>
 <label>Disability (CWSN) <span>*</span></label>
-<p><input type="radio" name="cwsn" value="">  Yes       <input type="radio" name="cwsn" value="2">   No</p>
+<p><input type="radio" name="cwsn" value="" onchange="disabilityType.hidden = false">  Yes       <input type="radio" name="cwsn" value="2" onchange="disabilityType.hidden = true">   No</p>
 <select id="disabilityType">
   <option value="">Select Disability Type</option>
   <option value="1">Blindness</option>
@@ -176,10 +176,10 @@ small { display: block;
   <option value="21">Parkinson's disease</option>
 </select></div>
 <div id="aadhaarNoArea"> <label for="aadhaarNo">Student Aadhaar Number<span>*</span></label>
-<input  type="text"  id="aadhaarNo" placeholder="" maxlength="12"  inputmode="numeric" /></div>
+<input  type="text"  id="aadhaarNo" placeholder="" maxlength="12"  inputmode="numeric"></div>
 <div id="penArea">
 <label for="penNo">Permanent Education Number (PEN) <span>*</span></label>
-<input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric" />
+<input  type="text"  id="penNo" placeholder="" maxlength="14"  inputmode="numeric">
  <small>Enter the number from your transfer certificate</small>
 </div>
  <button type="submit">Next</button>
@@ -189,15 +189,15 @@ small { display: block;
 <div id="contactSection" class="container">
     <h2>2. Family & Contact Details</h2>  <form id="contactForm">
  <label for="fatherName">Father's Full Name <span>*</span></label>
-      <input  type="text"      id="fatherName"  placeholder="e.g. John Bond"   />
+      <input  type="text"      id="fatherName"  placeholder="e.g. John Bond">
   <label for="motherName">Mother's Full Name <span>*</span></label>
-      <input  type="text" id="motherName"   placeholder="e.g. Mary Bond" />
+      <input  type="text" id="motherName"   placeholder="e.g. Mary Bond">
       <label for="motherName">Guardian's Full Name</label>
-      <input  type="text" id="guardianName"   placeholder="e.g. Albert King" />
+      <input  type="text" id="guardianName"   placeholder="e.g. Albert King">
   <label for="contactNo">WhatsApp Number <span>*</span></label>
-  <input  type="text"  id="contactNo" placeholder="e.g. 9876543210"  inputmode="numeric" maxlength="10" pattern="\d{10}" required />
+  <input  type="text"  id="contactNo" placeholder="e.g. 9876543210"  inputmode="numeric" maxlength="10" pattern="\d{10}" required>
  <small>Used for admission updates and communication</small>
-  <label for="contactRelate">Who uses this number? <span>*</span></label>
+  <label for="contactRelate">Who uses this  above number? <span>*</span></label>
   <select id="contactRelate" required>
     <option value="">Select Relation</option>
     <option>Student</option>
@@ -207,7 +207,7 @@ small { display: block;
     <option>Guardian</option>
   </select>
   <label for="alternateNo">Alternative Number (optional)</label>
-  <input type="text" id="alternateNo"  inputmode="numeric" maxlength="10"  pattern="\d{10}" />
+  <input type="text" id="alternateNo"  inputmode="numeric" maxlength="10"  pattern="\d{10}">
   <button type="submit">Next</button>
 </form>
 </div>
@@ -217,13 +217,17 @@ small { display: block;
     <h2>3. Address & Academic Details</h2>
     <form id="acadeForm">
 <label for="addressPer">Permanent Address <span>*</span></label>
-      <input  type="text"   id="addressPer"  placeholder="e.g. "   />
+      <input  type="text"   id="addressPer"  placeholder="e.g. " onchange="addressCheckArea.hidden =
+!this.value.trim()">
       <label for="pincode">Pincode <span>*</span></label>
-<input  type="text"  id="pincode" placeholder="e.g. 795136" maxlength="6"  inputmode="numeric" />
-      <label for="checkbox">Same as Current address</label>
-  <input type="checkbox" id="addressCheck">
+<input  type="text"  id="pincode" placeholder="e.g. 795136" maxlength="6"  inputmode="numeric">
+  <div id="addressCheckArea" hidden>
+<label>Same as Current address
+  <input type="checkbox"  onchange="addressCur.disabled =  this.checked;
+    addressCur.value =   this.checked
+        ? addressPer.value  : '';  "></label></div>
    <label for="addressCur">Current Address <span>*</span></label>
-      <input  type="text"   id="addressCur" list="areaList"  placeholder="e.g. Mantriban, Kanglatongbi"   />
+      <input  type="text"   id="addressCur" list="areaList"  placeholder="e.g. Mantriban, Kanglatongbi">
 <datalist id="areaList">
 <option value="Mantriban, Kanglatongbi">
 <option value="Namdilong, Kanglatongbi">
@@ -242,24 +246,28 @@ small { display: block;
 <option value="Sekmai Bazar">
 </datalist>
 <label for="scoreType">Assessment Type</label>
-      <select id="scoreType">
+      <select id="scoreType" onchange="
+percArea.hidden = true;    cgpaArea.hidden = true;  gradArea.hidden = true;
+    if (this.value === 'percentage') {  percArea.hidden = false; }
+    else if (this.value === 'cgpa') {  cgpaArea.hidden = false; }
+    else { gradArea.hidden = false;  }  ">
         <option value="percentage">Percentage (%)</option>
         <option value="cgpa">CGPA (10 pt scale)</option>
         <option value="grade" hidden>Letter Grade (A-E)</option>
       </select>
 <div id="percArea">
   <label for="percInput">Percentage Obtained <span>*</span></label>
-  <input type="number"    id="percInput" placeholder="e.g. 85.5"    min="10"  max="100"  step="0.01"  />
+  <input type="number"    id="percInput" placeholder="e.g. 85.5"    min="10"  max="100"  step="0.01">
   <small>Enter your final aggregate percentage</small>
 </div>
 <div id="cgpaArea">
   <label for="cgpaInput">Cumulative Grade Point Average (CGPA) <span>*</span></label>
-  <input  type="number" id="cgpaInput"    placeholder="e.g. 9.5" min="0" max="10"  step="0.01" />
+  <input  type="number" id="cgpaInput"    placeholder="e.g. 9.5" min="0" max="10"  step="0.01">
  <small>Enter score out of 10.0</small>
 </div>
 <div id="gradArea">
   <label for="gradInput">Letter Grade <span>*</span></label>
-  <input    type="text"   id="gradInput" placeholder="e.g. A+"  maxlength="2" pattern="[A-Za-z].?" />
+  <input    type="text"   id="gradInput" placeholder="e.g. A+"  maxlength="2" pattern="[A-Za-z].?">
   <small>Enter grade (A+, B, etc.)</small>
 </div>
 <button type="submit">Next</button>
@@ -271,19 +279,19 @@ small { display: block;
    <form id="docForm">
   <div id="msheetArea">
   <label>Marksheet <span>*</span></label>
-      <input   type="file"   id="msheetFile"     accept="image/*,application/pdf" />
-<img id="msheetView" style="width:100%; margin-top:10px;" />
+      <input   type="file"   id="msheetFile"     accept="image/*,application/pdf">
+<img id="msheetView" style="width:100%; margin-top:10px;">
 <div id="msheetPdf" hidden>
   ✔️ PDF Selected
 </div>
 </div>
       <label>Student Profile Photo <span>*</span></label>
-      <input   type="file" id="profileFile"  accept="image/*"  />
-<img id="profileView" style="width:100%; margin-top:10px;" />
+      <input   type="file" id="profileFile"  accept="image/*">
+<img id="profileView" style="width:100%; margin-top:10px;">
 <div id="tcArea">
 <label>Transfer Certificate <span>*</span></label>
-      <input   type="file" id="tcFile"  accept="image/*"  />
-<img id="tcView" style="width:100%; margin-top:10px;" />
+      <input   type="file" id="tcFile"  accept="image/*">
+<img id="tcView" style="width:100%; margin-top:10px;">
 </div>
  <select id="aadhaarType">
  <option value="aadhaar">Student Aadhaar</option>
@@ -294,9 +302,9 @@ small { display: block;
  <div class="helpBox">
   Front side first • Back side second • Images only
 </div></div>
-      <input  type="file"  id="aadhaarFile"   accept="image/*" />
-<img id="aadhaarView" style="width:100%; margin-top:10px;" />
-<img id="aadhaarView1" style="width:100%; margin-top:10px;" />
+      <input  type="file"  id="aadhaarFile"   accept="image/*">
+<img id="aadhaarView" style="width:100%; margin-top:10px;">
+<img id="aadhaarView1" style="width:100%; margin-top:10px;">
 
   <button type="submit">Submit</button>
     </form>
@@ -305,5 +313,4 @@ small { display: block;
 
   <script src="app.js"></script>
 </body>
-  </html>
-                                                
+</html>
