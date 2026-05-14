@@ -52,6 +52,8 @@ const addressPer = document.getElementById("addressPer");
 const pincode = document.getElementById("pincode");
 const addressCur = document.getElementById("addressCur");
 const scoreType = document.getElementById("scoreType");
+const gradeOption =
+document.querySelector('#scoreType option[value="grade"]');
 const percArea = document.getElementById("percArea");
 const percInput = document.getElementById("percInput");
 const cgpaArea = document.getElementById("cgpaArea");
@@ -88,6 +90,7 @@ codeForm.onsubmit = async (e) => {
     sumBtn.textContent = `☰ ${studentClass} 2026 • ${code}`;
     sumBtn.hidden = false;
     updateSumContent();
+    if ("CFJMQUXBEH".includes(prefix)) { gradeOption.hidden = false; }
 try {
     const res = await fetch(
      "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code",
