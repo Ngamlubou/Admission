@@ -1,4 +1,5 @@
 //========= DOM Store =========
+let sData = readStorage();
   const sFile = {
   aadhaar: null,
   profile: null,
@@ -10,12 +11,18 @@ const classMap = {
     E: "Class V", H: "Class VI", L: "Class VII", P: "Class VIII",
     T: "Class IX", W: "Class X", A: "XI Arts", D: "XI Science",
    G: "XII Arts", K: "XII Science"  };
+ const baseUrl =  "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea";
 //========= DOM Fields =========
 const sumBtn = document.getElementById("sumBtn");
 const sumContent = document.getElementById("sumContent");
 const spinner = document.getElementById("spinner");
 //-------- admission code --------
 const codeSection = document.getElementById("codeSection");
+const codeGenerateForm = document.getElementById("codeGenerateForm");
+const classSelect = document.getElementById("classSelect");
+const codeGenerateBtn = document.getElementById("codeGenerateBtn");
+const successCard = document.getElementById("successCard");
+const failedCard = document.getElementById("failedCard");
 const codeForm = document.getElementById("codeForm");
 const codeInput = document.getElementById("codeInput");
 const codeError = document.getElementById("codeError");
@@ -77,8 +84,65 @@ const aadhaarView = document.getElementById("aadhaarView");
 const aadhaarView1 = document.getElementById("aadhaarView1");
 
 //========= Active Workers  =========
+window.addEventListener("DOMContentLoaded", async () => {
+  await renderHistory();
+});
 //-------- admission code --------
-codeForm.onsubmit = async (e) => {
+/*1*/ codeGenerateForm.onsubmit = async (e) => {
+e.preventDefault();
+codeGenerateBtn.disabled = true;
+const sClass = e.target.elements['classSelect'];
+  const classText = sClass.selectedOptions[0].text;
+  const classValue = sClass.value;
+  try {
+const res = await fetch(`${baseUrl}/create-order`, {
+ method: "POST",
+headers: {  "Content-Type": "application/json" },
+body: JSON.stringify({
+  classValue: classValue
+})
+});
+const data = await res.json();
+  if (!res.ok) {
+ throw new Error("Server not responding"); }
+
+sData.push({
+  order_id: data.order_id,
+  code: data.code,
+  class: classText,
+  status: "pending"
+});
+writeStorage(sData);
+
+const setting = {
+    key: "rzp_test_SYuOBsX5gApP7v",
+    amount: data.amount,
+    currency: "INR",
+order_id: data.order_id,
+  name: "SP Admission form",
+    description: "Payment of ₹100 for admission form in SmartPea",
+
+handler: async function (response) {
+    alert("Payment Success! Your admission form code is allotted.");
+updateStatus(data.code, "success");
+updateSuccessCode();
+},
+    theme: { color: "#3399cc"    }
+  };
+
+ const rzp = new Razorpay(setting);
+  rzp.on("payment.failed", function (response) {
+updateStatus(data.code, "failed");
+updateFailedCode();
+  });
+ rzp.open();
+} catch (err) {
+  alert(err.message || "Something went wrong");
+ }
+codeGenerateBtn.disabled = false;
+};
+
+/*2*/ codeForm.onsubmit = async (e) => {
   e.preventDefault();
   spinner.hidden = false;
   const code = codeInput.value.trim();
@@ -90,7 +154,7 @@ codeForm.onsubmit = async (e) => {
     if ("CFJMQUXBEH".includes(prefix)) { gradeOption.hidden = false; }
 try {
     const res = await fetch(
-     "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea/admissionform-code",
+      `${baseUrl}/admissionform-code`,
       {   method: "POST",
         headers: {   "Content-Type": "application/json"  },
         body: JSON.stringify({ code })  }
@@ -136,10 +200,7 @@ aadhaarType.addEventListener("change", () => {
 aadhaarLabel.textContent =
     aadhaarType.options[aadhaarType.selectedIndex].text;
 });
-//========= Utility Function  =========
-function toggleSumContent() {
-  sumContent.hidden = !sumContent.hidden; }
-
+//========= Html Inject Function  =========
 function updateSumContent() {
   const personalHTML = studentName.value && `
   <h3>🟢 Personal Details</h3>
@@ -178,13 +239,78 @@ ${contactHTML || "<h3>🟡 Family & Contact Details</h3>"}
 ${acadeHTML || "<h3>🟡 Address & Academic Details</h3>"}
 ${docHTML || "<h3>🟡 Upload Documents</h3>"}
   `; }
+ //-------- admission code --------
+  /*1*/function updateSuccessCode() {
+    const successItems = [...sData]   .filter(item => item.status === "success")  .reverse();
+  if (successItems.length > 0) {
+ successCard.innerHTML = `
+  <h3>Your Admission Codes</h3>
+  ${successItems.map(item => `
+      <label>${item.class}</label>
+   <button  type="button">Code:  <strong>${item.code}</strong></button>
+  `).join("")} `; } }
+/*2*/ function updateFailedCode() {
+   const failedItems = sData.filter(item => item.status === "failed");
+  if (failedItems.length > 0) {
+ failedCard.innerHTML = `
+      <details>    <summary>Failed Payments</summary>
+      <div class="row"> <span>Order ID</span>    <span>Status</span>  </div>
+      ${failedItems.map(item => `
+            <div class="row">     <span>${item.order_id}</span>  <span>Failed</span>  </div>
+          `).join("")}
+      </details>`; } }
+//-------- personal detials --------
+//-------- contact detials --------
+//-------- academic detials --------
 
+//========= Utility Function  =========
 //-------- admission code --------
+/*1*/ function readStorage()
+{ return JSON.parse(localStorage.getItem("Payment History") || "[]"); }
+/*2*/function writeStorage(storage) { localStorage.setItem("Payment History", JSON.stringify(storage)); }
+/*3*/function updateStatus(code, status)
+{  sData = sData.map(item => {
+    if (item.code === code) {
+      return { ...item, status };  }
+    return item;  });
+writeStorage(sData);
+   }
+/*4*/async function renderHistory() {
+const pendingItems = sData.filter(item => item.status === "pending");
+if (pendingItems.length > 0) {
+try {
+const res = await fetch(`${baseUrl}/verify-status`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: pendingItems.map(i => i.code) })
+      });
+const verifiedStatus = await res.json();
+
+let hasChanges = false;
+const sDataUpdated = sData.reduce((acc, item) => {
+  const dbVerdict = verifiedStatus[item.code];
+
+  if (dbVerdict === true) {  hasChanges = true;
+    acc.push({ ...item, status: "success" });
+  }
+  else if (dbVerdict === false) {  hasChanges = true;
+  }
+  else {    acc.push(item);
+  }
+  return acc;
+}, []);
+
+if (hasChanges) { writeStorage(sDataUpdated);
+sData = readStorage(); }
+} catch (err) { } }
+updateSuccessCode();
+updateFailedCode();
+ }
 //-------- personal detials --------
 //-------- contact detials --------
 
 //-------- academic detials --------
-async function compressImg(file, maxWidth = 720, quality = 0.6) {
+/*1*/async function compressImg(file, maxWidth = 720, quality = 0.6) {
 if ( file.type === "application/pdf" ) {
 msheetPdf.hidden = false;
 return new File([file], "studentfile.pdf", {
