@@ -61,7 +61,37 @@ z-index: 999;
       width: 320px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
+#successCard {
+  background: #e9ffe9;
+  border: 1px solid #b2ffb2;
+}
+#successCard h3 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+#failedCard {
+  margin-top: 10px;
+}
+#failed_card details {
+  background: #fff3f3;
+  border: 1px solid #ffb2b2;
+  border-radius: 8px;
+  padding: 10px;
+}
+#failedCard summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+#failedCard .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #000;
+}
+#failedCard .row:last-child {
+  border-bottom: none;
+}
    input:not([type="radio"]):not([type="checkbox"]), select  {
 width: 100%;
       padding: 10px;
@@ -93,10 +123,35 @@ small { display: block;
 </head>
 <body>
 
-<h3 id="sumBtn" onclick="toggleSumContent()" hidden></h3>
+<h3 id="sumBtn" onclick="sumContent.hidden = !sumContent.hidden" hidden></h3>
 <div id="sumContent" hidden></div>
 <div id="codeSection" class="container">
     <h2>Admission Code</h2>
+    <form id="codeGenerateForm">
+  <label for="classSelect"><strong>Admission Form Fee:</strong> ₹100</label>
+  <select id="classSelect" required>
+    <option value="">--Choose Class--</option>
+  <option value="C">Play Group</option>
+<option value="F">Nursery</option>
+<option value="J">KG-1</option>
+<option value="M">KG-2</option>
+<option value="Q">Class 1</option>
+<option value="U">Class 2</option>
+<option value="X">Class 3</option>
+<option value="B">Class 4</option>
+<option value="E">Class 5</option>
+<option value="H">Class 6</option>
+<option value="L">Class 7</option>
+<option value="P">Class 8</option>
+<option value="T">Class 9</option>
+<option value="W">Class 10</option>
+<option value="A">Class 11</option>
+<option value="D">Class 12</option>
+  </select>
+  <button type="submit" id="codeGenerateBtn">Proceed for payment</button>
+</form>
+<div id="successCard"></div>
+<div id="failedCard"></div>
     <form id="codeForm">
 <label for="codeInput">Admission  Code <span>*</span></label>
 <input type="text"  id="codeInput" placeholder="e.g. AB123" maxlength="5"
@@ -310,7 +365,7 @@ percArea.hidden = true;    cgpaArea.hidden = true;  gradArea.hidden = true;
     </form>
   </div>
 </div>
-
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
