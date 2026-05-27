@@ -1,10 +1,104 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My First Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartPea Admission</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>This is my first HTML page.</p>
+<!-- Header -->
+  <header>
+    <h1>SmartPea</h1>
+
+    <nav>
+      <button type="button" data-page="home">Home</button>
+      <button type="button" data-page="student">Student</button>
+      <button type="button" data-page="notices">Notices</button>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </header>
+  <main>
+    <!-- HOME -->
+    <section id="homePage">
+      <h2>Welcome</h2>
+      <p>
+        Online admission and student access portal.
+      </p>
+    </section>
+    <!-- STUDENT ACCESS -->
+    <section id="studentPage" hidden>
+      <h2>Student Access</h2>
+      <form id="studentForm">
+        <label>
+          Admission Code
+        </label>
+        <input
+          type="text"
+          id="studentCode"
+          placeholder="Enter Admission Code"
+          required
+        >
+        <label>
+          Date of Birth
+        </label>
+        <input
+          type="date"
+          id="studentDob"
+          required
+        >
+    <button type="submit">
+          Continue
+        </button>
+      </form>
+    </section>
+    <!-- DASHBOARD -->
+    <section id="dashboardPage" hidden>
+      <h2>
+        Student Dashboard
+      </h2>
+      <div class="card">
+        <label>Name</label>
+        <p id="studentName">-</p>
+      </div>
+      <div class="card">
+        <label>Status</label>
+        <p id="studentStatus">-</p>
+      </div>
+
+      <div class="card">
+        <label>Class</label>
+        <p id="studentClass">-</p>
+      </div>
+
+      <div class="card">
+        <label>Documents</label>
+        <p id="studentDocuments">-</p>
+      </div>
+
+      <button
+        type="button"
+        id="logoutBtn"
+      >
+        Close Dashboard
+      </button>
+    </section>
+    <!-- NOTICES -->
+    <section id="noticesPage" hidden>
+
+      <h2>Notices</h2>
+
+      <div class="card">
+        Admission is currently open.
+      </div>
+
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
