@@ -9,96 +9,178 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Header -->
-  <header>
-    <h1>SmartPea</h1>
+<div class="container">
 
-    <nav>
-      <button type="button" data-page="home">Home</button>
-      <button type="button" data-page="student">Student</button>
-      <button type="button" data-page="notices">Notices</button>
-      <a href="faq.html">FAQ</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-    </nav>
-  </header>
-  <main>
-    <!-- HOME -->
-    <section id="homePage">
-      <h2>Welcome</h2>
-      <p>
-        Online admission and student access portal.
-      </p>
-    </section>
-    <!-- STUDENT ACCESS -->
-    <section id="studentPage" hidden>
-      <h2>Student Access</h2>
-      <form id="studentForm">
-        <label>
-          Admission Code
-        </label>
-        <input
-          type="text"
-          id="studentCode"
-          placeholder="Enter Admission Code"
-          required
-        >
-        <label>
-          Date of Birth
-        </label>
-        <input
-          type="date"
-          id="studentDob"
-          required
-        >
-    <button type="submit">
-          Continue
-        </button>
-      </form>
-    </section>
-    <!-- DASHBOARD -->
-    <section id="dashboardPage" hidden>
+    <!-- TOP -->
+
+    <div class="topCard">
+
+      <small>
+        Admission Registration No.
+      </small>
+
       <h2>
-        Student Dashboard
+        REG-2026-00152
       </h2>
-      <div class="card">
-        <label>Name</label>
-        <p id="studentName">-</p>
-      </div>
-      <div class="card">
-        <label>Status</label>
-        <p id="studentStatus">-</p>
-      </div>
+      <p>
+        Hi, <strong>Mr. James Bond</strong><br>
+        Class 8 • Session 2026
+      </p>
 
-      <div class="card">
-        <label>Class</label>
-        <p id="studentClass">-</p>
+      <div class="statusBox">
+        READY FOR SCHOOL JOINING
       </div>
 
-      <div class="card">
-        <label>Documents</label>
-        <p id="studentDocuments">-</p>
+    </div>
+
+    <!-- FEES -->
+    <div class="card">
+
+      <h3>
+        Fees Information
+      </h3>
+
+      <div class="row">
+        <span>Admission Fee</span>
+        <strong>₹4000</strong>
       </div>
 
-      <button
-        type="button"
-        id="logoutBtn"
-      >
-        Close Dashboard
-      </button>
-    </section>
-    <!-- NOTICES -->
-    <section id="noticesPage" hidden>
-
-      <h2>Notices</h2>
-
-      <div class="card">
-        Admission is currently open.
+      <div class="row">
+        <span>Monthly Fee</span>
+        <strong>₹700</strong>
       </div>
+    </div>
+    <!-- IMAGE PREVIEW -->
+<div id="previewBox" hidden>
+  <img id="previewImage" >
+</div>
+  <!-- UNIFORM -->
+<details>
+  <summary>Planning for hostel?</summary>
+  <div class="row">
+    <span>Hostel Admission Fee</span>
+    <strong>₹3000</strong>
+  </div>
 
-    </section>
-  </main>
+  <div class="row">
+    <span>Hostel Monthly Fee</span>
+    <strong>₹2500</strong>
+  </div>
+</details>
+<div class="card">
+  <h3>
+    Uniform
+  </h3>
+  <div class="imageGrid">
+<div>
+    <img
+      src="images/uniform1.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>2 Uniform Pants</p></div>
+<div>
+    <img
+      src="images/uniform2.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>2 Uniform Pants</p></div>
+<div>
+    <img
+      src="images/uniform3.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>2 Uniform Pants</p></div>
+<div>
+    <img
+      src="images/uniform4.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>2 Uniform Pants</p></div>
+</div>
 
+</div>
+    <!-- BOOKS -->
+    <div class="card">
+    <h3>
+        Books & Notebooks
+      </h3>
+<div class="imageGrid">
+<div>
+    <img
+      src="images/uniform1.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>2 Uniform Pants</p></div>
+    <div>
+    <img
+      src="images/uniform2.jpg"
+      alt="Uniform"
+      class="gridImage"
+> <p>1 Tie</p></div>
+<div>
+    <img
+      src="images/uniform3.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>1 pair Shoes</p></div>
+    <div>
+    <img
+      src="images/uniform4.jpg"
+      alt="Uniform"
+      class="gridImage"
+    > <p>1 pair shocks</p></div>
+  </div>
+    </div>
+    <!-- SCHOOL TIMING -->
+
+    <div class="card">
+
+      <h3>
+        School Timing
+      </h3>
+
+      <p>
+        09:00 AM – 02:00 PM
+      </p>
+
+    </div>
+    <!-- SCHOOL START -->
+    <div class="card">
+
+      <h3>
+        School Opening
+      </h3>
+
+      <p>
+        School starts on <strong>15 June 2026</strong>
+      </p>
+    </div>
+
+    <!-- IMPORTANT INSTRUCTIONS -->
+
+    <div class="card">
+
+      <h3>
+        Important Instructions
+      </h3>
+
+      <ul>
+        <li>Wear complete uniform on first day</li>
+        <li>Bring school bag and notebooks</li>
+        <li>Carry photocopy of Aadhaar card</li>
+      </ul>
+
+    </div>
+
+    <!-- HELP -->
+    <div class="footerHelp">
+
+      Need help?<br>
+      Contact School Office: <strong>9876543210</strong>
+
+    </div>
+
+  </div>
   <script src="app.js"></script>
 </body>
 </html>
