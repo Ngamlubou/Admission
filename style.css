@@ -48,29 +48,8 @@
       border-bottom: none;
     }
 
-    .itemImage {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 12px;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .notice {
-      background: #fff8e5;
-      color: #7a5a00;
-      padding: 12px;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-size: 14px;
-    }
+#previewTitle {
+  color: white; }
 
     .footerHelp {
       text-align: center;
