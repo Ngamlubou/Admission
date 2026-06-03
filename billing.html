@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billing & Fees</title>
+<style>
+*{margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  font-family:sans-serif;
+  background:#f5f7fa;
+  padding:16px;
+}
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:16px;
+  margin-bottom:16px;
+}
+h2{
+  margin-bottom:16px;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+  border-bottom:none;
+}
+
+.paid{
+  color:green;
+}
+
+.due{
+  color:#d97706;
+}
+
+.total{
+  font-size:18px;
+  font-weight:bold;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:12px;
+   background:#2563eb;
+   color:#fff;
+}
+.invoice{
+  display:none;
+}
+</style>
+
+</head>
+
+<body>
+<div class="card">
+  <div id="savedKeys"></div>
+  <input id="inputKey" placeholder="Enter Code / Reg / PEN">
+  <button onclick="loadBillingFromInput()">
+    View Billing
+  </button>
+</div>
+
+<div class="card">
+  <h2>Billing & Fees</h2>
+<div id="billDetials"></div>
+  <button onclick="showInvoice()">
+    Pay Fees
+  </button>
+</div>
+
+<div class="card invoice" id="invoice">
+
+  <h2>Invoice</h2>
+
+  <div id="items"></div>
+
+  <div class="row total">
+    <span>Total</span>
+    <strong id="total">₹700</strong>
+  </div>
+
+  <button onclick="addNextDue()">
+    + Add Next Due
+  </button>
+
+  <button>
+    Proceed Payment
+  </button>
+
+</div>
+
+<script src="billing.js">
+</script>
+
+</body>
+</html>
