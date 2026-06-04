@@ -7,7 +7,17 @@ const data = {
     benefit: "100% Admission Scholarship",
 totalDue: 7700,
   totalPaid: 3900,
+  tuitionDue: [
+    ["June 2026", 700],
+    ["July 2026", 700],
+    ["August 2026", 700]
+  ],
 
+  hostelDue: [
+    ["June 2026", 2500],
+    ["July 2026", 2500],
+    ["August 2026", 2500]
+  ],
   fees: [
   { name: "Admission Fee",
   items: [
@@ -141,10 +151,13 @@ items: [
 ]
 }
 const baseUrl =  "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea";
+let tuitionCount = 2;
+let hostelCount = 1;
 //========= DOM Fields =========
 const inputKey = document.getElementById("inputKey");
 const billDetails = document.getElementById("billDetails");
 const studentDetails = document.getElementById("studentDetails");
+const invoiceDetails = document.getElementById("invoiceDetails");
 //========= Active workers =========
 const importKey =
   new URLSearchParams(location.search)
@@ -201,18 +214,94 @@ function renderBilling() {
 `).join("");
 }
 
-async function fetchBillingDetails(Key) {
-try {
-const res = await fetch(`${baseUrl}/fetch-billing-details`, {
- method: "POST",
-headers: {  "Content-Type": "application/json" },
-body: JSON.stringify({
-  Key
-})
-});
-const billData = await res.json();
-  if (!res.ok) {
- throw new Error("Server not responding"); }
-} catch (err) {
-  alert( "Something went wrong");
- } }
+ function renderPayment() {
+  const selectedTuition =  data.tuitionDue.slice(0, tuitionCount);
+    const selectedHostel = data.hostelDue.slice(0, hostelCount);
+
+  invoiceDetails.innerHTML = `
+    <h3>Tuition Fees</h3>
+    ${selectedTuition.map(item => `
+      <div class="row">
+        <span>${item[0]}</span>
+        <strong>₹${item[1]}</strong>
+      </div>
+    `).join("")}
+
+    <div class="controls">
+      <button onclick="removeTuition()">−</button>
+      <button onclick="addTuition()">+</button>
+    </div>
+
+    <h3>Hostel Fees</h3>
+    ${selectedHostel.map(item => `
+      <div class="row">
+        <span>${item[0]}</span>
+        <strong>₹${item[1]}</strong>
+      </div>
+    `).join("")}
+    <div class="controls">
+      <button onclick="removeHostel()">−</button>
+      <button onclick="addHostel()">+</button>
+    </div>
+  `;
+}
+renderPayment();
+function addTuition() {
+  if (tuitionCount < data.tuitionDue.length) {
+    tuitionCount++;
+    renderPayment();
+  }
+}
+
+function removeTuition() {
+  if (tuitionCount >0) {
+    tuitionCount--;
+    renderPayment();
+  }
+}
+
+function addHostel() {
+  if (hostelCount < data.hostelDue.length) {
+    hostelCount++;
+    renderPayment();
+  }
+}
+
+function removeHostel() {
+  if (hostelCount >0) {
+    hostelCount--;
+    renderPayment();
+  }
+}
+function calculateInvoice() {
+
+  let feesTotal = 0;
+
+  selectedTuition.forEach(item => {
+    feesTotal += item[1];
+  });
+
+  selectedHostel.forEach(item => {
+    feesTotal += item[1];
+  });
+
+  const processingFee =
+    Math.round(feesTotal * 0.02);
+
+  const gstFee =
+    Math.round(processingFee * 0.18);
+
+  const gatewayFee =
+    processingFee + gstFee;
+
+  const totalToPay =
+    feesTotal + gatewayFee;
+
+  return {
+    feesTotal,
+    processingFee,
+    gstFee,
+    gatewayFee,
+    totalToPay
+  };
+}
