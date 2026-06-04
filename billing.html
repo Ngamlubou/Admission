@@ -54,6 +54,13 @@ h2{
 
 .controls button {
   flex: 1;
+  width: auto;
+  margin-top: 0;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  font-weight: 500;
 }
 button{
   width:100%;
@@ -92,46 +99,7 @@ button{
 </div>
 
 <div class="card" id="invoiceDetails"></div>
-<div class="row">
-  <span>Fees Total</span>
-  <strong>
-    ₹${invoice.feesTotal}
-  </strong>
-</div>
 
-<div class="row">
-  <span>Gateway Fee</span>
-  <strong>
-    ₹${invoice.gatewayFee}
-  </strong>
-</div>
-
-<details>
-  <summary>
-    How is this calculated?
-  </summary>
-
-  <div class="row">
-    <span>Processing Fee (2%)</span>
-    <strong>
-      ₹${invoice.processingFee}
-    </strong>
-  </div>
-
-  <div class="row">
-    <span>GST (18%)</span>
-    <strong>
-      ₹${invoice.gstFee}
-    </strong>
-  </div>
-</details>
-
-<div class="row total">
-  <span>Total to Pay</span>
-  <strong>
-    ₹${invoice.totalToPay}
-  </strong>
-</div>
 <script src="billing.js">
 </script>
 
