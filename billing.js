@@ -155,7 +155,6 @@ const count = {
   hostel: 1
 };
 //========= DOM Fields ID =========
-const inputKey = document.getElementById("inputKey");
 const billDetails = document.getElementById("billDetails");
 const studentDetails = document.getElementById("studentDetails");
 const invoiceDetails = document.getElementById("invoiceDetails");
@@ -170,11 +169,11 @@ if (!importKey) { renderSavedKeys();
 }
 
 function renderSavedKeys() {
-  const list = JSON.parse(  localStorage.getItem("Payment History") || "[]" );
+  const list = JSON.parse(  localStorage.getItem("studentInfo") || "[]" );
    document.getElementById("savedKeys").innerHTML = list.map(item => `
-    <div class="saved-key" data-key="${item.key}">
-      <div class="name">${item.code}</div>
-      <div class="meta">${item.class}</div>
+    <div class="card" onclick="inputKey.value='${item.key}'">
+      <div>${item.name}</div>
+      <div>${item.class}</div>
     </div>
   `).join("");
 }
@@ -228,16 +227,17 @@ const selectedHostel =
   const feesTotal =     [...selectedTuition, ...selectedHostel]
       .reduce((sum, item) => sum + item[1], 0);
 
+const totalToPay =
+  +(feesTotal / 0.9764).toFixed(2); // school receives 97.64%
+
   const processingFee =
-    Math.round(feesTotal * 0.02);
+  +(totalToPay * 0.02).toFixed(2);
 
-  const gstFee =
-    Math.round(processingFee * 0.18);
+const gstFee =
+  +(processingFee * 0.18).toFixed(2);
 
-  const gatewayFee =
-    processingFee + gstFee;
-
-const totalToPay = feesTotal + gatewayFee;
+ const gatewayFee =
+  totalToPay - feesTotal;
 
   invoiceDetails.innerHTML = `
     <h3>Tuition Fees</h3>
