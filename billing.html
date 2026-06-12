@@ -82,10 +82,12 @@ button{
 <body>
 <div class="card">
   <div id="savedKeys"></div>
-  <input id="inputKey" placeholder="Enter Code / Reg / PEN">
-  <button onclick="fetchBillingDetails('OHHS1001')">
+  <form onsubmit="event.preventDefault(); fetchBillingDetails(inputKey.value.trim())">
+  <input id="inputKey" placeholder="Enter Code / Reg / PEN" oninput="this.value = this.value.toUpperCase()" required>
+  <button type="submit">
     View Billing
   </button>
+  </form>
 </div>
 
 <div id="studentDetails" class="card"></div>
@@ -93,7 +95,7 @@ button{
 <div class="card">
   <h2>Fees Record</h2>
 <div id="billDetails"></div>
-  <button onclick="showInvoice()">
+  <button onclick="renderInvoiceDetails()">
     Pay Fees
   </button>
 </div>

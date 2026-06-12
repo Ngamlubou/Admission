@@ -1,5 +1,7 @@
 //========= DOM Store =========
 let billingData = null;
+let tuitionDue = [];
+let hostelDue = [];
 const baseUrl =  "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea";
 const count = {
   tuition: 1,
@@ -41,6 +43,18 @@ async function fetchBillingDetails(key) {
     const result = await res.json();
 if (!res.ok) {   alert(result); return;   }
 billingData = result;
+
+tuitionDue = Object.entries(
+  billingData.tuition_schedule
+).filter(([month]) =>
+  billingData.tuition_fees_status[month] === "due"
+);
+
+ hostelDue = Object.entries(
+  billingData.hostel_schedule || {}
+).filter(([month]) =>
+  billingData.hostel_fees_status?.[month] === "due"
+);
 renderBilling();
   } catch (err) {
     alert(err.message || "Failed to load student details");  }
@@ -53,7 +67,7 @@ function renderBilling() {
 
   const grandTotal =
   [...Object.values(billingData.tuition_schedule),
-   ...Object.values(billingData.hostel_schedule)]
+   ...Object.values(billingData.hostel_schedule || {})]
   .reduce((sum, amt) => sum + amt, 0);
 
   let totalDue = 0;
@@ -61,8 +75,8 @@ for (const month of months) {
   totalDue +=
     billingData.tuition_fees_status[month] === "due"    ? billingData.tuition_schedule[month]     : 0;
 
-  totalDue +=
-    billingData.hostel_fees_status[month] === "due"  ? billingData.hostel_schedule[month]   : 0;
+   totalDue +=
+    billingData.hostel_fees_status?.[month] === "due"  ? billingData.hostel_schedule?.[month] || 0  : 0;
 }
 const totalPaid = grandTotal - totalDue;
 
@@ -82,9 +96,9 @@ const totalPaid = grandTotal - totalDue;
 `;
  billDetails.innerHTML = months.map(month => {
  const tuitionStatus =  billingData.tuition_fees_status[month];
-  const hostelStatus = billingData.hostel_fees_status[month];
+  const hostelStatus = billingData.hostel_fees_status?.[month];
   return `
-  <div>
+  <div class="card">
     <h3>${month}</h3>
     <div class="row">
       <span>Tuition Fee</span>
@@ -92,7 +106,8 @@ const totalPaid = grandTotal - totalDue;
         ₹${billingData.tuition_schedule[month] || 0}
         •  ${tuitionStatus}
       </strong>
-    </div>
+
+ ${hostelStatus ? `   </div>
     <div class="row">
       <span>Hostel Fee</span>
       <strong class="${hostelStatus}">
@@ -100,18 +115,15 @@ const totalPaid = grandTotal - totalDue;
         •  ${hostelStatus}
       </strong>
     </div>
-  </div> `;
+  </div>` : ""}  `;
 }).join("");
 }
 
 
  function renderInvoiceDetails() {
+const selectedTuition = tuitionDue.slice(0, count.tuition);
 
-const selectedTuition =
-  data.tuitionDue.slice(0, count.tuition);
-
-const selectedHostel =
-  data.hostelDue.slice(0, count.hostel);
+const selectedHostel = hostelDue.slice(0, count.hostel);
 
   const feesTotal =     [...selectedTuition, ...selectedHostel]
       .reduce((sum, item) => sum + item[1], 0);
@@ -142,7 +154,7 @@ const gstFee =
       <button onclick="updateCount('tuition', 1)">+</button>
     </div>
 
-    <h3>Hostel Fees</h3>
+   ${hostelDue.length ? ` <h3>Hostel Fees</h3>
     ${selectedHostel.map(item => `
       <div class="row">
         <span>${item[0]}</span>
@@ -152,7 +164,7 @@ const gstFee =
     <div class="controls">
       <button onclick="updateCount('hostel', -1)">−</button>
       <button onclick="updateCount('hostel', 1)">+</button>
-    </div>
+    </div> ` : ""}
 <hr>
 
   <div class="row">
@@ -198,7 +210,7 @@ const gstFee =
 }
 
 function updateCount(type, change) {
-  const max = data[`${type}Due`].length;
+  const max = type === "tuition"   ? tuitionDue.length : hostelDue.length;
   count[type] = Math.max(
     0,
     Math.min(max, count[type] + change)
