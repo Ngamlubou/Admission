@@ -1,154 +1,5 @@
 //========= DOM Store =========
-const data = {
- studentName: "James Bond",
-    registration: "OHHS1001",
-    class: "Playgroup",
-    benefit: "100% Admission Scholarship",
-totalDue: 7700,
-  totalPaid: 3900,
-  tuitionDue: [
-    ["June 2026", 700],
-    ["July 2026", 700],
-    ["August 2026", 700]
-  ],
-
-  hostelDue: [
-    ["June 2026", 2500],
-    ["July 2026", 2500],
-    ["August 2026", 2500]
-  ],
-  fees: [
-  { name: "Admission Fee",
-  items: [
-      { title: "Admission Fee",
-        amount: 0,
-        status: "cleared" },
-      {    title: "Hostel Admission",
-        amount: 2000,
-        status: "paid"    }    ]
-  },
-
-  { name: "May 2026",
-  items: [
-      {  title: "Tuition Fee",
-        amount: 700,
-        status: "paid"   },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "paid"  }   ]
-  },
-
-  {  name: "June 2026",
- items: [
-      {  title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {  title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }   ]
-  },
-
-  {  name: "July 2026",
-   items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due" },
-      {  title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }   ]
-  },
-
-  {   name: "August 2026",
-    items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }  ]
-  },
-
-  {  name: "September 2026",
-   items: [
-      {   title: "Tuition Fee",
-        amount: 700,
-        status: "due"    },
-      {    title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }    ]
-  },
-
-  {  name: "October 2026",
-    items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due"   },
-      {     title: "Hostel Fee",
-        amount: 2500,
-        status: "due"    }    ]
-  },
-
-  {   name: "November 2026",
-    items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due"    },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }  ]
-  },
-
-  {   name: "December 2026",
-   items: [
-      {      title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }  ]
-  },
-
-  { name: "January 2027",
-items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {    title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }  ]
-  },
-
-  {  name: "February 2027",
- items: [
-      {  title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "due"  } ]
-  },
-
-  {  name: "March 2027",
-  items: [
-      {  title: "Tuition Fee",
-        amount: 700,
-        status: "due"  },
-      {  title: "Hostel Fee",
-        amount: 2500,
-        status: "due"   }  ]
-  },
-
-  { name: "April 2027",
- items: [
-      {    title: "Tuition Fee",
-        amount: 700,
-        status: "due"   },
-      {   title: "Hostel Fee",
-        amount: 2500,
-        status: "due"    }  ]
-  }
-]
-}
+let billingData = null;
 const baseUrl =  "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea";
 const count = {
   tuition: 1,
@@ -163,10 +14,9 @@ const importKey =
   new URLSearchParams(location.search)
   .get("key");
 
-if (!importKey) { renderSavedKeys();
-} else {
- fetchBillingDetails(importKey);
-}
+renderSavedKeys();
+
+if (importKey) { fetchBillingDetails(importKey); }
 
 function renderSavedKeys() {
   const list = JSON.parse(  localStorage.getItem("studentInfo") || "[]" );
@@ -179,43 +29,82 @@ function renderSavedKeys() {
 }
 
 
+async function fetchBillingDetails(key) {
+  try {
+    const res = await fetch(`${baseUrl}/billing-details`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ key })
+    });
+    const result = await res.json();
+if (!res.ok) {   alert(result); return;   }
+billingData = result;
 renderBilling();
-function renderBilling() {
- studentDetails.innerHTML = `
-  <h2>${data.studentName}</h2>
-
-  <p>${data.class}</p>
-  <p>
-    Registration No. ${data.registration}
-  </p>
-<br>
- <p>Fees to Pay <strong> ₹${data.totalDue.toLocaleString("en-IN")}</strong>
- </p>
-   <p>Total Paid <strong> ₹${data.totalPaid.toLocaleString("en-IN")}</strong>
-   </p>
-<br>
-  ${data.benefit
-    ? `<p>${data.benefit}</p>`
-    : ""
-  }
-`;
- billDetails.innerHTML = data.fees.map(month => `
-  <div class="card fee-card">
-    <h3>${month.name}</h3>
-    ${month.items.map(fee => `
-      <div class="row">
-        <span>${fee.title}</span>
-        <strong class="${fee.status}">
-          ₹${fee.amount.toLocaleString("en-IN")} • ${fee.status}
-        </strong>
-      </div>
-    `).join("")}
-  </div>
-`).join("");
+  } catch (err) {
+    alert(err.message || "Failed to load student details");  }
 }
 
 
-renderInvoiceDetails();
+function renderBilling() {
+  const months =
+  Object.keys(billingData.tuition_schedule);
+
+  const grandTotal =
+  [...Object.values(billingData.tuition_schedule),
+   ...Object.values(billingData.hostel_schedule)]
+  .reduce((sum, amt) => sum + amt, 0);
+
+  let totalDue = 0;
+for (const month of months) {
+  totalDue +=
+    billingData.tuition_fees_status[month] === "due"    ? billingData.tuition_schedule[month]     : 0;
+
+  totalDue +=
+    billingData.hostel_fees_status[month] === "due"  ? billingData.hostel_schedule[month]   : 0;
+}
+const totalPaid = grandTotal - totalDue;
+
+ studentDetails.innerHTML = `
+  <h2>${billingData.student_name}</h2>
+
+  <p>${billingData.class}</p>
+  <p>
+    Registration No. ${billingData.registration_no}
+  </p>
+<br>
+ <p>Fees to Pay <strong> ₹${totalDue.toLocaleString("en-IN")}</strong>
+ </p>
+   <p>Total Paid <strong> ₹${totalPaid.toLocaleString("en-IN")}</strong>
+   </p>
+
+`;
+ billDetails.innerHTML = months.map(month => {
+ const tuitionStatus =  billingData.tuition_fees_status[month];
+  const hostelStatus = billingData.hostel_fees_status[month];
+  return `
+  <div>
+    <h3>${month}</h3>
+    <div class="row">
+      <span>Tuition Fee</span>
+      <strong class="${tuitionStatus}">
+        ₹${billingData.tuition_schedule[month] || 0}
+        •  ${tuitionStatus}
+      </strong>
+    </div>
+    <div class="row">
+      <span>Hostel Fee</span>
+      <strong class="${hostelStatus}">
+        ₹${billingData.hostel_schedule[month] || 0}
+        •  ${hostelStatus}
+      </strong>
+    </div>
+  </div> `;
+}).join("");
+}
+
+
  function renderInvoiceDetails() {
 
 const selectedTuition =
