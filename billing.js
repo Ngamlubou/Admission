@@ -87,6 +87,11 @@ const totalPaid = grandTotal - totalDue;
   <p>
     Registration No. ${billingData.registration_no}
   </p>
+   ${billingData.benefit ? `
+    <p>
+      Benefit: <strong>${billingData.benefit}</strong>
+    </p>
+  ` : ""}
 <br>
  <p>Fees to Pay <strong> ₹${totalDue.toLocaleString("en-IN")}</strong>
  </p>
@@ -105,24 +110,24 @@ const totalPaid = grandTotal - totalDue;
       <strong class="${tuitionStatus}">
         ₹${billingData.tuition_schedule[month] || 0}
         •  ${tuitionStatus}
-      </strong>
+      </strong> </div>
 
- ${hostelStatus ? `   </div>
+ ${hostelStatus ? `
     <div class="row">
       <span>Hostel Fee</span>
       <strong class="${hostelStatus}">
         ₹${billingData.hostel_schedule[month] || 0}
         •  ${hostelStatus}
       </strong>
-    </div>
-  </div>` : ""}  `;
+    </div>` : ""}
+  </div>  `;
 }).join("");
 }
 
 
  function renderInvoiceDetails() {
-const selectedTuition = tuitionDue.slice(0, count.tuition);
 
+   const selectedTuition = tuitionDue.slice(0, count.tuition);
 const selectedHostel = hostelDue.slice(0, count.hostel);
 
   const feesTotal =     [...selectedTuition, ...selectedHostel]
