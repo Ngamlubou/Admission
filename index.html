@@ -1,23 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartPea Admission</title>
+  <title>Student Joining Guide</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+ <div id="savedKeys"></div>
 <div class="container">
-  <small>Admission Registration No.</small>
-      <h2>REG-2026-00152</h2>
-      <p>
-        Hi, <strong>Mr. James Bond</strong><br>
-        Class 8 • Session 2026</p>
-<div class="statusBox">
-        READY FOR SCHOOL JOINING
-      </div></div>
+  <h2 id="studentName"></h2>
+  <p id="studentClass"></p>
+   <p>Registration No: <strong id="registrationNo"></strong></p>
+</div>
 
     <div class="container">
       <h3>Fees Information</h3>
@@ -26,7 +22,9 @@
       </div>
       <div class="row">
         <span>Monthly Fee</span><strong id="monthlyFee"></strong>
-      </div><br>
+      </div>
+      <p id="benefit"></p>
+      <br>
       <details>
   <summary>Planning for hostel?</summary>
   <div class="row">
@@ -44,6 +42,7 @@
 <div id="previewBox" hidden onclick="this.hidden=true">
   <img id="previewImg" >
   <h3 id="previewTitle"></h3>
+  <h3 id="previewNote"></h3>
 </div>
 
 <div class="container">
@@ -61,14 +60,17 @@
     </div>
 
     <div class="container">
-      <h3>School Timing</h3>
-      <p id="schoolTiming"></p>
-    </div>
+  <h3>School Schedule</h3>
+<div class="row">
+  <span>Daily Class Hours</span>
+  <strong id="schoolTiming"></strong>
+</div>
 
-    <div class="container">
-  <h3>School Opening</h3>
-      <p>Session starts on <strong>15 June 2026</strong></p>
-    </div>
+<div class="row">
+  <span>First Day of School</span>
+  <strong id="schoolOpening"></strong>
+</div>
+</div>
 
     <div class="container">
   <h3>Important Instructions</h3>
