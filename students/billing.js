@@ -103,7 +103,7 @@ const totalPaid = grandTotal - totalDue;
  const tuitionStatus =  billingData.tuition_fees_status[month];
   const hostelStatus = billingData.hostel_fees_status?.[month];
   return `
-  <div class="card">
+  <div class="container">
     <h3>${month}</h3>
     <div class="row">
       <span>Tuition Fee</span>

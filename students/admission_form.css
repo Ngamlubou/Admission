@@ -1,11 +1,5 @@
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      display: flex;
-      justify-content: center;
-flex-direction: column;
-    }
+
 #sumBtn {
   position: fixed;
   top: 10px;
@@ -16,22 +10,7 @@ background: white;
 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 cursor: pointer;
 }
- #spinner {
-      position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  border: 10px solid #ddd;
-  border-top: 10px solid #000;
-  border-radius: 50%;
-animation: spin 0.7s linear infinite;
-z-index: 999;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg); }
-}
+
 .field {  position: relative;
 }
 .helpBox {
@@ -47,13 +26,7 @@ z-index: 999;
   line-height: 1.4;
   z-index: 999;
 }
-    .container {
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      width: 320px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+
 #successCard {
   background: #e9ffe9;
   border: 1px solid #b2ffb2;
@@ -85,14 +58,7 @@ z-index: 999;
 #failedCard .row:last-child {
   border-bottom: none;
 }
-   input:not([type="radio"]):not([type="checkbox"]), select  {
-width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+
 
 label { margin-top: 20px;
 display: block;
@@ -102,14 +68,5 @@ label span {  color: red; }
 small { display: block;
   margin-top: 5px; }
 
-  button {  width: 100%;
-      margin-top: 20px;
-      padding: 10px;
-      font-size: 16px;
-      background: #3399cc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;    }
 img {  width: 100%;
   margin-top: 10px; }

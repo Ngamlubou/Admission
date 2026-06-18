@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billing & Fees</title>
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="billing.css">
+</head>
+
+<body>
+<div class="container">
+  <div id="savedKeys"></div>
+  <form onsubmit="event.preventDefault(); fetchBillingDetails(inputKey.value.trim())">
+  <input id="inputKey" placeholder="Enter Code / Reg / PEN" oninput="this.value = this.value.toUpperCase()" required>
+  <button type="submit">
+    View Billing
+  </button>
+  </form>
+</div>
+
+<div id="studentDetails" class="container"></div>
+
+<div class="container">
+  <h2>Fees Record</h2>
+<div id="billDetails"></div>
+  <button onclick="renderInvoiceDetails()">
+    Pay Fees
+  </button>
+</div>
+
+<div class="container" id="invoiceDetails"></div>
+
+<script src="billing.js">
+</script>
+
+</body>
+</html>
