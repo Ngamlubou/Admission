@@ -14,7 +14,7 @@ navigate("/dashboard");
 }
   return (
     <main>
-      <form className="loginCard" onSubmit={handleSubmit}>
+      <form className="container" onSubmit={handleSubmit}>
         <h1>SmartPea Admin</h1>
 
         <input name="email"  type="email"    placeholder="Email address"  />

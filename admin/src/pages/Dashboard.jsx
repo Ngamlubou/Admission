@@ -1,3 +1,3 @@
 export default function Dashboard() {
-  return <h1>Welcome Admin</h1>;
+  return <h1 className="container">Welcome Admin</h1>;
 }
