@@ -1,11 +1,9 @@
-name: Deploy Admin (Vite)
+name: Deploy Website SmartPea
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "admin/**"
 
 permissions:
   contents: read
@@ -33,10 +31,22 @@ jobs:
         working-directory: ./admin
         run: npm run build
 
+        - name: Create deploy folder
+        run: |
+          mkdir -p deploy
+
+          cp index.html deploy/
+
+          cp -r students deploy/
+
+          mkdir -p deploy/admin
+
+          cp -r admin/dist/* deploy/admin/
+
       - name: Upload build
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./admin/dist
+          path: ./deploy
 
   deploy:
     needs: build
