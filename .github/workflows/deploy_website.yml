@@ -31,7 +31,7 @@ jobs:
         working-directory: ./admin
         run: npm run build
 
-        - name: Create deploy folder
+      - name: Create deploy folder
         run: |
           mkdir -p deploy
 
