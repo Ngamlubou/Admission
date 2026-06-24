@@ -26,8 +26,7 @@ if (!res.ok) {   alert(result); return;   }
 
  setLoading(false);
 navigate("/dashboard");
-} catch (err) {
-    alert(err.message || "Failed to load student details");  }
+} catch (err) {  alert(err.message || "Failed to load student details");  }
 }
   return (
     <main>
