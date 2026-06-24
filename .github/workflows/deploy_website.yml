@@ -36,12 +36,13 @@ jobs:
           mkdir -p deploy
 
           cp index.html deploy/
-
           cp -r students deploy/
+          cp -r images deploy/
 
           mkdir -p deploy/admin
 
           cp -r admin/dist/* deploy/admin/
+          cp admin/password.html deploy/admin/
 
       - name: Upload build
         uses: actions/upload-pages-artifact@v3
