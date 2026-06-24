@@ -3,9 +3,7 @@ let result;
 const baseUrl =  "https://9000-firebase-backend-test-1776507287720.cluster-mwsteha33jfdowtvzffztbjcj6.cloudworkstations.dev/smart-pea";
 //========= DOM Fields =========
 //========= Data Producers =========
-const importKey =
-  new URLSearchParams(location.search)
-  .get("key");
+const importKey = new URLSearchParams(location.search).get("key");
 const classInfo = {
   "Playgroup":       { admission: 4000, monthly: 700,  opening: "15 June 2026", timing: "09:00 AM – 12:00 PM" },
   "Nursery":         { admission: 4000, monthly: 700,  opening: "15 June 2026", timing: "09:00 AM – 12:00 PM" },
