@@ -87,7 +87,7 @@ document.getElementById(id).innerHTML = sections.map(([title, items]) => `
     <div class="imageGrid">
       ${items.map(item => `
         <img
-          src="Images/${item.type || item}.webp"
+          src="images/${item.type || item}.webp"
           alt="${item.type || item}"
           data-note="${item.quantity ? `Quantity: ${item.quantity}` : ""}"
           class="gridImage"
