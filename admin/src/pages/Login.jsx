@@ -16,25 +16,22 @@ const [loading, setLoading] = useState(false);
    try {
     const res = await fetch(`${baseUrl}/login`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: {   "Content-Type": "application/json"  },
       body: JSON.stringify({ email, password })
     });
     const result = await res.json();
 if (!res.ok) {   alert(result); return;   }
-
- setLoading(false);
-navigate("/dashboard");
-} catch (err) {  alert(err.message || "Failed to load student details");  }
-}
+localStorage.setItem("loggedIn", "true");
+navigate("/");
+} catch (err) {  alert(err.message || "Failed to load student details");
+  } finally { setLoading(false); } }
   return (
     <main>
       <form className="container" onSubmit={handleSubmit}>
         <h1>SmartPea Admin</h1>
 
-        <input name="email"  type="email"    placeholder="Email address"  />
-        <input name="password"   type="password"     placeholder="Password"  />
+        <input name="email"  type="email"    placeholder="Email address" required />
+        <input name="password"   type="password"     placeholder="Password" required />
 
         <button type="submit" disabled={loading}> {loading ? "Signing in..." : "Log In"}</button>
       </form>
