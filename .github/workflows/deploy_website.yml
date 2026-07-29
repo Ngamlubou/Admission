@@ -43,8 +43,8 @@ jobs:
           mkdir -p deploy/admin
 
           cp -r admin/dist/* deploy/admin/
-          cp admin/dist/index.html deploy/admin/404.html
           cp password.html deploy/admin/
+          cp admin/dist/index.html deploy/404.html
 
       - name: Upload build
         uses: actions/upload-pages-artifact@v3
