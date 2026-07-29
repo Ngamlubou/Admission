@@ -1,0 +1,35 @@
+.topbar {
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.topbar p {
+    margin: 0;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.topbar input {
+    width: 400px;
+
+    margin: 0 auto;
+
+    padding: 0.75rem 1rem;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 0.95rem;
+}
+
+.topbar input:focus {
+    border-color: #999;
+}

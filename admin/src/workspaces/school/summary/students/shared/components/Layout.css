@@ -1,0 +1,23 @@
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  margin: 24px 0 28px;
+}
+
+.page-title::before,
+.page-title::after {
+  content: "";
+  flex: 1;
+
+  height: 1px;
+  background-color: #d9d9d9;
+}
+
+.page-title span {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}

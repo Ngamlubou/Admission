@@ -1,0 +1,61 @@
+.admission-steps {
+    display: flex;
+    gap: 0.75rem;
+
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.admission-steps a {
+    padding: 0.65rem 1rem;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    color: inherit;
+
+    transition: background-color 0.15s ease;
+}
+
+.admission-steps a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.admission-steps a.active {
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.secondary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: 2rem;
+}
+
+.navigation-actions {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+}
+
+.secondary-actions button,
+.navigation-actions button {
+    padding: 0.75rem 1.5rem;
+
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.secondary-actions button:hover,
+.navigation-actions button:hover {
+    background: rgba(0, 0, 0, 0.04);
+}

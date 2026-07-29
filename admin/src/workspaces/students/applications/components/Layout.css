@@ -1,0 +1,51 @@
+.application-items {
+    display: flex;
+    gap: 0.4rem;
+
+    margin-bottom: 1.5rem;
+}
+
+.application-items a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+
+    text-decoration: none;
+    color: inherit;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.application-items a:hover {
+   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.application-items a.active {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+.pending {
+    color: #c28a00;
+    font-weight: 600;
+}
+
+.approved {
+    color: #2d8a46;
+    font-weight: 600;
+}
+
+.hold {
+    color: #666;
+    font-weight: 600;
+}
+
+.rejected {
+    color: #666;
+    font-weight: 600;
+}

@@ -1,0 +1,106 @@
+.billing-collection {
+    padding: 1.5rem;
+
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+width: 350px;
+}
+
+.billing-collection h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.billing-collection h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+}
+
+.collection-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.6rem 0;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.collection-row:last-child {
+    border-bottom: none;
+}
+
+.collection-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: 1rem;
+}
+
+.collection-controls button {
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background: white;
+    cursor: pointer;
+
+    font-size: 1.2rem;
+}
+
+.collection-controls span {
+    min-width: 30px;
+    text-align: center;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.collection-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 1rem;
+
+    border-top: 2px solid #ddd;
+
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.payment-method select {
+    padding: 0.75rem;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 1rem;
+}
+
+.collect-button {
+    padding: 0.9rem;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+}
