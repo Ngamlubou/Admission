@@ -36,12 +36,14 @@ jobs:
           mkdir -p deploy
 
           cp index.html deploy/
+          cp index.html deploy/404.html
           cp -r students deploy/
           cp -r images deploy/
 
           mkdir -p deploy/admin
 
           cp -r admin/dist/* deploy/admin/
+          cp admin/dist/index.html deploy/admin/404.html
           cp password.html deploy/admin/
 
       - name: Upload build
