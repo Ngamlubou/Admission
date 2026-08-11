@@ -1,0 +1,9 @@
+{
+  "productName": "SPHSS School Management",
+  "version": "1.0.0",
+  "identifier": "com.smartpea.sphss",
+
+ "window": {
+    "title": "Smart Pea Higher Secondary School"
+  }
+}

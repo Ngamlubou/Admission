@@ -1,0 +1,83 @@
+.export {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 1.5rem;
+}
+
+.export-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding: 1.5rem;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.export-section h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.export-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.export-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #666;
+}
+
+.export-field select {
+  max-width: 320px;
+
+  padding: 0.7rem 0.8rem;
+
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+
+  font-size: 0.95rem;
+}
+
+.export-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  cursor: pointer;
+}
+
+.export-checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.export-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.export-actions button {
+  padding: 0.75rem 1.5rem;
+
+  border: 1px solid #bbb;
+  border-radius: 0.35rem;
+
+  background: #fff;
+
+  cursor: pointer;
+}
+
+.export-actions button:hover {
+  background: #f5f5f5;
+}

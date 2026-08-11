@@ -1,0 +1,50 @@
+.overview {
+  width: 100%;
+}
+
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.overview-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.overview-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  background: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+}
+
+.overview-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.overview-table tbody tr {
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.overview-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.overview-table th:nth-child(n + 2),
+.overview-table td:nth-child(n + 2) {
+  text-align: right;
+}
+
+.overview-table td:first-child {
+  font-weight: 500;
+  color: #333;
+}

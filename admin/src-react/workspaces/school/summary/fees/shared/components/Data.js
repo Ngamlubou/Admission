@@ -1,0 +1,88 @@
+const data = [
+  {
+    month: "March 2026",
+    feeReceivable: 40000,
+    collected: 32000,
+    pending: 8000,
+    adjusted: false,
+  },
+  {
+    month: "April 2026",
+    feeReceivable: 35000,
+    collected: 30000,
+    pending: 5000,
+    adjusted: true,
+  },
+  {
+    month: "May 2026",
+    feeReceivable: 40000,
+    collected: 39000,
+    pending: 1000,
+    adjusted: false,
+  },
+  {
+    month: "June 2026",
+    feeReceivable: 40000,
+    collected: 40000,
+    pending: 0,
+    adjusted: false,
+  },
+  {
+    month: "July 2026",
+    feeReceivable: 38000,
+    collected: 35000,
+    pending: 3000,
+    adjusted: true,
+  },
+  {
+    month: "August 2026",
+    feeReceivable: 40000,
+    collected: 37000,
+    pending: 3000,
+    adjusted: false,
+  },
+  {
+    month: "September 2026",
+    feeReceivable: 40000,
+    collected: 40000,
+    pending: 0,
+    adjusted: false,
+  },
+  {
+    month: "October 2026",
+    feeReceivable: 36000,
+    collected: 32000,
+    pending: 4000,
+    adjusted: true,
+  },
+  {
+    month: "November 2026",
+    feeReceivable: 40000,
+    collected: 38500,
+    pending: 1500,
+    adjusted: false,
+  },
+  {
+    month: "December 2026",
+    feeReceivable: 40000,
+    collected: 39500,
+    pending: 500,
+    adjusted: false,
+  },
+  {
+    month: "January 2027",
+    feeReceivable: 40000,
+    collected: 36000,
+    pending: 4000,
+    adjusted: false,
+  },
+  {
+    month: "February 2027",
+    feeReceivable: 37000,
+    collected: 35000,
+    pending: 2000,
+    adjusted: true,
+  },
+];
+
+export default data;

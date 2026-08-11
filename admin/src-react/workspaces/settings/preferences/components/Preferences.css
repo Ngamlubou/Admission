@@ -1,0 +1,107 @@
+.preferences {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 1.5rem;
+}
+
+.preferences-section {
+  padding: 1.5rem;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.preferences-section h2 {
+  margin: 0 0 1.5rem;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.preference-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.preference-item h3 {
+  margin: 0 0 0.35rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.preference-item p {
+  margin: 0;
+
+  color: #666;
+  line-height: 1.5;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  min-width: 240px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+
+  width: 46px;
+  height: 24px;
+
+  flex-shrink: 0;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 999px;
+  background: #ccc;
+
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.slider::before {
+  content: "";
+
+  position: absolute;
+  left: 3px;
+  top: 3px;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background: #fff;
+
+  transition: transform 0.2s;
+}
+
+.switch input:checked + .slider {
+  background: #4caf50;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(22px);
+}

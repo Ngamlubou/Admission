@@ -1,0 +1,38 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    gap: 0.4rem;
+    padding: 1rem;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 1rem;
+
+    border-top: 1px solid #ddd;
+}
+
+.sidebar a {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+
+    text-decoration: none;
+    color: inherit;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.sidebar a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar a.active {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}

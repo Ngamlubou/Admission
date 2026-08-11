@@ -1,0 +1,44 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 1.5rem;
+}
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding: 1.5rem;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.about-section h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.about-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.about-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #666;
+}
+
+.about-field span {
+  color: #222;
+  line-height: 1.6;
+}

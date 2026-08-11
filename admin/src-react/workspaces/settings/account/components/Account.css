@@ -1,0 +1,96 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 1.5rem;
+}
+
+.account-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  padding: 1.5rem;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.account-section h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.account-field,
+.account-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  flex: 1;
+}
+
+.account-field label,
+.account-row label {
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #666;
+}
+
+.account-field p,
+.account-row p {
+  margin: 0;
+
+  font-size: 1rem;
+  color: #222;
+}
+
+.account-section small {
+  color: #777;
+  line-height: 1.5;
+}
+
+.account-section button {
+  padding: 0.7rem 1.25rem;
+
+  border: 1px solid #bbb;
+  border-radius: 0.35rem;
+
+  background: #fff;
+
+  cursor: pointer;
+}
+
+.account-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-button {
+  padding: 0.75rem 1.5rem;
+
+  border: 1px solid #c33;
+
+  border-radius: 0.35rem;
+
+  background: #fff;
+  color: #c33;
+
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #fff5f5;
+}
