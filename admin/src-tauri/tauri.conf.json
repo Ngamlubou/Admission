@@ -3,26 +3,43 @@
   "productName": "SPHSS School Management",
   "version": "1.0.0",
   "identifier": "com.smartpea.sphss",
+
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
+
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Smart Pea Higher Secondary School",
         "width": 800,
         "height": 600,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "visible": false
+      },
+      {
+        "label": "splash",
+        "title": "SmartPea",
+        "width": 400,
+        "height": 250,
+        "resizable": false,
+        "fullscreen": false,
+        "decorations": false,
+        "center": true,
+        "url": "/splash"
       }
     ],
+
     "security": {
       "csp": null
     }
   },
+
   "bundle": {
     "active": true,
     "targets": "all",
@@ -32,6 +49,9 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "resources": [
+       "resources/smart_pea.db"
     ]
   }
 }

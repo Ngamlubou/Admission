@@ -6,6 +6,7 @@ use super::run_migrations;
 
 pub struct Database {
     connection: Mutex<Connection>,
+    root: PathBuf,
 }
 
 impl Database {
@@ -15,10 +16,12 @@ impl Database {
 
         let app_data = app.path().app_data_dir()?;
 
-        let root = app_data.join("SmartPea");
-        std::fs::create_dir_all(&root)?;
+let root = app_data.join("SmartPea");
+let students = root.join("files").join("students");
 
-        let database_path = root.join("smartpea.db");
+std::fs::create_dir_all(&students)?;
+
+let database_path = root.join("smartpea.db");
 
         let connection = Connection::open(database_path)?;
 
@@ -26,6 +29,7 @@ impl Database {
 
         Ok(Self {
             connection: Mutex::new(connection),
+            root,
         })
     }
 

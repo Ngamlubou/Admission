@@ -9,28 +9,29 @@ import SettingRoutes from "./workspaces/settings/Routes";
 import { LayoutProvider } from "./layouts/context/LayoutProvider";
 import AppLayout from "./layouts/AppLayout";
 
-const router = createBrowserRouter(  [
-        {
-            path: "/login",
-            element: <Login />,
-        },
+export function createRouter() {
+    return createBrowserRouter(
+        [
+            {
+                path: "/login",
+                element: <Login />,
+            },
 
+            {
+                element: (
+                    <LayoutProvider>
+                        <AppLayout />
+                    </LayoutProvider>
+                ),
+                children: [
+                    ...studentRoutes,
+                    ...schoolRoutes,
+                    ...SettingRoutes,
+                ],
+            },
+        ],
         {
-            element: (
-        <LayoutProvider>
-            <AppLayout />
-        </LayoutProvider>
-    ),
-            children: [
-                ...studentRoutes,
-                ...schoolRoutes,
-                ...SettingRoutes,
-            ],
-        },
-    ],
-    {
-        basename: "/Admission/admin",
-    }
-);
-
-export default router;
+            basename: "/Admission/admin",
+        }
+    );
+}

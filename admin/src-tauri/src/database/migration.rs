@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 use rusqlite::{params, Connection};
-use crate::database::migrations::m001_initial;
+mod m001_initial;
 
 pub struct Migration {
     pub version: i32,
