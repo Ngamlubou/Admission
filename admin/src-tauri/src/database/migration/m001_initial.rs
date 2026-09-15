@@ -8,45 +8,6 @@ connection.execute_batch(
         r#"
 PRAGMA foreign_keys = ON;
 
--- ============================================================
--- SETTINGS
--- ============================================================
-
-CREATE TABLE IF NOT EXISTS settings (
-    key TEXT PRIMARY KEY,
-    value TEXT NOT NULL
-);
-
-
--- ============================================================
--- SYNC MUTATIONS
--- ============================================================
-
-CREATE TABLE IF NOT EXISTS sync_mutations (
-    mutation_id INTEGER PRIMARY KEY,
-    operation TEXT NOT NULL,
-    entity TEXT NOT NULL,
-    device_id TEXT NOT NULL,
-    uid TEXT NOT NULL,
-    base_version INTEGER NOT NULL,
-    data TEXT,
-    created_at TEXT NOT NULL
-);
-
-
--- ============================================================
--- SYNC RECORD VERSIONS
--- ============================================================
-
-CREATE TABLE IF NOT EXISTS sync_record_versions (
-    entity TEXT NOT NULL,
-    device_id TEXT NOT NULL,
-    uid TEXT NOT NULL,
-    server_version INTEGER NOT NULL,
-
-    PRIMARY KEY (entity, device_id, uid)
-);
-
 
 -- ============================================================
 -- SCHOOLS
