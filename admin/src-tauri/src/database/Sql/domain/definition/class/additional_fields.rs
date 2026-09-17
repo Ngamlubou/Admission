@@ -1,5 +1,5 @@
 pub const CREATE_TABLE: &str = "
-    CREATE TABLE IF NOT EXISTS admission_additional_fields (
+    CREATE TABLE IF NOT EXISTS additional_fields (
         uid TEXT PRIMARY KEY,
 
         class_uid TEXT NOT NULL,

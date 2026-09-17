@@ -8,3 +8,9 @@ pub struct Achievement {
     pub title: String,
     pub description: Option<String>,
 }
+
+pub enum ResultType {
+    Percentage,
+    Grade,
+    CGPA,
+}

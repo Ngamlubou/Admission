@@ -1,17 +1,19 @@
 {
-  "name": "backend",
+  "name": "Smart Pea Backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Ngamlubou",
-  "license": "ISC",
   "dependencies": {
+    "argon2": "^0.44.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "nodemailer": "^9.0.1",
-    "argon2": "^0.44.0",
+    "pg": "^8.23.0"
   }
 }

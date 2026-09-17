@@ -6,7 +6,9 @@ pub struct Family {
 }
 
 pub struct Parent {
-    pub full_name: String,
+    pub first_name: String,
+    pub middle_name: Option<String>,
+    pub last_name: Option<String>,
     pub whatsapp_number: Option<String>,
     pub alternative_number: Option<String>,
     pub profession: Option<String>,
