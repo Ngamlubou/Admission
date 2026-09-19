@@ -1,74 +1,63 @@
 use rusqlite::Connection;
 
 use crate::database::migration::Migration;
-fn up(connection: &Connection)
--> rusqlite::Result<()> {
+use crate::database::sql::{application, domain};
 
-connection.execute_batch(
+fn up(connection: &Connection) -> rusqlite::Result<()> {
+    connection.execute_batch(
         r#"
-PRAGMA foreign_keys = ON;
-
--- ============================================================
--- STUDENT FEE ADJUSTMENTS
--- ============================================================
-
-CREATE TABLE IF NOT EXISTS adjustments (
-    device_id TEXT NOT NULL,
-    uid TEXT NOT NULL,
-
-    student_device_id TEXT NOT NULL,
-    student_uid TEXT NOT NULL,
-
-    assignment_uid TEXT NOT NULL,
-    adjustment_type_uid TEXT NOT NULL,
-
-    amount REAL NOT NULL,
-    months TEXT,
-    reason TEXT,
-
-    PRIMARY KEY (device_id, uid),
-
-    FOREIGN KEY (student_device_id, student_uid)
-        REFERENCES students(device_id, uid),
-
-    FOREIGN KEY (assignment_uid)
-        REFERENCES assignments(uid),
-
-    FOREIGN KEY (adjustment_type_uid)
-        REFERENCES adjustment_types(uid)
-);
-
-
--- ============================================================
--- STUDENT FEE STATUS
--- ============================================================
-
-CREATE TABLE IF NOT EXISTS student_fee_status (
-    device_id TEXT NOT NULL,
-    uid TEXT NOT NULL,
-
-    student_device_id TEXT NOT NULL,
-    student_uid TEXT NOT NULL,
-
-    assignment_uid TEXT NOT NULL,
-
-    months TEXT,
-
-    PRIMARY KEY (device_id, uid),
-
-    FOREIGN KEY (student_device_id, student_uid)
-        REFERENCES students(device_id, uid),
-
-    FOREIGN KEY (assignment_uid)
-        REFERENCES assignments(uid)
-);
-
-     "#,
+        PRAGMA foreign_keys = ON;
+        "#,
     )?;
+
+   connection.execute_batch(
+    &[
+        // Application
+        application::SETTINGS,
+        application::SYNC_MUTATIONS,
+        application::SYNC_RECORD_VERSIONS,
+
+        // Structure
+        domain::ADMISSION_FORM_FIELDS,
+        domain::DISABILITY_TYPES,
+
+        // School definition
+        domain::SCHOOLS_IDENTITY,
+        domain::EDUCATION_CATEGORIES,
+        domain::SESSIONS,
+
+        // Class definition
+        domain::CLASSES,
+        domain::TIMINGS,
+        domain::FEES,
+        domain::UNIFORMS,
+        domain::UNIFORM_SIZES,
+        domain::BOOKS,
+        domain::ADMISSION_FORMS,
+        domain::ADDITIONAL_FIELDS,
+
+        // Student definition/data
+        domain::STUDENTS,
+        domain::ACADEMIC_DETAILS,
+        domain::ACHIEVEMENTS,
+        domain::ADDITIONALS,
+        domain::DISABILITIES,
+        domain::FAMILIES,
+        domain::FAMILY_PARENTS,
+        domain::ADDRESSES,
+        domain::DOCUMENTS,
+
+        // Academic relationships
+        domain::SESSION_CLASSES,
+        domain::ENROLLMENTS,
+        domain::STUDENT_FEE_CHARGES,
+        domain::FEE_TRANSACTIONS,
+    ]
+    .join("\n"),
+)?;
 
     Ok(())
 }
-
 
 pub fn m001_initial() -> Migration {
     Migration {
