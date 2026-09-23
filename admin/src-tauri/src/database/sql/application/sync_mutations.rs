@@ -10,3 +10,17 @@ pub const CREATE_TABLE: &str = "
     created_at TEXT NOT NULL
 );
 ";
+
+pub const INSERT: &str = "
+    INSERT INTO sync_mutations (
+        mutation_id,
+        operation,
+        entity,
+        device_id,
+        uid,
+        base_version,
+        data,
+        created_at
+    )
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);
+";

@@ -1,12 +1,26 @@
-{
-  "schoolId": "aBC70vl46i",
-  "schoolName": "Smart Pea Higher Secondary School",
-  "code": "SPHSS",
+ {
+ "schools_identity": {
+        "uid": "aBC70vl46i",
+        "name": "Smart Pea Higher Secondary School",
+        "code": "SPHSS",
+        "created_at":
+        },
 
-  "educationCategories": [],
-  "academicSessions": [],
-  "classes": [],
-  "classTimings": [],
-  "feeAssignments": [],
-  "feeAdjustmentTypes": []
+  "education_categories": [
+       {
+        "uid",
+        "schools_identity_uid": "aBC70vl46i",
+        "name": "Primary"
+        },
+        {
+        "uid",
+        "schools_identity_uid": "aBC70vl46i",
+        "name": "Intermediate"
+        },
+        {
+        "uid",
+        "schools_identity_uid": "aBC70vl46i",
+        "name": "Junior college"
+        }
+        ],
 }

@@ -8,3 +8,13 @@ pub const CREATE_TABLE: &str = "
     PRIMARY KEY (entity, device_id, uid)
 );
 ";
+
+pub const INSERT: &str = "
+    INSERT INTO sync_record_versions (
+        entity,
+        device_id,
+        uid,
+        server_version
+    )
+    VALUES (?1, ?2, ?3, ?4);
+";
