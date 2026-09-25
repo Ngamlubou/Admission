@@ -8,8 +8,17 @@ pub struct Document {
 pub enum DocumentType {
     BirthCertificate,
     Aadhaar,
-    Passport,
+    ProfilePhoto,
     ProgressReport,
     TransferCertificate,
+    IncomeCertificate,
+    DomicileCertificate,
+    CasteCertificate,
+    AchievementCertificate,
+    MigrationCertificate,
+    ProvisionalCertificate,
+    BankPassbook,
+    DisabilityCertificate,
+    CharacterCertificate,
     Custom,
 }

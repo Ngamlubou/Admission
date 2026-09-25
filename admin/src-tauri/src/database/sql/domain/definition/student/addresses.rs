@@ -9,7 +9,7 @@ pub const CREATE_TABLE: &str = "
     address_type TEXT NOT NULL,
 
     house_number TEXT,
-    address TEXT,
+    address_line TEXT,
     landmark TEXT,
     village TEXT,
     town TEXT,
@@ -40,7 +40,7 @@ pub const INSERT: &str = "
         student_uid,
         address_type,
         house_number,
-        address,
+        address_line,
         landmark,
         village,
         town,

@@ -6,7 +6,7 @@ pub const CREATE_TABLE: &str = "
     student_device_id TEXT NOT NULL,
     student_uid TEXT NOT NULL,
 
-    document_type TEXT NOT NULL,
+    document_type_id INTEGER NOT NULL,
     name TEXT NOT NULL,
 
     file TEXT NOT NULL,
@@ -17,7 +17,10 @@ pub const CREATE_TABLE: &str = "
     PRIMARY KEY (device_id, uid),
 
     FOREIGN KEY (student_device_id, student_uid)
-        REFERENCES students(device_id, uid)
+        REFERENCES students(device_id, uid),
+
+    FOREIGN KEY (document_type_id)
+        REFERENCES document_types(id)
 );
 ";
 
@@ -27,7 +30,7 @@ pub const INSERT: &str = "
         uid,
         student_device_id,
         student_uid,
-        document_type,
+        document_type_id,
         name,
         file,
         file2,
