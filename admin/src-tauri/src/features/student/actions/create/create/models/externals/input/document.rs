@@ -17,7 +17,6 @@ pub enum DocumentType {
     AchievementCertificate,
     MigrationCertificate,
     ProvisionalCertificate,
-    BankPassbook,
     DisabilityCertificate,
     CharacterCertificate,
     Custom,
