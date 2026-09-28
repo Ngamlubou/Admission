@@ -19,6 +19,10 @@ const school = {
             label: "Academic Setup",
             path: "/school/academic-setup",
         },
+        {
+            label: "Fees Setup",
+            path: "/school/fees-setup",
+        },
          {
             label: "Form Setup",
             path: "/school/form-setup",

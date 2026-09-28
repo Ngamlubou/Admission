@@ -4,6 +4,8 @@ import SearchResults from "./search/pages/Results";
 
 import AcademicSetupLayout from "./setup/academic/components/Layout";
 import FormSetupLayout from "./setup/form/components/Layout";
+import FeesSetup from "./setup/fees/pages/fees";
+
 import StudentSummaryLayout from "./summary/students/shared/components/Layout";
 import FeesSummaryLayout from "./summary/fees/shared/components/Layout";
 
@@ -108,6 +110,11 @@ const schoolRoutes = [
           },
         ],
       },
+
+      {
+        path: "fees-setup",
+        element: <FeesSetup />,
+      }
     ],
   },
 ];
