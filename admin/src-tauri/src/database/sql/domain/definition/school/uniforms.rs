@@ -3,17 +3,22 @@ pub const CREATE_TABLE: &str = "
         uid TEXT PRIMARY KEY,
 
         schools_identity_uid TEXT NOT NULL,
+        session_uid TEXT NOT NULL,
         uniform_item_type_id INTEGER NOT NULL,
 
         gender TEXT NOT NULL,
         name TEXT NOT NULL,
         file TEXT,
         file2 TEXT,
+        file3_mp4 TEXT,
 
-        UNIQUE (schools_identity_uid, uniform_item_type_id, gender, name),
+        UNIQUE (schools_identity_uid, session_uid, uniform_item_type_id, gender, name),
 
         FOREIGN KEY (schools_identity_uid)
             REFERENCES schools_identity(uid),
+
+        FOREIGN KEY (session_uid)
+            REFERENCES sessions(uid),
 
         FOREIGN KEY (uniform_item_type_id)
             REFERENCES uniform_item_types(id)
@@ -24,11 +29,13 @@ pub const INSERT: &str = "
     INSERT INTO uniforms (
         uid,
         schools_identity_uid,
+        session_uid,
         uniform_item_type_id,
         gender,
         name,
         file,
-        file2
+        file2,
+        file3_mp4
     )
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);
 ";

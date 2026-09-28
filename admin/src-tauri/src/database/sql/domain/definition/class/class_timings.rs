@@ -5,8 +5,6 @@ pub const CREATE_TABLE: &str = "
         class_uid TEXT NOT NULL,
         timing_uid TEXT NOT NULL,
 
-        name TEXT NOT NULL,
-
         UNIQUE (class_uid, timing_uid),
 
         FOREIGN KEY (class_uid)
@@ -22,7 +20,6 @@ pub const INSERT: &str = "
         uid,
         class_uid,
         timing_uid,
-        name
     )
-    VALUES (?1, ?2, ?3, ?4);
+    VALUES (?1, ?2, ?3);
 ";
