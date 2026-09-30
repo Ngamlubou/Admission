@@ -1,24 +1,27 @@
 pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS calendar (
-        uid TEXT PRIMARY KEY,
+    uid TEXT PRIMARY KEY,
 
-        schools_identity_uid TEXT NOT NULL,
-        session_uid TEXT NOT NULL,
+    schools_identity_uid TEXT NOT NULL,
+    session_uid TEXT NOT NULL,
 
-        start_date TEXT NOT NULL,
-        end_date TEXT NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT NOT NULL,
 
-        name TEXT NOT NULL,
-        kind TEXT NOT NULL,
+    name TEXT NOT NULL,
+    event_type_id INTEGER NOT NULL,
 
-        UNIQUE (schools_identity_uid, name),
+    UNIQUE (schools_identity_uid, name),
 
-        FOREIGN KEY (schools_identity_uid)
-            REFERENCES schools_identity(uid),
+    FOREIGN KEY (schools_identity_uid)
+        REFERENCES schools_identity(uid),
 
-        FOREIGN KEY (session_uid)
-            REFERENCES sessions(uid)
-    );
+    FOREIGN KEY (session_uid)
+        REFERENCES sessions(uid),
+
+    FOREIGN KEY (event_type_id)
+        REFERENCES calendar_event_types(id)
+);
 ";
 
 pub const INSERT: &str = "
@@ -29,7 +32,7 @@ pub const INSERT: &str = "
         start_date,
         end_date,
         name,
-        kind
+        event_type_id
     )
     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);
 ";

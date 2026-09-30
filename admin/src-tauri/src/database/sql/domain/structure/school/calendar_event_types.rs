@@ -1,12 +1,12 @@
 pub const CREATE_TABLE: &str = "
-    CREATE TABLE IF NOT EXISTS event_types (
+    CREATE TABLE IF NOT EXISTS calendar_event_types (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL UNIQUE
     );
 ";
 
 pub const INSERT: &str = "
-    INSERT INTO event_types (
+    INSERT INTO calendar_event_types (
         id,
         name
     )

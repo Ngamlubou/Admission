@@ -1,5 +1,4 @@
-pub mod additional_fields;
-pub mod admission_forms;
+pub mod class_admission_field;
 pub mod books;
 pub mod classes;
 pub mod fees;

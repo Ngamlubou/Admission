@@ -4,16 +4,23 @@ pub const CREATE_TABLE: &str = "
 
         class_uid TEXT NOT NULL,
 
-        subject TEXT NOT NULL,
-        book_type TEXT NOT NULL,
+        subject_uid TEXT NOT NULL,
+        book_type_uid TEXT NOT NULL,
+
         file TEXT,
         file2 TEXT,
         price REAL,
 
-        UNIQUE (class_uid, subject, book_type),
+        UNIQUE (class_uid, subject_uid, book_type_uid),
 
         FOREIGN KEY (class_uid)
-            REFERENCES classes(uid)
+            REFERENCES classes(uid),
+
+        FOREIGN KEY (subject_uid)
+            REFERENCES book_subjects(uid),
+
+        FOREIGN KEY (book_type_uid)
+            REFERENCES book_types(uid)
     );
 ";
 
@@ -21,8 +28,8 @@ pub const INSERT: &str = "
     INSERT INTO books (
         uid,
         class_uid,
-        subject,
-        book_type,
+        subject_uid,
+        book_type_uid,
         file,
         file2,
         price
