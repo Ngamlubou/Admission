@@ -4,10 +4,11 @@ pub const CREATE_TABLE: &str = "
 
         schools_identity_uid TEXT NOT NULL,
         session_uid TEXT NOT NULL,
+
         fee_type_id INTEGER NOT NULL,
+        frequency_id INTEGER NOT NULL,
 
         name TEXT NOT NULL,
-        frequency TEXT NOT NULL,
 
         UNIQUE (schools_identity_uid, session_uid, fee_type_id, name),
 
@@ -18,7 +19,10 @@ pub const CREATE_TABLE: &str = "
             REFERENCES sessions(uid),
 
         FOREIGN KEY (fee_type_id)
-            REFERENCES fee_types(id)
+            REFERENCES fee_types(id),
+
+        FOREIGN KEY (frequency_id)
+            REFERENCES frequencies(id)
     );
 ";
 
@@ -28,8 +32,8 @@ pub const INSERT: &str = "
         schools_identity_uid,
         session_uid,
         fee_type_id,
-        name,
-        frequency
+        frequency_id,
+        name
     )
     VALUES (?1, ?2, ?3, ?4, ?5, ?6);
 ";

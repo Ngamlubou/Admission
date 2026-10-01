@@ -1,10 +1,6 @@
-pub mod fee_types;
 pub mod uniform_item_types;
 pub mod disability_types;
 pub mod document_types;
-
-pub use fee_types::CREATE_TABLE as FEE_TYPES;
-pub use fee_types::INSERT as FEE_TYPES_INSERT;
 
 pub use uniform_item_types::CREATE_TABLE as UNIFORM_ITEM_TYPES;
 pub use uniform_item_types::INSERT as UNIFORM_ITEM_TYPES_INSERT;

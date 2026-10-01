@@ -10,51 +10,51 @@ fn up(connection: &Connection) -> rusqlite::Result<()> {
         "#,
     )?;
 
-   connection.execute_batch(
-    &[
-        // Application
-        application::SETTINGS,
-        application::SYNC_MUTATIONS,
-        application::SYNC_RECORD_VERSIONS,
+    connection.execute_batch(
+        &[
+            // Application
+            application::SETTINGS,
+            application::SYNC_MUTATIONS,
+            application::SYNC_RECORD_VERSIONS,
 
-        // Structure
-        domain::ADMISSION_FORM_FIELDS,
-        domain::DISABILITY_TYPES,
+            // Master / Reference
+            domain::FEE_TYPES,
+            domain::UNIFORM_ITEM_TYPES,
+            domain::DISABILITY_TYPES,
+            domain::ADMISSION_FIELDS_TYPES,
+            domain::CALENDAR_EVENT_TYPES,
+            domain::CLASS_LEVELS,
+            domain::FREQUENCIES,
 
-        // School definition
-        domain::SCHOOLS_IDENTITY,
-        domain::EDUCATION_CATEGORIES,
-        domain::SESSIONS,
+            // School
+            domain::SCHOOLS_IDENTITY,
+            domain::SESSIONS,
+            domain::BOOK_TYPES,
+            domain::BOOK_SUBJECTS,
+            domain::TIMINGS,
+            domain::UNIFORMS,
+            domain::UNIFORM_SIZES,
+            domain::FEES,
+            domain::CALENDAR,
+            domain::ADMISSION_FIELD_OPTIONS,
+            domain::ADMISSION_FIELD,
 
-        // Class definition
-        domain::CLASSES,
-        domain::TIMINGS,
-        domain::FEES,
-        domain::UNIFORMS,
-        domain::UNIFORM_SIZES,
-        domain::BOOKS,
-        domain::ADMISSION_FORMS,
-        domain::ADDITIONAL_FIELDS,
+            // Classes
+            domain::CLASSES,
+            domain::CLASS_UNIFORMS,
+            domain::CLASS_TIMINGS,
+            domain::CLASS_FEES,
+            domain::CLASS_CALENDAR,
+            domain::CLASS_ADMISSION_FIELD,
+            domain::BOOKS,
 
-        // Student definition/data
-        domain::STUDENTS,
-        domain::ACADEMIC_DETAILS,
-        domain::ACHIEVEMENTS,
-        domain::ADDITIONALS,
-        domain::DISABILITIES,
-        domain::FAMILIES,
-        domain::FAMILY_PARENTS,
-        domain::ADDRESSES,
-        domain::DOCUMENTS,
-
-        // Academic relationships
-        domain::SESSION_CLASSES,
-        domain::ENROLLMENTS,
-        domain::STUDENT_FEE_CHARGES,
-        domain::FEE_TRANSACTIONS,
-    ]
-    .join("\n"),
-)?;
+            // Students
+            domain::STUDENTS,
+            domain::STUDENT_FIELDS,
+            domain::STUDENT_DISABILITIES,
+        ]
+        .join("\n"),
+    )?;
 
     Ok(())
 }

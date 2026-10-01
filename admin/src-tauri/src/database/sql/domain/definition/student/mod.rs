@@ -1,19 +1,12 @@
-pub mod academic_details;
-pub mod achievements;
-pub mod additionals;
-pub mod addresses;
-pub mod disabilities;
-pub mod documents;
-pub mod families;
-pub mod family_parents;
+pub mod student_disabilities;
+pub mod student_fields;
 pub mod students;
 
-pub use academic_details::CREATE_TABLE as ACADEMIC_DETAILS;
-pub use achievements::CREATE_TABLE as ACHIEVEMENTS;
-pub use additionals::CREATE_TABLE as ADDITIONALS;
-pub use addresses::CREATE_TABLE as ADDRESSES;
-pub use disabilities::CREATE_TABLE as DISABILITIES;
-pub use documents::CREATE_TABLE as DOCUMENTS;
-pub use families::CREATE_TABLE as FAMILIES;
-pub use family_parents::CREATE_TABLE as FAMILY_PARENTS;
+pub use student_disabilities::CREATE_TABLE as STUDENT_DISABILITIES;
+pub use student_disabilities::INSERT as STUDENT_DISABILITIES_INSERT;
+
+pub use student_fields::CREATE_TABLE as STUDENT_FIELDS;
+pub use student_fields::INSERT as STUDENT_FIELDS_INSERT;
+
 pub use students::CREATE_TABLE as STUDENTS;
+pub use students::INSERT as STUDENTS_INSERT;

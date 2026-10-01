@@ -1,12 +1,13 @@
 pub const CREATE_TABLE: &str = "
-    CREATE TABLE IF NOT EXISTS document_types (
+    CREATE TABLE IF NOT EXISTS frequencies (
         id INTEGER PRIMARY KEY,
+
         name TEXT NOT NULL UNIQUE
     );
 ";
 
 pub const INSERT: &str = "
-    INSERT INTO document_types (
+    INSERT INTO frequencies (
         id,
         name
     )

@@ -4,16 +4,11 @@ pub mod timings;
 pub mod sessions;
 pub mod schools_identity;
 pub mod fees;
-pub mod education_categories;
 pub mod calendar;
-pub mod admission_field;
+pub mod book_types;
+pub mod book_subjects;
 pub mod admission_field_options;
-
-pub use admission_field::CREATE_TABLE as ADMISSION_FIELD;
-pub use admission_field::INSERT as ADMISSION_FIELD_INSERT;
-
-pub use admission_field_options::CREATE_TABLE as ADMISSION_FIELD_OPTIONS;
-pub use admission_field_options::INSERT as ADMISSION_FIELD_OPTIONS_INSERT;
+pub mod admission_field;
 
 pub use uniforms::CREATE_TABLE as UNIFORMS;
 pub use uniforms::INSERT as UNIFORMS_INSERT;
@@ -33,8 +28,17 @@ pub use schools_identity::INSERT as SCHOOLS_IDENTITY_INSERT;
 pub use fees::CREATE_TABLE as FEES;
 pub use fees::INSERT as FEES_INSERT;
 
-pub use education_categories::CREATE_TABLE as EDUCATION_CATEGORIES;
-pub use education_categories::INSERT as EDUCATION_CATEGORIES_INSERT;
-
 pub use calendar::CREATE_TABLE as CALENDAR;
 pub use calendar::INSERT as CALENDAR_INSERT;
+
+pub use book_types::CREATE_TABLE as BOOK_TYPES;
+pub use book_types::INSERT as BOOK_TYPES_INSERT;
+
+pub use book_subjects::CREATE_TABLE as BOOK_SUBJECTS;
+pub use book_subjects::INSERT as BOOK_SUBJECTS_INSERT;
+
+pub use admission_field_options::CREATE_TABLE as ADMISSION_FIELD_OPTIONS;
+pub use admission_field_options::INSERT as ADMISSION_FIELD_OPTIONS_INSERT;
+
+pub use admission_field::CREATE_TABLE as ADMISSION_FIELD;
+pub use admission_field::INSERT as ADMISSION_FIELD_INSERT;
