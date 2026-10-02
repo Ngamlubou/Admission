@@ -35,6 +35,7 @@ fn up(connection: &Connection) -> rusqlite::Result<()> {
             domain::UNIFORMS,
             domain::UNIFORM_SIZES,
             domain::FEES,
+            domain::FEE_SCHEDULES,
             domain::CALENDAR,
             domain::ADMISSION_FIELD_OPTIONS,
             domain::ADMISSION_FIELD,

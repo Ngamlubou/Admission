@@ -1,28 +1,36 @@
 pub const CREATE_TABLE: &str = "
-    CREATE TABLE IF NOT EXISTS class_fees (
-        uid TEXT PRIMARY KEY,
+   CREATE TABLE IF NOT EXISTS class_fees (
+    uid TEXT PRIMARY KEY,
+    fee_schedule_uid TEXT NOT NULL
+        REFERENCES fee_schedules(uid) DEFERRABLE INITIALLY DEFERRED,
+    class_uid TEXT NOT NULL
+        REFERENCES classes(uid) DEFERRABLE INITIALLY DEFERRED,
 
-        class_uid TEXT NOT NULL,
-        fee_uid TEXT NOT NULL,
+    amount_minor INTEGER NOT NULL CHECK (amount_minor >= 0),
 
-        amount REAL NOT NULL,
+    version INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    deleted_at TEXT,
+    updated_by_device_uid TEXT
+) STRICT;
 
-        UNIQUE (class_uid, fee_uid),
-
-        FOREIGN KEY (class_uid)
-            REFERENCES classes(uid),
-
-        FOREIGN KEY (fee_uid)
-            REFERENCES fees(uid)
-    );
+CREATE UNIQUE INDEX IF NOT EXISTS ux_class_fees_identity
+    ON class_fees (fee_schedule_uid, class_uid)
+    WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
     INSERT INTO class_fees (
         uid,
+        fee_schedule_uid,
         class_uid,
-        fee_uid,
-        amount
+        amount_minor,
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9);
 ";
