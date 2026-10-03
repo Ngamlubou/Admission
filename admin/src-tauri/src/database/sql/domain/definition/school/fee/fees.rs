@@ -10,6 +10,8 @@ pub const CREATE_TABLE: &str = "
         REFERENCES fee_types(id),
 
     name TEXT NOT NULL,
+    is_optional INTEGER NOT NULL DEFAULT 0
+    CHECK (is_optional IN (0, 1)),
 
     version INTEGER NOT NULL DEFAULT 1,
     created_at TEXT NOT NULL,
@@ -33,6 +35,7 @@ pub const INSERT: &str = "
         schools_identity_uid,
         fee_type_id,
         name,
+        is_optional,
         version,
         created_at,
         updated_at,
@@ -41,6 +44,6 @@ pub const INSERT: &str = "
     )
    VALUES (
         ?1, ?2, ?3, ?4, ?5, ?6,
-        ?7, ?8, ?9
+        ?7, ?8, ?9, ?10
     );
 ";

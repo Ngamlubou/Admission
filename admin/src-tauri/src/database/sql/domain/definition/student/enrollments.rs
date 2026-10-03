@@ -1,17 +1,18 @@
 pub const CREATE_TABLE: &str = "
-    CREATE TABLE IF NOT EXISTS fee_schedules (
+    CREATE TABLE IF NOT EXISTS enrollments (
         uid TEXT PRIMARY KEY,
 
-        fee_uid TEXT NOT NULL
-            REFERENCES fees(uid)
+        student_uid TEXT NOT NULL
+            REFERENCES students(uid)
             DEFERRABLE INITIALLY DEFERRED,
 
         session_uid TEXT NOT NULL
             REFERENCES sessions(uid)
             DEFERRABLE INITIALLY DEFERRED,
 
-        frequency_id INTEGER NOT NULL
-            REFERENCES frequencies(id),
+        class_uid TEXT NOT NULL
+            REFERENCES classes(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
         start_date TEXT NOT NULL,
         end_date TEXT,
@@ -25,20 +26,21 @@ pub const CREATE_TABLE: &str = "
         CHECK (end_date IS NULL OR end_date >= start_date)
     ) STRICT;
 
-    CREATE UNIQUE INDEX IF NOT EXISTS ux_fee_schedules_identity
-        ON fee_schedules (
-            fee_uid,
-            session_uid
-        )
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_enrollments_identity
+        ON enrollments (student_uid, session_uid)
+        WHERE deleted_at IS NULL;
+
+    CREATE INDEX IF NOT EXISTS ix_enrollments_class_session
+        ON enrollments (class_uid, session_uid)
         WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
-    INSERT INTO fee_schedules (
+    INSERT INTO enrollments (
         uid,
-        fee_uid,
+        student_uid,
         session_uid,
-        frequency_id,
+        class_uid,
         start_date,
         end_date,
         version,

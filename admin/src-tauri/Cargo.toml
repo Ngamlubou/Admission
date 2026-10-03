@@ -1,3 +1,9 @@
+[workspace]
+members = [
+    ".",
+    "crates/core",
+]
+
 [package]
 name = "smart_pea"
 version = "0.1.0"
@@ -28,3 +34,4 @@ log = "0.4"
 tauri = { version = "2.11.3", features = [] }
 tauri-plugin-log = "2"
 rusqlite = { version = "0.37", features = ["bundled"] }
+smart-pea-core = { path = "crates/core" }
