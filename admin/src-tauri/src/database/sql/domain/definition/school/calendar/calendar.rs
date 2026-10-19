@@ -1,27 +1,39 @@
 pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS calendar (
-    uid TEXT PRIMARY KEY,
+        uid TEXT PRIMARY KEY,
 
-    schools_identity_uid TEXT NOT NULL,
-    session_uid TEXT NOT NULL,
+        schools_identity_uid TEXT NOT NULL
+            REFERENCES schools_identity(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
-    start_date TEXT NOT NULL,
-    end_date TEXT NOT NULL,
+        session_uid TEXT NOT NULL
+            REFERENCES sessions(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
-    name TEXT NOT NULL,
-    event_type_id INTEGER NOT NULL,
+        start_date TEXT,
+        end_date TEXT,
 
-    UNIQUE (schools_identity_uid, name),
+        name TEXT NOT NULL,
 
-    FOREIGN KEY (schools_identity_uid)
-        REFERENCES schools_identity(uid),
+        event_type_id INTEGER NOT NULL
+            REFERENCES calendar_event_types(id),
 
-    FOREIGN KEY (session_uid)
-        REFERENCES sessions(uid),
+        version INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        deleted_at TEXT,
+        updated_by_device_uid TEXT,
 
-    FOREIGN KEY (event_type_id)
-        REFERENCES calendar_event_types(id)
-);
+        CHECK (
+    start_date IS NULL
+    OR end_date IS NULL
+    OR end_date >= start_date
+)
+    ) STRICT;
+
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_calendar_identity
+        ON calendar (schools_identity_uid, name)
+        WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
@@ -32,7 +44,12 @@ pub const INSERT: &str = "
         start_date,
         end_date,
         name,
-        event_type_id
+        event_type_id,
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12);
 ";

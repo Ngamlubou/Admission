@@ -1,44 +1,45 @@
 pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS student_fields (
-        device_id TEXT NOT NULL,
-        uid TEXT NOT NULL,
+        uid TEXT PRIMARY KEY,
 
-        student_device_id TEXT NOT NULL,
-        student_uid TEXT NOT NULL,
+        student_uid TEXT NOT NULL
+            REFERENCES students(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
-        admission_field_uid TEXT NOT NULL,
+        admission_field_uid TEXT NOT NULL
+            REFERENCES admission_field(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
         value TEXT NOT NULL,
         value2 TEXT,
 
+        version INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL,
+        deleted_at TEXT,
+        updated_by_device_uid TEXT
+    ) STRICT;
 
-        PRIMARY KEY (device_id, uid),
-
-        UNIQUE (
-            student_device_id,
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_student_fields_identity
+        ON student_fields (
             student_uid,
             admission_field_uid
-        ),
-
-        FOREIGN KEY (student_device_id, student_uid)
-            REFERENCES students(device_id, uid),
-
-        FOREIGN KEY (admission_field_uid)
-            REFERENCES admission_field(uid)
-    );
+        )
+        WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
     INSERT INTO student_fields (
-        device_id,
         uid,
-        student_device_id,
         student_uid,
         admission_field_uid,
         value,
         value2,
-        updated_at
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10);
 ";

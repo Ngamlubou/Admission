@@ -1,32 +1,39 @@
 pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS student_disabilities (
-        device_id TEXT NOT NULL,
-        uid TEXT NOT NULL,
+        uid TEXT PRIMARY KEY,
 
-        student_device_id TEXT NOT NULL,
-        student_uid TEXT NOT NULL,
+        student_uid TEXT NOT NULL
+            REFERENCES students(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
-        disability_type_id INTEGER NOT NULL,
+        disability_type_id INTEGER NOT NULL
+            REFERENCES disability_types(id),
 
-        PRIMARY KEY (device_id, uid),
+        version INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        deleted_at TEXT,
+        updated_by_device_uid TEXT
+    ) STRICT;
 
-        UNIQUE (student_device_id, student_uid, disability_type_id),
-
-        FOREIGN KEY (student_device_id, student_uid)
-            REFERENCES students(device_id, uid),
-
-        FOREIGN KEY (disability_type_id)
-            REFERENCES disability_types(id)
-    );
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_student_disabilities_identity
+        ON student_disabilities (
+            student_uid,
+            disability_type_id
+        )
+        WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
     INSERT INTO student_disabilities (
-        device_id,
         uid,
-        student_device_id,
         student_uid,
-        disability_type_id
+        disability_type_id,
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4, ?5);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);
 ";

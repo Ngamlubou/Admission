@@ -2,26 +2,34 @@ pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS books (
         uid TEXT PRIMARY KEY,
 
-        class_uid TEXT NOT NULL,
+        class_uid TEXT NOT NULL
+            REFERENCES classes(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
-        subject_uid TEXT NOT NULL,
-        book_type_uid TEXT NOT NULL,
+        subject_uid TEXT NOT NULL
+            REFERENCES book_subjects(uid)
+            DEFERRABLE INITIALLY DEFERRED,
+
+        book_type_uid TEXT NOT NULL
+            REFERENCES book_types(uid)
+            DEFERRABLE INITIALLY DEFERRED,
 
         file TEXT,
         file2 TEXT,
-        price REAL,
 
-        UNIQUE (class_uid, subject_uid, book_type_uid),
+        price_minor INTEGER
+            CHECK (price_minor IS NULL OR price_minor >= 0),
 
-        FOREIGN KEY (class_uid)
-            REFERENCES classes(uid),
+        version INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        deleted_at TEXT,
+        updated_by_device_uid TEXT
+    ) STRICT;
 
-        FOREIGN KEY (subject_uid)
-            REFERENCES book_subjects(uid),
-
-        FOREIGN KEY (book_type_uid)
-            REFERENCES book_types(uid)
-    );
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_books_identity
+        ON books (class_uid, subject_uid, book_type_uid)
+        WHERE deleted_at IS NULL;
 ";
 
 pub const INSERT: &str = "
@@ -32,7 +40,12 @@ pub const INSERT: &str = "
         book_type_uid,
         file,
         file2,
-        price
+        price_minor,
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12);
 ";

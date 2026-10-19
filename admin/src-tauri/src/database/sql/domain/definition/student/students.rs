@@ -1,25 +1,28 @@
 pub const CREATE_TABLE: &str = "
     CREATE TABLE IF NOT EXISTS students (
-        device_id TEXT NOT NULL,
-        uid TEXT NOT NULL,
+        uid TEXT PRIMARY KEY,
 
-        schools_identity_uid TEXT NOT NULL,
-
-        created_at TEXT NOT NULL,
-
-        PRIMARY KEY (device_id, uid),
-
-        FOREIGN KEY (schools_identity_uid)
+        schools_identity_uid TEXT NOT NULL
             REFERENCES schools_identity(uid)
-    );
+            DEFERRABLE INITIALLY DEFERRED,
+
+        version INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        deleted_at TEXT,
+        updated_by_device_uid TEXT
+    ) STRICT;
 ";
 
 pub const INSERT: &str = "
     INSERT INTO students (
-        device_id,
         uid,
         schools_identity_uid,
-        created_at
+        version,
+        created_at,
+        updated_at,
+        deleted_at,
+        updated_by_device_uid
     )
-    VALUES (?1, ?2, ?3, ?4);
+    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7);
 ";
