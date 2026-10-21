@@ -1,6 +1,5 @@
 use std::collections::HashSet;
 use rusqlite::{params, Connection};
-mod m001_initial;
 
 pub struct Migration {
     pub version: i32,
@@ -9,14 +8,7 @@ pub struct Migration {
 }
 pub fn run_migrations( connection: &Connection,)
 -> rusqlite::Result<()> {
-    connection.execute(
-    "CREATE TABLE IF NOT EXISTS schema_migrations (
-        version INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP   );",
-    [], )?;
-
-    let migrations =  vec![  m001_initial::m001_initial(), ];
+    let migrations =  vec![];
 
     let mut statement = connection.prepare(
     "SELECT version FROM schema_migrations;", )?;

@@ -1,0 +1,11 @@
+{
+  "version": "1.0.1",
+  "notes": "SmartPea update",
+  "pub_date": "2026-10-21T10:00:00Z",
+  "platforms": {
+    "linux-x86_64": {
+      "url": "https://github.com/Ngamlubou/Admission/releases/download/v0.1.0-test/sample.txt.tar.gz",
+      "signature": "PASTE_THE_CONTENTS_OF_THE_SIG_FILE_HERE"
+    }
+  }
+}

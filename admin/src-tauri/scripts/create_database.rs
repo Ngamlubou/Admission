@@ -1,15 +1,17 @@
+
 use rusqlite::Connection;
 use std::fs;
 use std::path::PathBuf;
 
-#[path = "../src/database/migration.rs"]
-mod migration;
+#[path = "src/database/sql/mod.rs"]
+mod sql;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let resources = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("resources");
+    let resources =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("resources");
 
-fs::create_dir_all(&resources)?;
+    fs::create_dir_all(&resources)?;
 
     let database_path = resources.join("smart_pea.db");
 
@@ -19,7 +21,10 @@ fs::create_dir_all(&resources)?;
 
     let connection = Connection::open(&database_path)?;
 
-    migration::run_migrations(&connection)?;
+    connection.execute_batch("PRAGMA foreign_keys = ON;")?;
+
+    sql::application::create_tables(&connection)?;
+    sql::domain::create_tables(&connection)?;
 
     println!(
         "Created database template: {}",

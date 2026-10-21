@@ -23,6 +23,10 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 name = "create_database"
 path = "scripts/create_database.rs"
 
+[[bin]]
+name = "populate_database"
+path = "scripts/populate_database.rs"
+
 [build-dependencies]
 tauri-build = { version = "2.6.3", features = [] }
 
@@ -35,6 +39,8 @@ tauri = { version = "2.11.3", features = [] }
 tauri-plugin-log = "2"
 rusqlite = { version = "0.37", features = ["bundled"] }
 smart-pea-core = { path = "crates/core" }
+calamine = "0.36"
+uuid = { version = "1", features = ["v4"] }
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
 tauri-plugin-updater = "2"
