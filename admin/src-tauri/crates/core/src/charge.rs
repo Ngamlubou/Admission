@@ -98,16 +98,27 @@ mod tests {
     use super::*;
 
     fn pct(uid: &str, bp: i64) -> DiscountInput {
-        DiscountInput { discount_uid: uid.into(), calc_type: CalcType::Percent, value: bp }
+        DiscountInput {
+            discount_uid: uid.into(),
+            calc_type: CalcType::Percent,
+            value: bp,
+        }
     }
     fn fixed(uid: &str, amt: i64) -> DiscountInput {
-        DiscountInput { discount_uid: uid.into(), calc_type: CalcType::Fixed, value: amt }
+        DiscountInput {
+            discount_uid: uid.into(),
+            calc_type: CalcType::Fixed,
+            value: amt,
+        }
     }
 
     #[test]
     fn no_discounts_net_equals_gross() {
         let r = calculate_charge(150_000, &[]).unwrap();
-        assert_eq!((r.gross_minor, r.discount_minor, r.net_minor), (150_000, 0, 150_000));
+        assert_eq!(
+            (r.gross_minor, r.discount_minor, r.net_minor),
+            (150_000, 0, 150_000)
+        );
         assert!(r.applied.is_empty());
     }
 
@@ -120,8 +131,18 @@ mod tests {
 
     #[test]
     fn percent_rounds_half_up() {
-        assert_eq!(calculate_charge(1_005, &[pct("a", 1_000)]).unwrap().discount_minor, 101);
-        assert_eq!(calculate_charge(1_004, &[pct("a", 1_000)]).unwrap().discount_minor, 100);
+        assert_eq!(
+            calculate_charge(1_005, &[pct("a", 1_000)])
+                .unwrap()
+                .discount_minor,
+            101
+        );
+        assert_eq!(
+            calculate_charge(1_004, &[pct("a", 1_000)])
+                .unwrap()
+                .discount_minor,
+            100
+        );
     }
 
     #[test]
@@ -150,8 +171,16 @@ mod tests {
 
     #[test]
     fn input_order_does_not_change_the_result() {
-        let one = calculate_charge(5_000, &[pct("a", 2_000), fixed("b", 900), fixed("c", 4_000)]).unwrap();
-        let two = calculate_charge(5_000, &[fixed("c", 4_000), pct("a", 2_000), fixed("b", 900)]).unwrap();
+        let one = calculate_charge(
+            5_000,
+            &[pct("a", 2_000), fixed("b", 900), fixed("c", 4_000)],
+        )
+        .unwrap();
+        let two = calculate_charge(
+            5_000,
+            &[fixed("c", 4_000), pct("a", 2_000), fixed("b", 900)],
+        )
+        .unwrap();
         assert_eq!(one, two);
     }
 
@@ -171,14 +200,27 @@ mod tests {
 
     #[test]
     fn rejects_bad_input() {
-        assert_eq!(calculate_charge(-1, &[]), Err(ChargeError::NegativeGross(-1)));
-        assert!(matches!(calculate_charge(100, &[pct("a", 10_001)]), Err(ChargeError::InvalidRule { .. })));
-        assert!(matches!(calculate_charge(100, &[fixed("a", -5)]), Err(ChargeError::InvalidRule { .. })));
+        assert_eq!(
+            calculate_charge(-1, &[]),
+            Err(ChargeError::NegativeGross(-1))
+        );
+        assert!(matches!(
+            calculate_charge(100, &[pct("a", 10_001)]),
+            Err(ChargeError::InvalidRule { .. })
+        ));
+        assert!(matches!(
+            calculate_charge(100, &[fixed("a", -5)]),
+            Err(ChargeError::InvalidRule { .. })
+        ));
     }
 
     #[test]
     fn applied_rows_always_sum_to_discount() {
-        let r = calculate_charge(7_777, &[pct("a", 3_333), fixed("b", 1_234), pct("c", 9_000)]).unwrap();
+        let r = calculate_charge(
+            7_777,
+            &[pct("a", 3_333), fixed("b", 1_234), pct("c", 9_000)],
+        )
+        .unwrap();
         let sum: i64 = r.applied.iter().map(|d| d.amount_minor).sum();
         assert_eq!(sum, r.discount_minor);
         assert_eq!(r.gross_minor - r.discount_minor, r.net_minor);
